@@ -4,7 +4,7 @@ RSpec.describe 'Conversations API' do
     let!(:user) { create(:user) }
     let!(:users) { create_list(:user, 5 ) }
     let!(:request) { create(:request, user_id: users.first.id) }
-    let!(:conversations) { create_list(:conversation, 5, user_id: users.first.id, request_id: request.id) }
+    let!(:conversations) { create_list(:conversation, 5, user_id: users.second.id, request_id: request.id) }
     let(:request_id) { request.id }
     let(:id) { conversations.first.id }
 
@@ -30,7 +30,7 @@ RSpec.describe 'Conversations API' do
             end
 
             it 'returns a not found message' do
-                expect(response.body).to match(/Couldn't find request/)
+                expect(response.body).to match(/Couldn't find Request with 'id'=0/)
             end
         end
     end
@@ -49,19 +49,19 @@ RSpec.describe 'Conversations API' do
         end
 
         context 'where the request conversation does not exist' do
-            let(:id) { 0 }
+            let(:id) { 1 }
             it 'returns a status code of 404' do
                 expect(response).to have_http_status(404)
             end
 
             it 'returns a not found message' do
-                expect(response.body).to match(/Couldn't find Item/)
+                expect(response.body).to match(/Couldn't find Conversation/)
             end
         end
     end
 
     describe 'POST /requests/:request_id/conversations' do
-        let(:valid_attributes) { { user_id: 15, request_id: 5 } }
+        let(:valid_attributes) { { user_id: users.second.id, request_id: 5 } }
 
         context 'when conversation attributes are valid' do
             before { post "/requests/#{request_id}/conversations", params: valid_attributes }
@@ -83,35 +83,6 @@ RSpec.describe 'Conversations API' do
             end
         end
     end
-
-    #describe 'PUT /requests/:request_id/conversations/:id' do
-    #    let(:valid_attributes) { { user_id: 4 } }
-#
-    #    before { put "/requests/#{request_id}/conversations/#{id}", params: valid_attributes }
-#
-    #    context 'when conversation exists' do
-    #        it 'returns status code 204' do
-    #            expect(response).to have_http_status(204)
-    #        end
-#
-    #        it 'updates the conversation' do
-    #            updated_conversation = Conversation.find(id)
-    #            expect(updated_conversation.user_id).to match(4)
-    #        end
-    #    end
-#
-    #    context 'when the converation does not exist' do
-    #        let(:id) { 0 }
-#
-    #        it 'returns status code 404' do
-    #            expect(response).to have_http_status(404)
-    #        end
-#
-    #        it 'returns a not found message' do
-    #            expect(response.body).to match(/Couldn't find conversation/)
-    #        end
-    #    end
-    #end
 
     describe 'DELETE /conversations/:id' do
         before { delete "/requests/#{request_id}/conversations/#{id}" }
