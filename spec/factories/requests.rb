@@ -3,7 +3,7 @@ FactoryBot.define do
     description { "MyString" }
     latitude { 1.5 }
     longitude { 1.5 }
-    fulfilled { false }
+    fulfilled { false } 
     user { nil }
   end
 end
