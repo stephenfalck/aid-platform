@@ -71,7 +71,7 @@ RSpec.describe 'Conversations API' do
             end
         end
 
-        context 'when an invalid conversation' do
+        context 'when invalid conversation params' do
             before { post "/requests/#{request_id}/conversations", params: {} }
 
             it 'returns a status code of 422' do
@@ -79,7 +79,7 @@ RSpec.describe 'Conversations API' do
             end
 
             it 'returns a failure message' do
-                expect(response.body).to match(/Validation failed: /)
+                expect(response.body).to match(/Validation failed: User_id can't be blank/)
             end
         end
     end

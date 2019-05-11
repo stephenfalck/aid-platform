@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   end
 
   resources :requests do 
-    resources :conversations
+    resources :conversations do 
+      resources :messages, only: [:index, :create], path: '/'
+    end
   end
 
 end
