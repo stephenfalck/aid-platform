@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :requests do 
     resources :conversations do 
-      resources :messages, only: [:index, :create], path: '/'
+      resources :messages, only: [:index, :create]
     end
   end
 

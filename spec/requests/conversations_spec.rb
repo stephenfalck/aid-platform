@@ -44,6 +44,7 @@ RSpec.describe 'Conversations API' do
             end
 
             it 'returns the conversation' do
+                expect(json).not_to be_empty
                 expect(json['id']).to eq(id)
             end
         end
@@ -79,7 +80,7 @@ RSpec.describe 'Conversations API' do
             end
 
             it 'returns a failure message' do
-                expect(response.body).to match(/Validation failed: User_id can't be blank/)
+                expect(response.body).to match(/Validation failed: User can't be blank/)
             end
         end
     end

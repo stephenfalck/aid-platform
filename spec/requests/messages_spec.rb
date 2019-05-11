@@ -8,8 +8,8 @@ RSpec.describe 'Messages API' do
     let(:conversation_id) { conversation.id }
     let!(:messages) { create_list(:message, 5, user_id: users.first.id, conversation_id: conversation.id ) }
 
-    describe 'GET /requests/:request_id/conversations/:id' do
-        before { get "/requests/#{request_id}/conversations/#{conversation_id}" }
+    describe 'GET /requests/:request_id/conversations/:id/messages' do
+        before { get "/requests/#{request_id}/conversations/#{conversation_id}/messages" }
 
         context 'when conversation exists' do
             it 'returns a status code of 200' do
@@ -34,11 +34,11 @@ RSpec.describe 'Messages API' do
         end
     end
 
-    describe 'POST /requests/:request_id/conversations/:id' do
+    describe 'POST /requests/:request_id/conversations/:id/messages' do
         let(:valid_attributes) { { text: "hello", user_id: users.first.id, conversation_id: conversation_id } }
 
         context 'when message attributes are valid' do
-            before { post "/requests/#{request_id}/conversations/#{conversation_id}", params: valid_attributes }
+            before { post "/requests/#{request_id}/conversations/#{conversation_id}/messages", params: valid_attributes }
 
             it 'returns a status code of 201' do
                 expect(response).to have_http_status(201)
@@ -46,7 +46,7 @@ RSpec.describe 'Messages API' do
         end
 
         context 'when invalid message params' do
-            before { post "/requests/#{request_id}/conversations/#{conversation_id}", params: {} }
+            before { post "/requests/#{request_id}/conversations/#{conversation_id}/messages", params: {} }
 
             it 'returns a status code of 422' do
                 expect(response).to have_http_status(422)
