@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
+  devise_for :users,
+              path: '',
+              path_names: {
+                sign_in: 'login',
+                sign_out: 'logout',
+                registration: 'signup'
+              },
+              controllers: {
+                sessions: 'sessions',
+                registrations: 'registrations'
+              }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users do
-  end
+  #potentially needed for devise to work      root to: "home#index"
+
+  resources :users
+  
 
   resources :requests do 
     resources :conversations do 

@@ -21,3 +21,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+#ignore secrets for jwt
+/config/local_env.yml
