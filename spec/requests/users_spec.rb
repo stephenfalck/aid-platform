@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'devise/jwt/test_helpers'
 
 RSpec.describe 'Users API', type: :request do
     let!(:users) { create_list(:user, 10) }
@@ -47,28 +48,26 @@ RSpec.describe 'Users API', type: :request do
     describe 'POST /signup' do
         let(:valid_attributes) {{first_name: 'Frank', last_name: 'Lampard', email: 'fl@email.com', password: 'password'}} 
 
-        #context 'when the request is valid' do 
-        #    before { post '/signup', params: valid_attributes }
-#
-        #    it 'creates a user' do
-        #        expect(json['first_name']).to eq('Frank')
-        #    end
-#
-        #    it 'returns status code 201' do
-        #        expect(response).to have_http_status(201)
-        #    end
-#
-        #end
-
-        context 'when user is unauthenticated' do
+        context 'when request is valid' do
             before { post '/signup', params: valid_attributes }
         
-            it 'returns 200' do
-              expect(response.status).to eq 200
+            it 'returns 201' do
+              expect(response).to have_http_status(201)
             end
         
             it 'returns a new user' do
-              expect(response.body).to match_schema('user')
+              expect(json['first_name']).to eq('Frank')
+            end
+
+            it 'returns JWT token in authorization header' do
+                expect(response.headers['Authorization']).to be_present
+            end
+
+            it 'returns valid JWT token' do
+                post '/signup', params: valid_attributes 
+                token = JSON.parse(response.body)['token']
+
+                expect{ JWT.decode(token, key) }.to_not raise_error(JWT::DecodeError)
             end
         end
 
@@ -76,39 +75,47 @@ RSpec.describe 'Users API', type: :request do
             before { post '/signup', params: {first_name: users.first.first_name, last_name: users.first.last_name, email: users.first.email, password: users.first.password} }
         
             it 'returns bad request status' do
-              expect(response.status).to eq 400
+              expect(response.status).to eq 422
             end
         
             it 'returns validation errors' do
-              expect(json['errors'].first['title']).to eq('Bad Request')
+              json_response = JSON.parse(response.body)
+              expect(json_response).to include("errors" => {"email"=>["has already been taken"]})
             end
         end
 
         context 'when the request is invaild' do
-            before { post '/users', params: {first_name: 'Random', email: 'fl@email.com', password: 'password'} }
+            before { post '/signup', params: {first_name: 'Random', email: 'fl@email.com', password: 'password'} }
 
             it 'returns status code 422' do
                 expect(response).to have_http_status(422)
             end
 
             it 'returns a validation failure message' do
-                expect(response.body)
-                  .to match(/Validation failed: Last name can't be blank/)
+                json_response = JSON.parse(response.body)
+                expect(json_response).to include("errors" => {"last_name"=>["can't be blank"]})
             end
         end
     end
 
-    describe 'DELETE /users/:id' do
-        before { delete "/users/#{user_id}" }
-    
+    describe 'DELETE /signup' do
+
         it 'returns status code 204' do
+
+            user = users.first
+            headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+            # This will add a valid token for `user` in the `Authorization` header
+            auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
+
+            delete "/signup", headers: auth_headers
+        
             expect(response).to have_http_status(204)
         end
     end
 
-    describe 'POST/login' do 
+    describe 'POST /login' do 
         context 'when params are correct' do
-            before { post '/login', params: {email: users.first.email, password: users.first.encrypted_password} }
+            before { post '/login', params: {user: { email: users.first.email, password: users.first.password} } }
 
             it 'returns a status code of 200' do
                 expect(response).to have_http_status(200)
@@ -119,8 +126,9 @@ RSpec.describe 'Users API', type: :request do
             end
 
             it 'returns valid JWT token' do
-                decoded_token = decoded_jwt_token_from_response(response)
-                expect(decoded_token.first['sub']).to be_present
+                token = JSON.parse(response.body)['token']
+
+                expect{ JWT.decode(token, key) }.to_not raise_error(JWT::DecodeError)
             end
         end
 
