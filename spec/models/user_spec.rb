@@ -14,7 +14,6 @@ RSpec.describe User, type: :model do
   it { should_not allow_value("foo").for(:email) }
   it { should_not allow_value("foo@email").for(:email) }
 
-  it { should validate_uniqueness_of(:email)}
+  it { should validate_uniqueness_of(:email).ignoring_case_sensitivity}
 
-  it { should have_secure_password }
 end

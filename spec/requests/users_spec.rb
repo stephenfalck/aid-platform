@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
-    #let!(:users) { create_list(:user, 10) }
-    #let(:user_id) { users.first.id }
-    let(:user) { User.create!(first_name: 'eden', last_name: 'hazard', email: 'xyz@gmail.com', password: 'pass') }
-    #let(:users) {FactoryBot.create_list(:user, 10)}
-    let(:user_id) { user.id }
+    let!(:users) { create_list(:user, 10) }
+    let(:user_id) { users.first.id }
 
     describe 'GET /users' do
         before { get "/users" }
