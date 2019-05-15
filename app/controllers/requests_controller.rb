@@ -29,7 +29,7 @@ class RequestsController < ApplicationController
 
     private 
     def request_params
-        params.permit(:latitude, :longitude, :fulfilled, :description, :user_id)
+        params.permit(:latitude, :longitude, :fulfilled, :description, :user_id, :request_category_id)
     end
 
     def set_request

@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Requests API', type: :request do
     let!(:user) { create(:user) }
-    let!(:requests) { create_list(:request, 5, user_id: user.id ) }
+    let!(:request_category) { create(:request_category) }
+    let!(:requests) { create_list(:request, 5, user_id: user.id, request_category_id: request_category.id ) }
     let(:request_id) { requests.first.id }
+    
 
     before { sign_in user }
     
@@ -49,7 +51,7 @@ RSpec.describe 'Requests API', type: :request do
     end
 
     describe 'POST /requests' do
-        let(:valid_attributes) {{latitude: 100.00, longitude: 90.00, fulfilled: false, description: 'brief description', user_id: user.id}} 
+        let(:valid_attributes) {{latitude: 100.00, longitude: 90.00, fulfilled: false, description: 'brief description', user_id: user.id, request_category_id: request_category.id}} 
 
         context 'when the request is valid' do 
             before { post '/requests', params: valid_attributes }
@@ -65,7 +67,7 @@ RSpec.describe 'Requests API', type: :request do
         end
 
         context 'when the request is invaild' do
-            before { post '/requests', params: {longitude: 90.00, fulfilled: false, description: 'brief description', user_id: user.id} }
+            before { post '/requests', params: {longitude: 90.00, fulfilled: false, description: 'brief description', user_id: user.id, request_category_id: request_category.id} }
 
             it 'returns status code 422' do
                 expect(response).to have_http_status(422)

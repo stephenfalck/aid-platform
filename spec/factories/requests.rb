@@ -5,5 +5,6 @@ FactoryBot.define do
     longitude { 1.5 }
     fulfilled { false } 
     user { nil }
+    request_category { nil }
   end
 end

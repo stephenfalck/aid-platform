@@ -1,5 +1,6 @@
 class Request < ApplicationRecord
   belongs_to :user
+  belongs_to :request_category
   has_many :conversations
 
   validates_presence_of :latitude, :longitude

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Request, type: :model do
 
   it { should belong_to(:user) }
+  it { should belong_to(:request_category) }
   it { should have_many(:conversations) }
 
   it { should validate_presence_of(:description) }

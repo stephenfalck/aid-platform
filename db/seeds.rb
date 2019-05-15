@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+def seed_categories
+    categories = ['One-time task', 'Material need']
+
+    categories.each do |category|
+        RequestCategory.create(category: category)
+    end
+end
+
+seed_categories
