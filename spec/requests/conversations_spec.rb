@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Conversations API' do 
     let!(:user) { create(:user) }
     let!(:users) { create_list(:user, 5 ) }
-    let!(:request) { create(:request, user_id: users.first.id) }
+    let!(:request_category) { create(:request_category) }
+    let!(:request) { create(:request, user_id: users.first.id, request_category_id: request_category.id) }
     let!(:conversations) { create_list(:conversation, 5, user_id: users.second.id, request_id: request.id) }
     let(:request_id) { request.id }
     let(:id) { conversations.first.id }
@@ -74,17 +75,6 @@ RSpec.describe 'Conversations API' do
             end
         end
 
-        context 'when invalid conversation params' do
-            before { post "/requests/#{request_id}/conversations", params: {} }
-
-            it 'returns a status code of 422' do
-                expect(response).to have_http_status(422)
-            end
-
-            it 'returns a failure message' do
-                expect(response.body).to match(/Validation failed: User can't be blank/)
-            end
-        end
     end
 
     describe 'DELETE /conversations/:id' do

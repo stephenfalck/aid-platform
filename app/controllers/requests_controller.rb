@@ -12,7 +12,11 @@ class RequestsController < ApplicationController
     end
 
     def create
-        @request = Request.create!(request_params)
+        #@request = Request.create!(request_params)
+        @request = Request.new(request_params)
+        @request.user_id = current_user.id
+        @request.save!
+
         json_response(@request, :created)
     end
 

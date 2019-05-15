@@ -9,7 +9,11 @@ class ConversationsController < ApplicationController
     end
 
     def create
-        @conversation = Conversation.create!(conversation_params)
+        #@conversation = Conversation.create!(conversation_params)
+        @conversation = Conversation.new(conversation_params)
+        @conversation.user_id = current_user.id
+        @conversation.save!
+
         json_response(@conversation, :created)
     end
 

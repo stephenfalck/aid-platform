@@ -3,5 +3,5 @@ class Conversation < ApplicationRecord
   has_many :messages, dependent: :destroy
   belongs_to :request
 
-  validates_presence_of :request_id, :user_id
+  #validates_presence_of :request_id, :user_id
 end

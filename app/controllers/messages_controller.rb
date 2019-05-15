@@ -8,7 +8,11 @@ class MessagesController < ApplicationController
     end
 
     def create
-        @message = Message.create!(message_params)
+        #@message = Message.create!(message_params)
+        @message = Message.new(message_params)
+        @message.user_id = current_user.id
+        @message.save!
+
         json_response(@message, :created)
     end
     

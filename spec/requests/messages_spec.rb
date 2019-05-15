@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Messages API' do
     let!(:users) { create_list(:user, 2) }
-    let!(:request) { create(:request, user_id: users.second.id) }
+    let!(:request_category) { create(:request_category) }
+    let!(:request) { create(:request, user_id: users.second.id, request_category_id: request_category.id) }
     let!(:conversation) { create(:conversation, user_id: users.first.id, request_id: request.id) }
     let(:request_id) { request.id }
     let(:conversation_id) { conversation.id }
@@ -37,7 +38,7 @@ RSpec.describe 'Messages API' do
     end
 
     describe 'POST /requests/:request_id/conversations/:id/messages' do
-        let(:valid_attributes) { { text: "hello", user_id: users.first.id, conversation_id: conversation_id } }
+        let(:valid_attributes) { { text: "hello", conversation_id: conversation_id } }
 
         context 'when message attributes are valid' do
             before { post "/requests/#{request_id}/conversations/#{conversation_id}/messages", params: valid_attributes }
@@ -55,7 +56,7 @@ RSpec.describe 'Messages API' do
             end
 
             it 'returns a failure message' do
-                expect(response.body).to match(/Validation failed: User must exist, Text can't be blank/)
+                expect(response.body).to match(/Validation failed: Text can't be blank/)
             end
         end
     end
