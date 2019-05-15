@@ -4,6 +4,8 @@ RSpec.describe 'Requests API', type: :request do
     let!(:user) { create(:user) }
     let!(:requests) { create_list(:request, 5, user_id: user.id ) }
     let(:request_id) { requests.first.id }
+
+    before { sign_in user }
     
 
     describe 'GET /requests' do

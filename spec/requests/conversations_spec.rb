@@ -8,6 +8,8 @@ RSpec.describe 'Conversations API' do
     let(:request_id) { request.id }
     let(:id) { conversations.first.id }
 
+    before { sign_in user }
+
     
     describe 'GET requests/:request_id/conversations' do
         before { get "/requests/#{request_id}/conversations" }

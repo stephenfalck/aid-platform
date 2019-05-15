@@ -8,6 +8,8 @@ RSpec.describe 'Messages API' do
     let(:conversation_id) { conversation.id }
     let!(:messages) { create_list(:message, 5, user_id: users.first.id, conversation_id: conversation.id ) }
 
+    before { sign_in users.second }
+
     describe 'GET /requests/:request_id/conversations/:id/messages' do
         before { get "/requests/#{request_id}/conversations/#{conversation_id}/messages" }
 

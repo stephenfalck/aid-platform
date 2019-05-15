@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
-before_action :set_request, only: [:show, :update, :destroy]
+    before_action :authenticate_user!
+    before_action :set_request, only: [:show, :update, :destroy]
 
     def index
         @requests = Request.all
