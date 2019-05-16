@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Requests API', type: :request do
-    let!(:user) { create(:user) }
+    let!(:user) { create :user, :with_image }
     let!(:request_category) { create(:request_category) }
     let!(:requests) { create_list(:request, 5, user_id: user.id, request_category_id: request_category.id ) }
     let(:request_id) { requests.first.id }

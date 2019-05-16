@@ -3,8 +3,8 @@ require 'devise/jwt/test_helpers'
 
 RSpec.describe 'Users API', type: :request do
     let(:file) { fixture_file_upload(Rails.root.join('public', '/Users/stephenfalck/Documents/open-classrooms/Bootstrap/film-festival/website-files/assets/images/wall_e.jpg'), 'image/jpg') }
-    let!(:user) {create(:user, image: file)}
-    #let!(:users) { create_list(:user, 10) }
+    let!(:user) {create :user, :with_image}
+    let!(:users) { create_list :user, 10, :with_image }
     let(:user_id) { user.id }
 
     describe 'GET /users' do
@@ -12,7 +12,7 @@ RSpec.describe 'Users API', type: :request do
 
         it 'returns users' do
             expect(json).not_to be_empty
-            expect(json.size).to eq(1)
+            expect(json.size).to eq(11)
         end
 
         it 'returns status code 200' do

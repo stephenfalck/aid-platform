@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Conversations API' do 
-    let!(:user) { create(:user) }
-    let!(:users) { create_list(:user, 5 ) }
+    let(:file) { fixture_file_upload(Rails.root.join('public', '/Users/stephenfalck/Documents/open-classrooms/Bootstrap/film-festival/website-files/assets/images/wall_e.jpg'), 'image/jpg') }
+    let!(:user) { create :user, :with_image }
+    let!(:users) { create_list :user, 5, :with_image }
     let!(:request_category) { create(:request_category) }
     let!(:request) { create(:request, user_id: users.first.id, request_category_id: request_category.id) }
     let!(:conversations) { create_list(:conversation, 5, user_id: users.second.id, request_id: request.id) }

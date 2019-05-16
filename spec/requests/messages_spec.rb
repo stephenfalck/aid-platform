@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Messages API' do
-    let!(:users) { create_list(:user, 2) }
+    let!(:users) { create_list :user, 2, :with_image }
     let!(:request_category) { create(:request_category) }
     let!(:request) { create(:request, user_id: users.second.id, request_category_id: request_category.id) }
     let!(:conversation) { create(:conversation, user_id: users.first.id, request_id: request.id) }
