@@ -4,11 +4,11 @@ class RepliesController < ApplicationController
 
     def index
         @replies = Reply.all
-        json_reply(@replies)
+        json_response(@replies)
     end
 
     def show
-        json_reply(@reply) 
+        json_response(@reply) 
     end
 
     def create
@@ -16,7 +16,7 @@ class RepliesController < ApplicationController
         @reply.volunteer_id = current_user.id
         @reply.save!
 
-        json_reply(@reply, :created)
+        json_response(@reply, :created)
     end
 
     def update

@@ -7,11 +7,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
   
-
   resources :requests
 
   resources :conversations do 
     resources :messages, only: [:index, :create]
   end
+
+  resources :replies
 
 end

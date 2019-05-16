@@ -16,7 +16,7 @@ RSpec.describe 'replies API', type: :request do
         end
 
         it 'returns a status request of 200' do
-            expect(reply).to have_http_status(200)
+            expect(response).to have_http_status(200)
         end
     end
 
@@ -30,18 +30,21 @@ RSpec.describe 'replies API', type: :request do
             end
 
             it 'returns a status request of 200' do
-                expect(reply).to have_http_status(200)
+                expect(response).to have_http_status(200)
             end
         end
 
         context 'when the request does not exist' do
             it 'returns status code 404' do
-                get "/repliess/#{200}"
-                expect(reply).to have_http_status(404)
+                sign_in(user)
+                get "/replies/#{200}"
+                expect(response).to have_http_status(404)
             end
 
             it 'returns a not found message' do
-                expect(reply.body).to match(/Couldn't find reply with 'id'=200/)
+                sign_in(user)
+                get "/replies/#{200}"
+                expect(response.body).to include("Couldn't find Reply with 'id'=200")
             end
         end
     end
@@ -57,21 +60,21 @@ RSpec.describe 'replies API', type: :request do
             end
 
             it 'returns status code 201' do
-                expect(reply).to have_http_status(201)
+                expect(response).to have_http_status(201)
             end
 
         end
 
-        context 'when the request is invaild' do
-            before { post '/requests', params: {active: true, message_sent: true} }
+        context 'when the reply is invaild' do
+            before { post '/replies', params: {active: true, message_sent: true} }
 
             it 'returns status code 422' do
-                expect(reply).to have_http_status(422)
+                expect(response).to have_http_status(422)
             end
 
             it 'returns a validation failure message' do
-                expect(reply.body)
-                  .to match(/Validation failed: Request id can't be blank/)
+                expect(response.body)
+                  .to match(/Validation failed: Request can't be blank/)
             end
         end
     end
@@ -83,24 +86,26 @@ RSpec.describe 'replies API', type: :request do
 
         context 'when reply exists' do
             it 'returns status code 204' do
-                expect(reply).to have_http_status(204)
+                expect(response).to have_http_status(204)
             end
 
             it 'updates the reply' do
-                updated_reply = reply.find(reply.id)
+                updated_reply = Reply.find(reply.id)
                 expect(updated_reply.active).to match(true)
             end
         end
 
         context 'when the reply does not exist' do
             it 'returns status code 404' do
+                sign_in(user)
                 put "/replies/#{200}", params: {message_sent: true}
-                expect(reply).to have_http_status(404)
+                expect(response).to have_http_status(404)
             end
 
             it 'returns a not found message' do
-                put "/replies/#{reply.id}", params: {message_sent: true}
-                expect(reply.body).to match(/Couldn't find reply with 'id'=0/)
+                sign_in(user)
+                put "/replies/#{0}", params: {message_sent: true}
+                expect(response.body).to include("Couldn't find Reply with 'id'=0")
             end
         end
     end
