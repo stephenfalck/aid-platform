@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_163344) do
+ActiveRecord::Schema.define(version: 2019_05_16_195345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2019_05_16_163344) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.integer "request_id"
+    t.integer "volunteer_id"
+    t.boolean "active", default: false
+    t.boolean "message_sent", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "request_categories", force: :cascade do |t|
     t.string "category"
     t.datetime "created_at", null: false
@@ -73,6 +82,15 @@ ActiveRecord::Schema.define(version: 2019_05_16_163344) do
     t.bigint "request_category_id"
     t.index ["request_category_id"], name: "index_requests_on_request_category_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer "request_id"
+    t.integer "volunteer_id"
+    t.boolean "active", default: false
+    t.boolean "message_sent", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
