@@ -1,7 +1,6 @@
 class ConversationsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_request
-    before_action :set_request_conversation, only: [:show, :update, :destroy] 
+    before_action :set_conversation, only: [:show, :update, :destroy]
 
     def index
         @conversations = Conversation.all
@@ -9,10 +8,11 @@ class ConversationsController < ApplicationController
     end
 
     def create
+        @conversation = Conversation.create!
         #@conversation = Conversation.create!(conversation_params)
-        @conversation = Conversation.new(conversation_params)
-        @conversation.user_id = current_user.id
-        @conversation.save!
+        #@conversation = Conversation.new(conversation_params)
+        #@conversation.user_id = current_user.id
+        #@conversation.save!
 
         json_response(@conversation, :created)
     end
@@ -32,15 +32,7 @@ class ConversationsController < ApplicationController
     end
 
     private
-    def set_request
-        @request = Request.find(params[:request_id])
-    end
-
-    def set_request_conversation
-        @conversation = @request.conversations.find_by!(id: params[:id]) if @request
-    end
-
-    def conversation_params
-        params.permit(:user_id, :request_id)
+    def set_conversation
+        @conversation = Conversation.find(params[:id])
     end
 end

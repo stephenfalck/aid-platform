@@ -2,17 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'Messages API' do
     let!(:users) { create_list :user, 2, :with_image }
-    let!(:request_category) { create(:request_category) }
-    let!(:request) { create(:request, user_id: users.second.id, request_category_id: request_category.id) }
-    let!(:conversation) { create(:conversation, user_id: users.first.id, request_id: request.id) }
-    let(:request_id) { request.id }
+    let!(:conversation) { create(:conversation) }
     let(:conversation_id) { conversation.id }
     let!(:messages) { create_list(:message, 5, user_id: users.first.id, conversation_id: conversation.id ) }
 
     before { sign_in users.second }
 
-    describe 'GET /requests/:request_id/conversations/:id/messages' do
-        before { get "/requests/#{request_id}/conversations/#{conversation_id}/messages" }
+    describe 'GET /conversations/:id/messages' do
+        before { get "/conversations/#{conversation_id}/messages" }
 
         context 'when conversation exists' do
             it 'returns a status code of 200' do
@@ -37,11 +34,11 @@ RSpec.describe 'Messages API' do
         end
     end
 
-    describe 'POST /requests/:request_id/conversations/:id/messages' do
+    describe 'POST /conversations/:id/messages' do
         let(:valid_attributes) { { text: "hello", conversation_id: conversation_id } }
 
         context 'when message attributes are valid' do
-            before { post "/requests/#{request_id}/conversations/#{conversation_id}/messages", params: valid_attributes }
+            before { post "/conversations/#{conversation_id}/messages", params: valid_attributes }
 
             it 'returns a status code of 201' do
                 expect(response).to have_http_status(201)
@@ -49,7 +46,7 @@ RSpec.describe 'Messages API' do
         end
 
         context 'when invalid message params' do
-            before { post "/requests/#{request_id}/conversations/#{conversation_id}/messages", params: {} }
+            before { post "/conversations/#{conversation_id}/messages", params: {} }
 
             it 'returns a status code of 422' do
                 expect(response).to have_http_status(422)

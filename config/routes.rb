@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   
 
-  resources :requests do 
-    resources :conversations do 
-      resources :messages, only: [:index, :create]
-    end
+  resources :requests
+
+  resources :conversations do 
+    resources :messages, only: [:index, :create]
   end
 
 end
