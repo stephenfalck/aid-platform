@@ -1,3 +1,9 @@
 #map-container {
     height: calc(100vh - 128px);
 }
+
+@media screen and (max-width: 599px) {
+    #map-container {
+        height: calc(100vh - 112px);
+    }
+}
