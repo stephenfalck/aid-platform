@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Grid, Typography } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 import SignUpForm from './sign_up_form'
 
 class SignUpPage extends React.Component {

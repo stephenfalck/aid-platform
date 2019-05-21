@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
-import LandingPage from'./landing_page/landing_layout'
-import SignUpPage from'./sign_up_page/sign_up_layout'
+import LandingPage from'./landing_page/landing_layout';
+import SignUpPage from'./sign_up_page/sign_up_layout';
+import RequestsPage from './requests_page/requests_layout';
 
 class App extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class App extends React.Component {
       <Router>
         <Route path="/" exact component={LandingPage} />
         <Route path="/signup" component={SignUpPage} />
+        <Route path="/requests" component={RequestsPage} />
       </Router>
     )
   }
