@@ -8,7 +8,8 @@ class LogInForm extends React.Component {
     state = {
         email: '',
         password: '',
-        showPassword: false
+        showPassword: false,
+        response: {}
     }
 
     handleChange = prop => event => {
@@ -19,13 +20,37 @@ class LogInForm extends React.Component {
         this.setState(state => ({ showPassword: !state.showPassword }));
     };
 
-    handleSubmit = () => {
-        
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let url = '/login'
+        let data = {
+            email: this.state.email,
+            password: this.state.password
+        }
+
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            /*this.setState({
+                response: response
+            })
+            console.log(this.state.response.headers) */
+            
+            console.log(response.headers.get('Authorization'))
+            return response.json();
+        }).then(data => {
+            console.log(data)
+        })
+        .catch(error => console.error('Error:', error))
     }
 
     render() {
         return(
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <TextField
                     id="email"
                     label="Email"
@@ -58,6 +83,7 @@ class LogInForm extends React.Component {
                 <Fab 
                 variant="extended" 
                 aria-label="Log in" 
+                type="submit"
                 color="secondary" 
                 onClick={this.handleSubmit}
                 style={{marginTop: "15px", marginBottom: "10px", width: "100%"}}

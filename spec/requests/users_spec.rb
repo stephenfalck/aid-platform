@@ -133,6 +133,7 @@ RSpec.describe 'Users API', type: :request do
 
             #it 'returns valid JWT token' do
             #    token = JSON.parse(response.body)['token']
+            #    token = JSON.parse(response.header)
 #
             #    #expect(token).to be_present
 #
