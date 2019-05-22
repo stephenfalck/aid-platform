@@ -5,18 +5,6 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 
 class SignUpForm extends React.Component {
-    /*
-    constructor(props) {
-        super(props);
-        this.state = {
-            first_name: '',
-            last_name: '',
-            email: ''
-        }
-
-        this.fileInput = React.createRef();
-    }
-    */
    state = {
     first_name: '',
     last_name: '',
@@ -48,22 +36,11 @@ class SignUpForm extends React.Component {
         const formData = new FormData(form)
         const url = '/signup'
 
-        /*
-        alert(
-            `Selected file - ${
-              this.fileInput.current.files[0].name
-            }`
-          );
-          */
-
-          for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
-
         fetch(url, {
             method: 'POST',
             body: formData
         }).then(response => {
+            /*
             this.setState({
                 response: response
             })
@@ -72,10 +49,14 @@ class SignUpForm extends React.Component {
                 console.log('Looks like there was a problem. Status Code: ' + response.status);
                 return;
             }
-
             response.json().then((submission) => {
                 console.log("Success", JSON.stringify(submission));
               });
+              */
+             console.log(response.headers.get('Authorization'))
+             return response.json();
+        }).then(data => {
+            console.log(data)
         })
         .catch(error => console.error('Error:', error));  
         
