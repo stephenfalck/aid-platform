@@ -2,6 +2,8 @@ import React from 'react';
 import { TextField, Button, Fab, FormControl, InputLabel, 
         InputAdornment, IconButton, Input } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { store } from "../redux/store";
+import { setJwtToken, setAuthenticatedUser } from '../redux/actions';
 
 
 class SignUpForm extends React.Component {
@@ -27,6 +29,14 @@ class SignUpForm extends React.Component {
     handleClickShowPasswordConfirmation = () => {
         this.setState(state => ({ showPasswordConfirmation: !state.showPasswordConfirmation }));
     };
+
+    dispatchToken = (token) => {
+        store.dispatch(setJwtToken(token));
+    }
+
+    dispatchUser = (user) => {
+        store.dispatch(setAuthenticatedUser(user));
+    }
     
 
     handleSubmit = (e) => {
@@ -41,28 +51,22 @@ class SignUpForm extends React.Component {
             body: formData
         }).then(response => {
             /*
-            this.setState({
-                response: response
-            })
-
             if (response.status !== 201) {
                 console.log('Looks like there was a problem. Status Code: ' + response.status);
                 return;
             }
-            response.json().then((submission) => {
-                console.log("Success", JSON.stringify(submission));
-              });
-              */
-             console.log(response.headers.get('Authorization'))
+            */
+             //console.log(response.headers.get('Authorization'))
+             this.dispatchToken(response.headers.get('Authorization'))
              return response.json();
         }).then(data => {
-            console.log(data)
+            //console.log(data)
+            this.dispatchUser(data);
+            console.log(store.getState());
         })
         .catch(error => console.error('Error:', error));  
         
     }
-    
-
     render() {
         return(
             <form id="sign-up-form" onSubmit={this.handleSubmit}>

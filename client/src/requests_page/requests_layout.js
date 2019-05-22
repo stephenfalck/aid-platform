@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Paper, Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Navbar from '../navbar/navbar';
 import Footer from '../footer/footer';
 import './requests_layout.css'

@@ -3,6 +3,8 @@ import { TextField, FormControl, InputLabel, InputAdornment, IconButton, Input,
         Fab } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import { store } from "../redux/store";
+import { setJwtToken, setAuthenticatedUser } from '../redux/actions';
 
 class LogInForm extends React.Component {
     state = {
@@ -20,6 +22,14 @@ class LogInForm extends React.Component {
         this.setState(state => ({ showPassword: !state.showPassword }));
     };
 
+    dispatchToken = (token) => {
+        store.dispatch(setJwtToken(token));
+    }
+
+    dispatchUser = (user) => {
+        store.dispatch(setAuthenticatedUser(user));
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         let url = '/login'
@@ -35,15 +45,14 @@ class LogInForm extends React.Component {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            /*this.setState({
-                response: response
-            })
-            console.log(this.state.response.headers) */
-            
-            console.log(response.headers.get('Authorization'))
+            //console.log(response.headers.get('Authorization'))
+
+            this.dispatchToken(response.headers.get('Authorization'))
+            //console.log(store.getState())
             return response.json();
         }).then(data => {
-            console.log(data)
+            this.dispatchUser(data);
+            console.log(store.getState())
         })
         .catch(error => console.error('Error:', error))
     }
