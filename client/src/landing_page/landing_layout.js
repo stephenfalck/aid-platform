@@ -28,7 +28,7 @@ class LandingPage extends React.Component {
                                 <Typography variant="overline">
                                     Log in to continue
                                 </Typography>
-                                <LogInForm /> 
+                                <LogInForm history={this.props.history}/> 
                                 <Typography variant="subtitle2">
                                     Not a member? <Link to='/signup'>Sign up.</Link>
                                 </Typography>

@@ -9,7 +9,7 @@ class SignUpPage extends React.Component {
             <Grid container alignContent={'center'} justify={'center'} className="main-container" style={{minHeight: '100vh'}}>  
                 <Grid item md={8}>
                     <Paper style={{padding: "15px"}}>
-                        <SignUpForm />
+                        <SignUpForm history={this.props.history}/>
                     </Paper>
                 </Grid>
             </Grid>

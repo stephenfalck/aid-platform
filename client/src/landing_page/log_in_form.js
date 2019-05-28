@@ -46,6 +46,9 @@ class LogInForm extends React.Component {
             }
         }).then(response => {
             //console.log(response.headers.get('Authorization'))
+            this.setState({
+                response: response
+            })
 
             this.dispatchToken(response.headers.get('Authorization'))
             //console.log(store.getState())
@@ -53,8 +56,15 @@ class LogInForm extends React.Component {
         }).then(data => {
             this.dispatchUser(data);
             console.log(store.getState())
+            this.checkResponseStatus(this.state.response);
         })
-        .catch(error => console.error('Error:', error))
+        .catch(error => console.error('Error:', error)) 
+    }
+
+    checkResponseStatus = (response) => {
+        if (response.status === 200) {
+            this.props.history.push("/requests")
+        }
     }
 
     render() {

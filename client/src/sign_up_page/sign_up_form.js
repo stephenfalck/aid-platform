@@ -50,6 +50,9 @@ class SignUpForm extends React.Component {
             method: 'POST',
             body: formData
         }).then(response => {
+            this.setState({
+                response: response
+            })
             /*
             if (response.status !== 201) {
                 console.log('Looks like there was a problem. Status Code: ' + response.status);
@@ -63,10 +66,18 @@ class SignUpForm extends React.Component {
             //console.log(data)
             this.dispatchUser(data);
             console.log(store.getState());
+            this.checkResponseStatus(this.state.response);
         })
-        .catch(error => console.error('Error:', error));  
-        
+        .catch(error => console.error('Error:', error));    
     }
+
+    checkResponseStatus = (response) => {
+        if (response.status === 201) {
+            this.props.history.push("/requests")
+        }
+    }
+
+
     render() {
         return(
             <form id="sign-up-form" onSubmit={this.handleSubmit}>
