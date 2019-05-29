@@ -50,6 +50,8 @@ class LogInForm extends React.Component {
                 response: response
             })
 
+            console.log(response)
+
             this.dispatchToken(response.headers.get('Authorization'))
             //console.log(store.getState())
             return response.json();

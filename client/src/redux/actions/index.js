@@ -20,3 +20,9 @@ export function setAuthenticatedUser(user) {
         }
     }
 }
+
+export function logOutUser() {
+    return {
+        type: "LOG_OUT_USER"
+    }
+}

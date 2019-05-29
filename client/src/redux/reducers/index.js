@@ -9,8 +9,21 @@ export function reducer(state, action) {
             return {
                 ...state,
                 token: action.payload.token
+            };
+        case "LOG_OUT_USER":
+            return {
+                ...state,
+                token: {
+                    token: null
+                },
+                current_user: {
+                    id: null,
+                    first_name: null,
+                    last_name: null,
+                    email: null
+                }
             }
        default:
            return state;
-            }
+        }
 } 
