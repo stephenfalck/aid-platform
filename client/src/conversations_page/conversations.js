@@ -33,7 +33,7 @@ class ConversationsPage extends React.Component {
                                     label="Write a message..."
                                     multiline
                                     rowsMax="4"
-                                    value={this.state.multiline}
+                                    value={this.state.message}
                                     onChange={this.handleChange('message')}
                                     margin="normal"
                                     variant="outlined"

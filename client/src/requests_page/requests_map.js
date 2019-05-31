@@ -6,7 +6,7 @@ const RequestsMap = withScriptjs(withGoogleMap((props) =>{
     return (
         <GoogleMap
           defaultZoom={14}
-          center={ { lat:  42.3601, lng: -71.0589 } }
+          center={ { lat:  51.515499, lng: -0.1419 } }
           >
         </GoogleMap>
       );
