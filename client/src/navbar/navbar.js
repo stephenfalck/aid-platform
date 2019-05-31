@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem  } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -89,7 +89,7 @@ class Navbar extends React.Component {
                         open={open}
                         onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose}>Inbox</MenuItem>
+                            <MenuItem onClick={this.handleClose}><Link to='/inbox'>Inbox</Link></MenuItem>
                             <MenuItem onClick={this.handleLogOut}>Log out</MenuItem>
                         </Menu>
                     </div>  

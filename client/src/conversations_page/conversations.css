@@ -1,0 +1,14 @@
+#conversations-container {
+    height: calc(100vh - 64px);
+    overflow-y: scroll;
+}
+
+#contacts {
+    border-right: 1px solid grey;
+}
+
+@media screen and (max-width: 599px) {
+    #conversations-container {
+        height: calc(100vh - 56px);
+    }
+}
