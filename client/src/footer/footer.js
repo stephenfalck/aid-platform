@@ -45,7 +45,7 @@ class Footer extends React.Component {
         }).then(data => {
             console.log(data)
             this.setState({
-                location = {
+                location: {
                     lat: data.results[0].gemoetry.location.lat,
                     lng: data.results[0].gemoetry.location.lng
                 }
