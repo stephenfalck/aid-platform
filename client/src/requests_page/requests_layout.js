@@ -9,7 +9,7 @@ class RequestsPage extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar history={this.props.history}/>
+                <Navbar title='Requests' history={this.props.history}/>
                 <Grid container id="map-container">
                     <RequestsMapContainer />
                 </Grid>

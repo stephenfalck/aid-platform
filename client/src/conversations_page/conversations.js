@@ -17,7 +17,7 @@ class ConversationsPage extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar history={this.props.history}/>
+                <Navbar title='Inbox' history={this.props.history}/>
                 <Grid container id="conversations-container">
                     <Grid item sm={3} style={{height: '100%'}} id="contacts">
                         <h4>Conversations container</h4>

@@ -1,4 +1,5 @@
 import React from 'react';
+import './navbar.css';
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem  } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
@@ -60,11 +61,11 @@ class Navbar extends React.Component {
         return (
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="Menu" style={{marginLeft: -12, marginRight: 20}}>
+                    <IconButton color="inherit" aria-label="Open drawer">
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" color="inherit">
-                        Requests
+                        {this.props.title}
                     </Typography>
                     <div>
                         <IconButton
@@ -89,6 +90,7 @@ class Navbar extends React.Component {
                         open={open}
                         onClose={this.handleClose}
                         >
+                            <MenuItem onClick={this.handleClose}><Link to='/requests'>Requests</Link></MenuItem>
                             <MenuItem onClick={this.handleClose}><Link to='/inbox'>Inbox</Link></MenuItem>
                             <MenuItem onClick={this.handleLogOut}>Log out</MenuItem>
                         </Menu>

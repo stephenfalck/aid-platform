@@ -12,6 +12,7 @@ class Footer extends React.Component {
     state = {
         open: false,
         category: '1',
+        location: {}
     };
 
     handleClickOpen = () => {
@@ -31,9 +32,9 @@ class Footer extends React.Component {
 
       getLocationData = () => {
         const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk';
-        const address = `${this.state.address}+${this.state.town}+${this.state.postCode}`
-        const joinedAddress = address.replace(/ /g, '+')
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${joinedAddress}&key=${apiKey}`
+        const address = `${this.state.address}+${this.state.town}+${this.state.postCode}`;
+        const joinedAddress = address.replace(/ /g, '+');
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${joinedAddress}&key=${apiKey}`;
 
         fetch(url, {
             method: "GET",
@@ -43,9 +44,14 @@ class Footer extends React.Component {
             return response.json()
         }).then(data => {
             console.log(data)
+            this.setState({
+                location = {
+                    lat: data.results[0].gemoetry.location.lat,
+                    lng: data.results[0].gemoetry.location.lng
+                }
+            })
         })
         .catch(error => console.error('Error: ', error))
-
       }
 
       handleSubmit = (e) => {
@@ -57,8 +63,8 @@ class Footer extends React.Component {
 
           const url = '/requests';
           const data = {
-              latitude: '',
-              longitude: '',
+              latitude: this.state.location.lat,
+              longitude: this.state.location.lng,
               fulfilled: false,
               description: this.state.description,
               user_id: store.getState().current_user.id,
@@ -119,6 +125,7 @@ class Footer extends React.Component {
                             id="address"
                             label="Address"
                             fullWidth
+                            required
                             onChange={this.handleChange('address')}
                             />
                             <TextField
@@ -132,12 +139,14 @@ class Footer extends React.Component {
                             margin="normal"
                             id="town-city"
                             label="Town/City"
+                            required
                             onChange={this.handleChange('town')}
                             />
                             <TextField
                             margin="normal"
                             id="post-code"
                             label="Post Code"
+                            required
                             onChange={this.handleChange('postCode')}
                             />
                         <TextField
@@ -148,6 +157,7 @@ class Footer extends React.Component {
                                 onChange={this.handleChange('description')}
                                 margin="normal"
                                 fullWidth
+                                required
                             />
                             <FormControl component="fieldset" style={{marginTop: '30px'}}>
                                 <FormLabel component="legend">Category</FormLabel>

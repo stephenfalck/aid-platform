@@ -1,0 +1,10 @@
+#root > header.MuiPaper-root-10.MuiPaper-elevation4-16.MuiAppBar-root-1.MuiAppBar-positionStatic-5.MuiAppBar-colorPrimary-8 > div > div {
+    position: absolute;
+    right: 24px;
+}
+
+@media screen and (max-width: 599px) {
+    #root > header.MuiPaper-root-10.MuiPaper-elevation4-16.MuiAppBar-root-1.MuiAppBar-positionStatic-5.MuiAppBar-colorPrimary-8 > div > div {
+        right: 16px;
+    }
+}
