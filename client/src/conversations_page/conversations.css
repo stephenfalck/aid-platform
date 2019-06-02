@@ -3,8 +3,13 @@
     overflow-y: scroll;
 }
 
+#conversations-container > div.MuiGrid-item-100.MuiGrid-grid-sm-9-150 > div > div.MuiGrid-item-100.MuiGrid-grid-sm-2-143 > div {
+    /*margin: 0;*/
+    border-top: 1px solid #D1C4E9;
+}
+
 #contacts {
-    border-right: 1px solid grey;
+    background-color: #D1C4E9;
 }
 
 @media screen and (max-width: 599px) {

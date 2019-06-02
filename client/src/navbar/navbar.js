@@ -73,6 +73,7 @@ class Navbar extends React.Component {
                         aria-haspopup="true"
                         onClick={this.handleMenu}
                         color="inherit"
+                        id="menu-button"
                         >
                             <AccountCircle />
                         </IconButton>
