@@ -30,6 +30,8 @@ class Footer extends React.Component {
         });
       };
 
+      
+      /*
       getLocationData = () => {
         const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk';
         const address = `${this.state.address}+${this.state.town}+${this.state.postCode}`;
@@ -46,19 +48,20 @@ class Footer extends React.Component {
             console.log(data)
             this.setState({
                 location: {
-                    lat: data.results[0].gemoetry.location.lat,
-                    lng: data.results[0].gemoetry.location.lng
+                    lat: data.results[0].geometry.location.lat,
+                    lng: data.results[0].geometry.location.lng
                 }
             })
         })
         .catch(error => console.error('Error: ', error))
       }
+      */
 
       handleSubmit = (e) => {
           e.preventDefault();
           //console.log(this.state)
           
-          this.getLocationData();
+          //this.getLocationData();
 
 
           const url = '/requests';
@@ -71,7 +74,7 @@ class Footer extends React.Component {
               request_category_id: parseInt(this.state.category)
           }
 
-          //console.log(data)
+          console.log(data)
 
           /*
           fetch(url, {
@@ -94,6 +97,7 @@ class Footer extends React.Component {
             category: '1',
           })
           */
+          
       }
         
 

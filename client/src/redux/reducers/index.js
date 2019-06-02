@@ -22,6 +22,11 @@ export function reducer(state, action) {
                     last_name: null,
                     email: null
                 }
+            };
+        case "SET_REQUESTS":
+            return {
+                ...state,
+                requests: action.payload.requests
             }
        default:
            return state;

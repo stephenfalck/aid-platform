@@ -10,7 +10,8 @@ const initialState = {
         first_name: null,
         last_name: null,
         email: null
-    }
+    },
+    requests: []
 }
 
 export const store = createStore(reducer, initialState);

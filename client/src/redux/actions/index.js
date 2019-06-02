@@ -26,3 +26,12 @@ export function logOutUser() {
         type: "LOG_OUT_USER"
     }
 }
+
+export function setRequests(requests) {
+    return {
+        type: "SET_REQUESTS",
+        payload: {
+            requests: requests
+        }
+    }
+}
