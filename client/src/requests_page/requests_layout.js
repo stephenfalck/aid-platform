@@ -8,12 +8,12 @@ import { store } from "../redux/store";
 import { setRequests } from '../redux/actions';
 
 class RequestsPage extends React.Component {
-    dispatchRequests = (requests) => {
-        store.dispatch(setRequests(requests))
-    }
-    
     componentDidMount() {
         this.fetchRequests();
+    }
+
+    dispatchRequests = (requests) => {
+        store.dispatch(setRequests(requests))
     }
 
     fetchRequests() {
@@ -39,7 +39,7 @@ class RequestsPage extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar title='Requests' history={this.props.history}/>
+                <Navbar title='Requests' history={this.props.history} />
                 <Grid container id="map-container">
                     <RequestsMapContainer />
                 </Grid>

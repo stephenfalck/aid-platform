@@ -64,7 +64,7 @@ class Footer extends React.Component {
           //this.getLocationData();
 
 
-          const url = '/requests';
+          //const url = '/requests';
           const data = {
               latitude: this.state.location.lat,
               longitude: this.state.location.lng,

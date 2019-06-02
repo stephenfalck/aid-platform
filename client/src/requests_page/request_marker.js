@@ -1,11 +1,12 @@
 import React from 'react';
 import { Marker } from "react-google-maps";
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
-    DialogContentText, DialogTitle, Typography  } from '@material-ui/core';
+    DialogTitle, Typography, Switch, FormControlLabel  } from '@material-ui/core';
 
 class RequestMarker extends React.Component {
     state = {
         open: false,
+        checked: true,
         currentRequest: {}
       };
 
@@ -32,6 +33,17 @@ class RequestMarker extends React.Component {
         });
       };
 
+    handleCheckChange = name => event => {
+        this.setState({ [name]: event.target.checked });
+      };
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(this.state)
+        //submitResponse();
+        //startConversation();
+    }
+
     submitResponse = () => {
 
     }
@@ -45,13 +57,14 @@ class RequestMarker extends React.Component {
             <Marker
                 position={this.props.location}
                 onClick={this.handleClickOpen}
+                icon={this.props.request.request_category_id === 1 ? 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'}
             >
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                    <DialogTitle id="form-dialog-title">Request details</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Request type: {this.props.request.request_category_id === 1 ? "One-time task" : "Material need"}</DialogTitle>
                     <DialogContent>
                         <Typography variant='subtitle1'>
                             {this.props.request.description}
@@ -61,21 +74,35 @@ class RequestMarker extends React.Component {
                             If you would like to fulfill this request, please send the user a message below and check fulfill.
                         </Typography>
                         <br></br>
-                        <TextField
-                        autoFocus
-                        margin="dense"
-                        id="message"
-                        label="Message"
-                        fullWidth
-                        multiline
-                        rows="4"
-                        />
+                        <form id="response-form" onSubmit={this.handleSubmit}>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="message"
+                                label="Message"
+                                fullWidth
+                                multiline
+                                rows="4"
+                                onChange={this.handleChange('message')}
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                    checked={this.state.checked}
+                                    onChange={this.handleCheckChange('checked')}
+                                    value="checked"
+                                    color="primary"
+                                    />
+                                }
+                                label="Fulfill"
+                                />
+                        </form>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
                         Cancel
                         </Button>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} color="primary" type='submit' form="response-form">
                         Submit
                         </Button>
                     </DialogActions>
