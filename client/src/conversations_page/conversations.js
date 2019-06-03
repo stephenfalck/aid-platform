@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { Grid, TextField } from '@material-ui/core';
+import { Grid, TextField, InputAdornment } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import Navbar from '../navbar/navbar';
 import './conversations.css'
 
@@ -28,17 +29,17 @@ class ConversationsPage extends React.Component {
                                 <h4>messages container</h4>
                             </Grid>
                             <Grid item sm={2} style={{maxWidth: '100%'}}>
-                                <TextField
-                                    id="outlined-multiline-flexible"
-                                    label="Write a message..."
-                                    multiline
-                                    rowsMax="4"
-                                    value={this.state.message}
-                                    onChange={this.handleChange('message')}
-                                    margin="normal"
-                                    variant="outlined"
-                                    fullWidth
-                                />
+                            <TextField
+                                id="message"
+                                label="Write a message..."
+                                value={this.state.message}
+                                margin="normal"
+                                InputProps={{disableUnderline: true}}
+                                fullWidth
+                                multiline
+                                rowsMax="4"
+                            />
+                                
                             </Grid>
                         </Grid>
                     </Grid>
