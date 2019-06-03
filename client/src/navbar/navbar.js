@@ -1,20 +1,15 @@
 import React from 'react';
 import './navbar.css';
 import { Link } from "react-router-dom";
+import Cookies from 'js-cookie';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem  } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
-import { store } from "../redux/store";
-import { logOutUser } from '../redux/actions';
 
 class Navbar extends React.Component {
     state = {
         anchorEl: null
     };
-
-    componentDidMount(){
-        console.log(store.getState());
-    }
 
     handleMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
@@ -24,10 +19,6 @@ class Navbar extends React.Component {
         this.setState({ anchorEl: null });
     };
 
-    dispatchLogOut = () => {
-        store.dispatch(logOutUser());
-    }
-
     handleLogOut = () => {
         this.handleClose();
         let url = "/logout";
@@ -36,11 +27,13 @@ class Navbar extends React.Component {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': store.getState().token
+                'Authorization': Cookies.get('Authorization')
             }
         }).then(response => {
             console.log(response);
             //return response.json();
+            Cookies.remove('Authorization', { path: '/' })
+            Cookies.remove('currentUser', { path: '/' })
             this.checkResponseStatus(response);
         })
         .catch(error => console.error('Error:', error))
@@ -48,9 +41,7 @@ class Navbar extends React.Component {
 
     checkResponseStatus = (response) => {
         if (response.status === 204) {
-            this.dispatchLogOut();
-            //console.log(store.getState().token);
-            this.props.history.push("/")
+            this.props.history.push("/login")
         }
     }
 

@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { Grid, TextField, InputAdornment } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { Grid, TextField } from '@material-ui/core';
 import Navbar from '../navbar/navbar';
 import './conversations.css'
 

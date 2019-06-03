@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import { AppBar, Toolbar, IconButton, Fab, Button,
     TextField, Dialog, DialogActions, DialogContent, 
     DialogContentText, DialogTitle, Radio, RadioGroup, 
@@ -6,7 +7,6 @@ import { AppBar, Toolbar, IconButton, Fab, Button,
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import './footer.css';
-import { store } from "../redux/store";
 
 class Footer extends React.Component {
     state = {
@@ -73,7 +73,7 @@ class Footer extends React.Component {
               longitude: this.state.location.lng,
               fulfilled: false,
               description: this.state.description,
-              user_id: store.getState().current_user.id,
+              user_id: Cookies.getJSON('currentUser').user_id,
               request_category_id: parseInt(this.state.category)
           }
 
@@ -84,7 +84,7 @@ class Footer extends React.Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': store.getState().token
+                'Authorization': Cookies.get('Authorization')
             },
             body: JSON.stringify(data)
           }).then(response => {

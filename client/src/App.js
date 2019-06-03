@@ -10,9 +10,9 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path="/" exact component={LandingPage} />
+        <Route path="/login" exact component={LandingPage} />
         <Route path="/signup" component={SignUpPage} />
-        <Route path="/requests" component={RequestsPage} />
+        <Route path="/" component={RequestsPage} />
         <Route path="/inbox" component={ConversationsPage} />
       </Router>
     )

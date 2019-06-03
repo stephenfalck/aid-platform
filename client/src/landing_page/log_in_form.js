@@ -3,8 +3,7 @@ import { TextField, FormControl, InputLabel, InputAdornment, IconButton, Input,
         Fab } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import { store } from "../redux/store";
-import { setJwtToken, setAuthenticatedUser } from '../redux/actions';
+import Cookies from 'js-cookie';
 
 class LogInForm extends React.Component {
     state = {
@@ -22,14 +21,6 @@ class LogInForm extends React.Component {
         this.setState(state => ({ showPassword: !state.showPassword }));
     };
 
-    dispatchToken = (token) => {
-        store.dispatch(setJwtToken(token));
-    }
-
-    dispatchUser = (user) => {
-        store.dispatch(setAuthenticatedUser(user));
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
         let url = '/login'
@@ -45,19 +36,23 @@ class LogInForm extends React.Component {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            //console.log(response.headers.get('Authorization'))
             this.setState({
                 response: response
             })
 
-            console.log(response)
+            //console.log(response)
+            Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
 
-            this.dispatchToken(response.headers.get('Authorization'))
-            //console.log(store.getState())
             return response.json();
         }).then(data => {
-            this.dispatchUser(data);
-            console.log(store.getState())
+            Cookies.set('currentUser', {
+                user_id: data.id,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                email: data.email         
+            }, { expires: 1 })
+            console.log(Cookies.getJSON('currentUser'))
+            
             this.checkResponseStatus(this.state.response);
         })
         .catch(error => console.error('Error:', error)) 
@@ -65,7 +60,7 @@ class LogInForm extends React.Component {
 
     checkResponseStatus = (response) => {
         if (response.status === 200) {
-            this.props.history.push("/requests")
+            this.props.history.push("/")
         }
     }
 

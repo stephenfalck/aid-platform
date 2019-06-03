@@ -1,8 +1,8 @@
 import React from 'react';
 import { Marker } from "react-google-maps";
+import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
     DialogTitle, Typography, Switch, FormControlLabel  } from '@material-ui/core';
-import { store } from "../redux/store";
 
 class RequestMarker extends React.Component {
     state = {
@@ -49,7 +49,7 @@ class RequestMarker extends React.Component {
         const url = "/replies"
         const data = {
             request_id: this.props.request.id,
-            volunteer_id: store.getState().current_user.id,
+            volunteer_id: Cookies.getJSON('currentUser').user_id,
             active: this.state.checked,
             message_sent: true
         }
@@ -60,7 +60,7 @@ class RequestMarker extends React.Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': store.getState().token
+                'Authorization': Cookies.get('Authorization')
             },
             body: JSON.stringify(data)
         }).then(response => {

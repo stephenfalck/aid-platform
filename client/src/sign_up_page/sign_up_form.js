@@ -1,9 +1,8 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import { TextField, Button, Fab, FormControl, InputLabel, 
         InputAdornment, IconButton, Input } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { store } from "../redux/store";
-import { setJwtToken, setAuthenticatedUser } from '../redux/actions';
 
 
 class SignUpForm extends React.Component {
@@ -30,15 +29,6 @@ class SignUpForm extends React.Component {
         this.setState(state => ({ showPasswordConfirmation: !state.showPasswordConfirmation }));
     };
 
-    dispatchToken = (token) => {
-        store.dispatch(setJwtToken(token));
-    }
-
-    dispatchUser = (user) => {
-        store.dispatch(setAuthenticatedUser(user));
-    }
-    
-
     handleSubmit = (e) => {
         e.preventDefault();
         const form = document.getElementById("sign-up-form")
@@ -59,13 +49,17 @@ class SignUpForm extends React.Component {
                 return;
             }
             */
-             //console.log(response.headers.get('Authorization'))
-             this.dispatchToken(response.headers.get('Authorization'))
+             Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
              return response.json();
         }).then(data => {
             //console.log(data)
-            this.dispatchUser(data);
-            console.log(store.getState());
+            Cookies.set('currentUser', {
+                user_id: data.id,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                email: data.email         
+            }, { expires: 1 })
+
             this.checkResponseStatus(this.state.response);
         })
         .catch(error => console.error('Error:', error));    
@@ -73,7 +67,7 @@ class SignUpForm extends React.Component {
 
     checkResponseStatus = (response) => {
         if (response.status === 201) {
-            this.props.history.push("/requests")
+            this.props.history.push("/")
         }
     }
 

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Grid } from '@material-ui/core';
+import Cookies from 'js-cookie';
 import Navbar from '../navbar/navbar';
 import Footer from '../footer/footer';
 import './requests_layout.css'
@@ -23,7 +24,7 @@ class RequestsPage extends React.Component {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': store.getState().token
+                'Authorization': Cookies.get('Authorization')
             }
         }).then(response => {
             console.log(response)
