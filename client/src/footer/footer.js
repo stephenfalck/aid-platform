@@ -30,8 +30,8 @@ class Footer extends React.Component {
         });
       };
 
-      
       /*
+      
       getLocationData = () => {
         const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk';
         const address = `${this.state.address}+${this.state.town}+${this.state.postCode}`;
@@ -46,6 +46,7 @@ class Footer extends React.Component {
             return response.json()
         }).then(data => {
             console.log(data)
+            console.log(data.results)
             this.setState({
                 location: {
                     lat: data.results[0].geometry.location.lat,
@@ -55,7 +56,9 @@ class Footer extends React.Component {
         })
         .catch(error => console.error('Error: ', error))
       }
+
       */
+      
 
       handleSubmit = (e) => {
           e.preventDefault();
@@ -64,7 +67,7 @@ class Footer extends React.Component {
           //this.getLocationData();
 
 
-          //const url = '/requests';
+          const url = '/requests';
           const data = {
               latitude: this.state.location.lat,
               longitude: this.state.location.lng,

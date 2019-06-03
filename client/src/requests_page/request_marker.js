@@ -2,6 +2,7 @@ import React from 'react';
 import { Marker } from "react-google-maps";
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
     DialogTitle, Typography, Switch, FormControlLabel  } from '@material-ui/core';
+import { store } from "../redux/store";
 
 class RequestMarker extends React.Component {
     state = {
@@ -40,12 +41,35 @@ class RequestMarker extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         console.log(this.state)
-        //submitResponse();
-        //startConversation();
+        this.submitReply();
+        //this.startConversation();
     }
 
-    submitResponse = () => {
+    submitReply = () => {
+        const url = "/replies"
+        const data = {
+            request_id: this.props.request.id,
+            volunteer_id: store.getState().current_user.id,
+            active: this.state.checked,
+            message_sent: true
+        }
 
+        console.log(data)
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': store.getState().token
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response)
+            return response.json()
+        }).then(data => {
+            console.log(data)
+        })
+        .catch(error => console.error('Error:', error))
     }
 
     startConversation = () => {

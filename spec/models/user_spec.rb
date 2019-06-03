@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   it { should have_many(:requests).dependent(:destroy) }
+  it { should have_and_belong_to_many(:conversations) }
   
   describe 'Attachment' do
     it 'is valid  ' do

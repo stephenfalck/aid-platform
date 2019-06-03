@@ -26,7 +26,7 @@ class RepliesController < ApplicationController
 
     private
     def reply_params
-        params.permit(:request_id, :volunteer_id, :active, :message_sent)
+        params.require(:reply).permit(:request_id, :volunteer_id, :active, :message_sent)
     end
 
     def set_reply 
