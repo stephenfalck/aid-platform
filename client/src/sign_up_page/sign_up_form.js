@@ -67,7 +67,7 @@ class SignUpForm extends React.Component {
 
     checkResponseStatus = (response) => {
         if (response.status === 201) {
-            this.props.history.push("/")
+            this.props.history.push("/requests")
         }
     }
 

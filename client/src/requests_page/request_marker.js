@@ -21,7 +21,6 @@ class RequestMarker extends React.Component {
                 request_category: this.props.request.request_category_id
             }
         });
-        console.log(this.state.currentRequest)
     };
 
     handleClose = () => {
@@ -40,9 +39,8 @@ class RequestMarker extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
         this.submitReply();
-        //this.startConversation();
+        this.startConversation();
     }
 
     submitReply = () => {
@@ -54,10 +52,52 @@ class RequestMarker extends React.Component {
             message_sent: true
         }
 
-        console.log(data)
 
         fetch(url, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            //console.log(response)
+            return response.json()
+        }).then(data => {
+            //console.log(data)
+        })
+        .catch(error => console.error('Error:', error))
+    }
+
+    startConversation = () => {
+        const url = '/conversations';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            }
+        }).then(response => {
+            console.log(response)
+            return response.json()
+        }).then(data => {
+            console.log(data)
+            this.submitMessage(data.id)
+        })
+        .catch(error => console.error('Error:', error))
+    }
+
+    submitMessage = (conversationId) => {
+        const url = `/conversations/${conversationId}/messages`;
+        const data = {
+            user_id: Cookies.get('currentUser').user_id,
+            conversation_id: conversationId,
+            text: this.state.message
+        }
+
+        fetch(url, {
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': Cookies.get('Authorization')
@@ -69,11 +109,6 @@ class RequestMarker extends React.Component {
         }).then(data => {
             console.log(data)
         })
-        .catch(error => console.error('Error:', error))
-    }
-
-    startConversation = () => {
-
     }
 
     render() {
