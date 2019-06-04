@@ -71,13 +71,18 @@ class RequestMarker extends React.Component {
 
     startConversation = () => {
         const url = '/conversations';
+        const data = {
+            user_id: Cookies.getJSON('currentUser').user_id,
+            user_id_2: this.props.request.user_id
+        }
 
         fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': Cookies.get('Authorization')
-            }
+            },
+            body: JSON.stringify(data)
         }).then(response => {
             console.log(response)
             return response.json()
@@ -91,7 +96,7 @@ class RequestMarker extends React.Component {
     submitMessage = (conversationId) => {
         const url = `/conversations/${conversationId}/messages`;
         const data = {
-            user_id: Cookies.get('currentUser').user_id,
+            user_id: Cookies.getJSON('currentUser').user_id,
             conversation_id: conversationId,
             text: this.state.message
         }

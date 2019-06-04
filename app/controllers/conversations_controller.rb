@@ -9,10 +9,14 @@ class ConversationsController < ApplicationController
 
     def create
         @conversation = Conversation.create!
-        #@conversation = Conversation.create!(conversation_params)
-        #@conversation = Conversation.new(conversation_params)
-        #@conversation.user_id = current_user.id
-        #@conversation.save!
+
+        @user = User.find(params[:user_id])
+        @user2 = User.find(params[:user_id_2])
+
+        @conversation_users = @conversation.users
+        @conversation_users << @user
+        @conversation_users << @user2
+        
 
         json_response(@conversation, :created)
     end
@@ -32,6 +36,9 @@ class ConversationsController < ApplicationController
     end
 
     private
+    def conversation_params
+        params.permit(:user_id, :user_id_2)
+    end
     def set_conversation
         @conversation = Conversation.find(params[:id])
     end
