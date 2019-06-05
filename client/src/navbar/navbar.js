@@ -41,7 +41,7 @@ class Navbar extends React.Component {
 
     checkResponseStatus = (response) => {
         if (response.status === 204) {
-            this.props.history.push("/login")
+            this.props.history.push("/")
         }
     }
 

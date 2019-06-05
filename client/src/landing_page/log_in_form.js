@@ -51,7 +51,7 @@ class LogInForm extends React.Component {
                 last_name: data.last_name,
                 email: data.email         
             }, { expires: 1 })
-            console.log(Cookies.getJSON('currentUser'))
+            //console.log(Cookies.getJSON('currentUser'))
             
             this.checkResponseStatus(this.state.response);
         })
