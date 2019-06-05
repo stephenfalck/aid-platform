@@ -53,7 +53,7 @@ RSpec.describe 'Conversations API' do
     end
 
     describe 'POST /conversations' do
-        let(:valid_attributes) { { } }
+        let(:valid_attributes) { { user_id: users.first.id, user_id_2: users.second.id} }
 
         context 'when conversation attributes are valid' do
             before { post "/conversations", params: valid_attributes }

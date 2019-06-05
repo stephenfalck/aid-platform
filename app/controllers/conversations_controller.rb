@@ -3,8 +3,13 @@ class ConversationsController < ApplicationController
     before_action :set_conversation, only: [:show, :update, :destroy]
 
     def index
+        @user = User.find(params[:user_id])
         @conversations = Conversation.all
-        json_response(@conversations)
+        @filtered = @conversations.select do |conversation|
+            conversation.user_ids.include?(@user.id)
+        end
+
+        json_response(@filtered)
     end
 
     def create
