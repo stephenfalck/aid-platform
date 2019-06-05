@@ -1,12 +1,36 @@
 import React, { Fragment } from 'react';
+import Cookies from 'js-cookie';
 import { Grid, TextField } from '@material-ui/core';
 import Navbar from '../navbar/navbar';
 import './conversations.css'
 
 class ConversationsPage extends React.Component {
     state = {
-        
+        conversations: []
     };
+
+    componentDidMount() {
+        this.fetchConversations()
+    }
+
+    
+    fetchConversations = () => {
+        const url = `/users/${Cookies.getJSON('currentUser').user_id}/conversations`
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            }
+        }).then(response => {
+            console.log(response)
+            return response.json()
+        }).then(data => {
+            console.log(data)
+        })
+    }
+    
 
     handleChange = name => event => {
         this.setState({

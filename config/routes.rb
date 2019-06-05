@@ -5,13 +5,17 @@ Rails.application.routes.draw do
 
   #potentially needed for devise to work     root to: "home#index"
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do 
+    resources :conversations do 
+      resources :messages, only: [:index, :create]
+    end
+  end
   
   resources :requests
 
-  resources :conversations do 
-    resources :messages, only: [:index, :create]
-  end
+  #resources :conversations do 
+  #  resources :messages, only: [:index, :create]
+  #end
 
   resources :replies
 

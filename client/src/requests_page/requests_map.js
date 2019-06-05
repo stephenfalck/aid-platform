@@ -2,7 +2,6 @@ import React from "react";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import { store } from "../redux/store";
 import RequestMarker from './request_marker';
-import Cookies from 'js-cookie';
 
 const RequestsMap = withScriptjs(withGoogleMap((props) =>{
 

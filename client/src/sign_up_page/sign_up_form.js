@@ -139,6 +139,11 @@ class SignUpForm extends React.Component {
                         }
                     />
                 </FormControl>
+                <label htmlFor="upload">
+                    <Button component="span" color="primary">
+                    Upload ID
+                    </Button>
+                </label>
                 <input
                     accept="image/png, image/jpeg, .pdf"
                     id="upload"
@@ -148,11 +153,6 @@ class SignUpForm extends React.Component {
                     required
                     style={{width: "100%"}}
                 />
-                <label htmlFor="upload">
-                    <Button component="span">
-                    Upload
-                    </Button>
-                </label>
                 <Fab 
                 variant="extended" 
                 aria-label="Sign up" 
