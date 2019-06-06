@@ -1,20 +1,14 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
-import { Grid, TextField } from '@material-ui/core';
+import { Grid, TextField, List } from '@material-ui/core';
 import Navbar from '../navbar/navbar';
+import ConversationUser from './conversation_user';
 import './conversations.css';
 
 class ConversationsPage extends React.Component {
-    constructor(props){
-        super(props);
-
-        this.state  = {
-            conversations: []
-        }
-    }
-    /*state = {
-        conversations: null
-    };*/
+    state = {
+        conversations: []
+    };
 
     componentDidMount() {
         this.fetchConversations()
@@ -39,6 +33,7 @@ class ConversationsPage extends React.Component {
             })
             console.log(this.state.conversations)
         })
+        .catch(error => console.error('Error: ', error))
     }
  
 
@@ -56,10 +51,11 @@ class ConversationsPage extends React.Component {
                 <Navbar title='Inbox' history={this.props.history}/>
                 <Grid container id="conversations-container">
                     <Grid item sm={3} style={{height: '100%'}} id="contacts">
-                        <h4>Conversations container</h4>
-                        {conversations.map(conversation => (
-                            <div key={conversation.id} className="conversation-users">{conversation.id}</div>
-                        ))}  
+                        <List>
+                            {conversations.map(conversation => (
+                                <ConversationUser key={conversation.id} conversation={conversation} />
+                            ))}  
+                        </List>
                     </Grid>
                     <Grid item sm={9} style={{height: '100%'}}>
                         <Grid container direction={'column'} style={{height: '100%'}}>

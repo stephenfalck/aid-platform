@@ -17,7 +17,7 @@ class RequestModal extends React.Component {
       };
 
       
-      /*
+      
       getLocationData = () => {
         const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk';
         const address = `${this.state.address}+${this.state.town}+${this.state.postCode}`;
@@ -31,6 +31,10 @@ class RequestModal extends React.Component {
             console.log(response)
             return response.json()
         }).then(data => {
+            console.log(data)
+            this.saveRequest(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
+
+            /*
             console.log(data)
             console.log(data.results)
             console.log(data.results[0])
@@ -46,24 +50,16 @@ class RequestModal extends React.Component {
                 }
             })
             console.log(this.state)
+            */
         })
         .catch(error => console.error('Error: ', error))
       }
-      */
-      
-      
 
-      handleSubmit = (e) => {
-          e.preventDefault();
-          //console.log(this.state)
-          
-          //this.getLocationData();
-
-
-          const url = '/requests';
+      saveRequest = (lat, lng) => {
+        const url = '/requests';
           const data = {
-              latitude: this.state.location.lat,
-              longitude: this.state.location.lng,
+              latitude: lat,
+              longitude: lng,
               fulfilled: false,
               description: this.state.description,
               user_id: Cookies.getJSON('currentUser').user_id,
@@ -72,7 +68,7 @@ class RequestModal extends React.Component {
 
           console.log(data)
 
-          /*
+          
           fetch(url, {
             method: 'POST',
             headers: {
@@ -91,8 +87,53 @@ class RequestModal extends React.Component {
           this.setState({
             category: '1',
           })
+      }
+      
+      
+      
+
+      handleSubmit = (e) => {
+          e.preventDefault();
+
+          this.getLocationData()
           
+          /*
+          this.getLocationData();
+
+
+          const url = '/requests';
+          const data = {
+              latitude: this.state.location.lat,
+              longitude: this.state.location.lng,
+              fulfilled: false,
+              description: this.state.description,
+              user_id: Cookies.getJSON('currentUser').user_id,
+              request_category_id: parseInt(this.state.category)
+          }
+
+          console.log(data)
+
+          
+          fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            },
+            body: JSON.stringify(data)
+          }).then(response => {
+              console.log(response)
+              return response.json()
+          }).then(data => {
+              console.log(data)
+          })
+          .catch(error => console.error('Error: ', error))
+
+          this.setState({
+            category: '1',
+          })
           */
+          
       }
 
     render() {
