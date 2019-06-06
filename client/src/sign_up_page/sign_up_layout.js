@@ -10,7 +10,7 @@ class SignUpPage extends React.Component {
                 <Grid item md={8}>
                     <Paper style={{padding: "15px"}}>
                     <Typography variant="h5" gutterBottom align="center">
-                        Please fill out this form and upload a picture of a valid ID. (jpg, png or pdf)
+                        Please fill out this form and upload a picture of a valid ID
                     </Typography>
                         <SignUpForm history={this.props.history}/>
                     </Paper>

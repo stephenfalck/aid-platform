@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
-import { ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Divider } from '@material-ui/core';
+import { ListItem, Avatar, ListItemText, Divider } from '@material-ui/core';
+import ImageIcon from '@material-ui/icons/Image';
 
 class ConversationUser extends React.Component {
     state = {
-        userName: ''
+        userName: '',
+        messages: null
     };
 
     componentDidMount() {
@@ -32,21 +34,24 @@ class ConversationUser extends React.Component {
 
     setConversationUser = (currentUserId, arr) => {
         let user = arr.find(i => i.id !== currentUserId)
-        //console.log(currentUserId)
 
         this.setState({
             userName: `${user.first_name} ${user.last_name}`
         })
     }
 
+    handleClick = () => {
+        this.props.click(this.props.conversation.id)
+    }
+
 
     render() {
         return(
             <Fragment>
-                <ListItem alignItems="flex-start" key={this.props.conversation.id}>
-                    <ListItemAvatar>
-                        <Avatar alt="Profile pic" src="/static/images/avatar/1.jpg" />
-                    </ListItemAvatar>
+                <ListItem alignItems="flex-start" key={this.props.conversation.id} onClick={this.handleClick}>
+                    <Avatar>
+                        <ImageIcon />
+                    </Avatar>
                     <ListItemText
                         primary={this.state.userName}
                         secondary={

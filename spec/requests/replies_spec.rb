@@ -50,7 +50,7 @@ RSpec.describe 'replies API', type: :request do
     end
 
     describe "POST /replies" do
-        let(:valid_attributes) {{request_id: 6, active: true , message_sent: true}}
+        let(:valid_attributes) {{reply: {request_id: 6, active: true , message_sent: true}}}
 
         context 'when the reponse is valid' do 
             before { post '/replies', params: valid_attributes }
@@ -66,7 +66,7 @@ RSpec.describe 'replies API', type: :request do
         end
 
         context 'when the reply is invaild' do
-            before { post '/replies', params: {active: true, message_sent: true} }
+            before { post '/replies', params: {reply: {active: true, message_sent: true} }}
 
             it 'returns status code 422' do
                 expect(response).to have_http_status(422)
@@ -80,7 +80,7 @@ RSpec.describe 'replies API', type: :request do
     end
 
     describe 'PUT /replies/:id' do
-        let(:valid_attributes) { { active: true } }
+        let(:valid_attributes) { {reply: { active: true } }}
 
         before { put "/replies/#{reply.id}", params: valid_attributes }
 
@@ -98,7 +98,7 @@ RSpec.describe 'replies API', type: :request do
         context 'when the reply does not exist' do
             it 'returns status code 404' do
                 sign_in(user)
-                put "/replies/#{200}", params: {message_sent: true}
+                put "/replies/#{200}", params: {reply: {message_sent: true}}
                 expect(response).to have_http_status(404)
             end
 

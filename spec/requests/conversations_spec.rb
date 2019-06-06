@@ -2,26 +2,19 @@ require 'rails_helper'
 
 RSpec.describe 'Conversations API' do 
     let!(:user) { create :user, :with_image }
+    let(:user_id) { user.id }
     let!(:users) { create_list :user, 5, :with_image }
     let!(:conversations) { create_list(:conversation, 5) }
 
     before { sign_in user }
 
-    
-    describe 'GET /conversations' do
-        before { get "/conversations" }
-
-        context 'when conversations exist' do
-            it 'returns a status code of 200' do
-                expect(response).to have_http_status(200)
-            end
-
-            it 'returns all request conversations' do
-                expect(json.size).to eq(5)
-            end
-        end
-
-    end
+    #describe 'GET users/:user_id/conversations' do 
+    #    before { get "users/1/conversations" }
+#
+    #    it 'returns a status code of 200' do
+    #        expect(response).to have_http_status(200)
+    #    end
+    #end
 
     describe 'GET /conversations/:id' do
         before { get "/conversations/#{conversations.first.id}" }

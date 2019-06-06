@@ -3,7 +3,9 @@ class MessagesController < ApplicationController
     before_action :set_conversation
 
     def index
-        @messages = Message.all
+        @conversation = Conversation.find(params[:conversation_id])
+        @messages = @conversation.messages
+        
         json_response(@messages)
     end
 

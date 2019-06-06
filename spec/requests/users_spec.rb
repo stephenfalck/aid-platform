@@ -7,6 +7,8 @@ RSpec.describe 'Users API', type: :request do
     let!(:users) { create_list :user, 10, :with_image }
     let(:user_id) { user.id }
 
+    before {sign_in user }
+
     describe 'GET /users' do
         before { get "/users" }
 
