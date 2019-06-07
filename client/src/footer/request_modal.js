@@ -15,8 +15,6 @@ class RequestModal extends React.Component {
             [name]: event.target.value,
         });
       };
-
-      
       
       getLocationData = () => {
         const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk';
@@ -33,24 +31,6 @@ class RequestModal extends React.Component {
         }).then(data => {
             console.log(data)
             this.saveRequest(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
-
-            /*
-            console.log(data)
-            console.log(data.results)
-            console.log(data.results[0])
-            console.log(data.results[0].geometry)
-            console.log(data.results[0].geometry.location)
-            console.log(data.results[0].geometry.location.lat)
-            console.log(data.results[0].geometry.location.lng)
-            
-            this.setState({
-                location: {
-                    lat: data.results[0].geometry.location.lat,
-                    lng: data.results[0].geometry.location.lng
-                }
-            })
-            console.log(this.state)
-            */
         })
         .catch(error => console.error('Error: ', error))
       }
@@ -87,53 +67,12 @@ class RequestModal extends React.Component {
           this.setState({
             category: '1',
           })
-      }
-      
-      
-      
+      }    
 
       handleSubmit = (e) => {
           e.preventDefault();
 
           this.getLocationData()
-          
-          /*
-          this.getLocationData();
-
-
-          const url = '/requests';
-          const data = {
-              latitude: this.state.location.lat,
-              longitude: this.state.location.lng,
-              fulfilled: false,
-              description: this.state.description,
-              user_id: Cookies.getJSON('currentUser').user_id,
-              request_category_id: parseInt(this.state.category)
-          }
-
-          console.log(data)
-
-          
-          fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': Cookies.get('Authorization')
-            },
-            body: JSON.stringify(data)
-          }).then(response => {
-              console.log(response)
-              return response.json()
-          }).then(data => {
-              console.log(data)
-          })
-          .catch(error => console.error('Error: ', error))
-
-          this.setState({
-            category: '1',
-          })
-          */
-          
       }
 
     render() {
