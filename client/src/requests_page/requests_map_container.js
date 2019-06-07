@@ -14,6 +14,7 @@ class RequestsMapContainer extends React.Component {
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%`, width: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
+                requests={this.props.requests}
             />
         );
     }

@@ -5,11 +5,17 @@ import RequestMarker from './request_marker';
 
 const RequestsMap = withScriptjs(withGoogleMap((props) =>{
 
-    const markers = store.getState().requests.map(request => 
+    /*const markers = store.getState().requests.map(request => 
         <RequestMarker 
           key={request.id} request={request} location={{lat: request.latitude, lng: request.longitude}}
         />
-    );
+    );*/
+
+    const markers = props.requests.map(request => 
+      <RequestMarker 
+          key={request.id} request={request} location={{lat: request.latitude, lng: request.longitude}}
+        />
+    )
 
     return (
         <GoogleMap

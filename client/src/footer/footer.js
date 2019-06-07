@@ -1,6 +1,6 @@
 import React from 'react';
 import RequestModal from './request_modal';
-import { AppBar, Toolbar, IconButton, Fab } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Fab, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import './footer.css';
@@ -30,6 +30,9 @@ class Footer extends React.Component {
                         <AddIcon/>
                     </Fab>
                     <RequestModal open={this.state.open} close={this.handleClose} />
+                    <Typography variant="overline" color="inherit">
+                        Total requests: {this.props.totalRequests}
+                    </Typography>
                 </Toolbar>
             </AppBar>
         )

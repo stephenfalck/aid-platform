@@ -2,6 +2,7 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
     DialogTitle, Typography, Switch, FormControlLabel  } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 class RequestMarkerModal extends React.Component {
     state = {
@@ -13,6 +14,7 @@ class RequestMarkerModal extends React.Component {
     componentDidMount() {
         this.fetchRequestUser(this.props.request.user_id)
         this.fetchRepliesNumber(this.props.request.id)
+        console.log(this.props.classes)
     }
 
     handleChange = name => event => {
@@ -152,7 +154,7 @@ class RequestMarkerModal extends React.Component {
                 >
                     <DialogTitle 
                     id="form-dialog-title"
-                    style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF"} : {backgroundColor: "#f6685e"}}
+                    style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF", color:'#FFFFFF'} : {backgroundColor: "#f6685e"}}
                     >
                         {this.state.requestUserName} 
                     </DialogTitle>
