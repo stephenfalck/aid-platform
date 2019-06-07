@@ -4,7 +4,7 @@ class ConversationsController < ApplicationController
 
     def index
         @user = User.find(params[:user_id])
-        @conversations = Conversation.all
+        @conversations = Conversation.all.order(created_at: :desc)
         @filtered = @conversations.select do |conversation|
             conversation.user_ids.include?(@user.id)
         end

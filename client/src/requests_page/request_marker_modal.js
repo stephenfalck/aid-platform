@@ -103,9 +103,18 @@ class RequestMarkerModal extends React.Component {
                     open={this.props.open}
                     onClose={this.props.close}
                     aria-labelledby="form-dialog-title"
+                    
                 >
-                    <DialogTitle id="form-dialog-title">Request type: {this.props.request.request_category_id === 1 ? "One-time task" : "Material need"}</DialogTitle>
+                    <DialogTitle 
+                    id="form-dialog-title"
+                    style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF"} : {backgroundColor: "#f6685e"}}
+                    >
+                        Request type: {this.props.request.request_category_id === 1 ? "One-time task" : "Material need"}
+    
+                    </DialogTitle>
                     <DialogContent>
+                        <br></br>
+                        <br></br>
                         <Typography variant='subtitle1'>
                             {this.props.request.description}
                         </Typography>
@@ -142,7 +151,13 @@ class RequestMarkerModal extends React.Component {
                         <Button onClick={this.props.close} color="primary">
                         Cancel
                         </Button>
-                        <Button onClick={this.props.close} color="primary" type='submit' form="response-form">
+                        <Button 
+                        onClick={this.props.close} 
+                        color="primary" 
+                        type='submit' 
+                        form="response-form"
+                        disabled={Cookies.getJSON('currentUser').user_id === this.props.request.user_id ? true : false}
+                        >
                         Submit
                         </Button>
                     </DialogActions>

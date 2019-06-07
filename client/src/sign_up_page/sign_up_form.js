@@ -1,7 +1,7 @@
 import React from 'react';
 import Cookies from 'js-cookie';
 import { TextField, Button, Fab, FormControl, InputLabel, 
-        InputAdornment, IconButton, Input } from '@material-ui/core';
+        InputAdornment, IconButton, Input, Tooltip } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 
@@ -139,11 +139,13 @@ class SignUpForm extends React.Component {
                         }
                     />
                 </FormControl>
+                <Tooltip disableFocusListener disableTouchListener title=".jpg / .png / .pdf" placement="right">
                 <label htmlFor="upload">
                     <Button component="span" color="primary">
                     Upload ID
                     </Button>
                 </label>
+                </Tooltip>
                 <input
                     accept="image/png, image/jpeg, .pdf"
                     id="upload"
