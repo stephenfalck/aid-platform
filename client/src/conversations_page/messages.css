@@ -1,0 +1,35 @@
+.my-message {
+    background-color: #8C9EFF;
+    border-radius: 10px 10px 0px 10px;
+    align-self: flex-end;
+    color: white;
+
+}
+
+.their-message {
+    background-color: #EAEAEA;
+    border-radius: 10px 10px 10px 0px;
+    align-self: flex-start;
+    color: black;
+    
+}
+
+.message {
+    width: 70%;
+    padding: 5px 8px;
+    margin: 5px;
+}
+
+#message-input {
+    margin-left: 8px;
+    
+}
+
+#input-divider {
+    width: 1px;
+    margin: 4px;
+}
+
+#input-paper {
+    display: flex;
+}

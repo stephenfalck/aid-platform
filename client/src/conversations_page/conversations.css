@@ -16,11 +16,24 @@
 }
 
 #contacts {
-    border-right: 1px solid #D1C4E9; 
+    border-right: 1px solid #EAEAEA; 
 }
 
 @media screen and (max-width: 599px) {
     #conversations-container {
         height: calc(100vh - 56px);
     }
+}
+
+.active-conversation {
+    background-color: #8C9EFF;
+
+}
+
+.active-conversation-text span {
+    color: white;
+}
+
+.active-conversation-text p {
+    color: white;
 }

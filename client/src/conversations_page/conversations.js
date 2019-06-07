@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
-import { Grid, TextField, List, Button } from '@material-ui/core';
+import { Grid, List, Button, Paper, InputBase } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import Navbar from '../navbar/navbar';
 import ConversationUser from './conversation_user';
@@ -90,7 +90,7 @@ class ConversationsPage extends React.Component {
             console.log(data)
             this.displayMessages(data.conversation_id)
             this.setState({
-                message: ''
+                message: null
             })
         })
         .catch(error => console.error('Error: ', error))
@@ -109,22 +109,24 @@ class ConversationsPage extends React.Component {
         return(
             <Fragment>
                 <Navbar title='Inbox' history={this.props.history}/>
-                <Grid container id="conversations-container">
-                    <Grid item xs={3} style={{height: '100%'}} id="contacts">
+                <Grid container item id="conversations-container" xs={12}>
+                    <Grid item style={{height: '100%'}} id="contacts" xs={3}>
                         <List>
                             {conversations.map(conversation => (
-                                <ConversationUser key={conversation.id} conversation={conversation}  click={this.displayMessages}/>
+                                <ConversationUser key={conversation.id} conversation={conversation}  click={this.displayMessages} active={this.state.currentConversation}/>
                             ))}  
                         </List>
                     </Grid>
-                    <Grid item xs={9} style={{height: '100%'}}>
-                        <Grid container direction={'row'} style={{height: '100%'}}>
-                            <Grid item xs={12} style={{maxWidth: '100%', height:'60vh'}}>
-                                <h4>messages container</h4>
+                    <Grid container item xs={9} style={{height: '100%'}} direction='row' wrap='wrap'>
+                        
+                            <Grid container item xs={12} direction='column' style={{maxWidth: '100%', height:'80%', padding: '10px'}}>
                                 {messages}
                             </Grid>
-                            <Grid item xs={12} style={{maxWidth: '100%', height: '20vh'}}>
+                            <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '20%'}}>
+                                
+                                    <Grid item xs={12}>
                                 <form id='message-form' onSubmit={this.handleSubmit}>
+                                    {/*
                                     <TextField
                                         id="message"
                                         label="Write a message..."
@@ -135,12 +137,35 @@ class ConversationsPage extends React.Component {
                                         variant="outlined"
                                         onChange={this.handleChange('message')}
                                     />
+                                    */}
+                                    <Paper id="input-paper" elevation={1}>
+                                        <InputBase 
+                                            id="message-input" 
+                                            placeholder="Write a message..." 
+                                            fullWidth 
+                                            multiline 
+                                            rows='4' 
+                                            style={{padding: '6px'}} 
+                                            onChange={this.handleChange('message')}
+                                        />
+                                        <Button variant="contained" color="secondary" type='submit' form='message-form' >
+                                            <Icon>send</Icon>
+                                        </Button>
+                                    </Paper>
+                                    </form>
+                                    </Grid>
+                                    
+                                    {/*
+                                    <Grid item xs={2} >
+                                        
                                     <Button variant="contained" color="primary" type='submit' form='message-form'>
                                         <Icon>send</Icon>
                                     </Button>
-                                </form>
+                                        
+                                </Grid>
+                                */}
                             </Grid>
-                        </Grid>
+                        
                     </Grid>
                 </Grid>
             </Fragment>

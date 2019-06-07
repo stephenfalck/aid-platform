@@ -48,7 +48,12 @@ class ConversationUser extends React.Component {
     render() {
         return(
             <Fragment>
-                <ListItem alignItems="flex-start" key={this.props.conversation.id} onClick={this.handleClick}>
+                <ListItem 
+                alignItems="flex-start" 
+                key={this.props.conversation.id} 
+                onClick={this.handleClick}
+                className={this.props.active === this.props.conversation.id ? "active-conversation" : ""}
+                >
                     <Avatar>
                         <ImageIcon />
                     </Avatar>
@@ -59,6 +64,7 @@ class ConversationUser extends React.Component {
                             {"Potential message snippet" }
                             </React.Fragment>
                         }
+                        className={this.props.active === this.props.conversation.id ? "active-conversation-text" : ""}
                     />
                 </ListItem>
                 <Divider variant="middle" />

@@ -2,7 +2,7 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
     DialogTitle, Typography, Switch, FormControlLabel  } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+//import { withStyles } from '@material-ui/core/styles';
 
 class RequestMarkerModal extends React.Component {
     state = {
