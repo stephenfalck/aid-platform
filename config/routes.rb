@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get '/conversations/:conversation_id/users', to: 'users#index'
   get '/users/:user_id/conversations(.:format)', to: 'conversations#index'
+  get '/requests/:request_id/replies', to: 'replies#index'
   
   resources :requests
 

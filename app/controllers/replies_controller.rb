@@ -3,8 +3,14 @@ class RepliesController < ApplicationController
     before_action :set_reply, only: [:show, :update]
 
     def index
+        @request = Request.find(params[:request_id])
         @replies = Reply.all
-        json_response(@replies)
+        
+        @filtered = @replies.select do |reply|
+            reply.request_id == @request.id
+        end
+
+        json_response(@filtered)
     end
 
     def show
@@ -13,7 +19,7 @@ class RepliesController < ApplicationController
 
     def create
         @reply = Reply.new(reply_params)
-        @reply.volunteer_id = current_user.id
+        #@reply.volunteer_id = current_user.id
         @reply.save!
 
         json_response(@reply, :created)

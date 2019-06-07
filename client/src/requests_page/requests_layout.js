@@ -31,7 +31,7 @@ class RequestsPage extends React.Component {
             return response.json()
         }).then(data => {
             this.dispatchRequests(data)
-            console.log(store.getState().requests)
+            //console.log(store.getState().requests)
         })
         .catch(error => console.error('Error:', error)) 
     }

@@ -5,8 +5,15 @@ import { Button, TextField, Dialog, DialogActions, DialogContent,
 
 class RequestMarkerModal extends React.Component {
     state = {
-        checked: true
+        checked: true,
+        requestUserName: null,
+        repliesNumber: null
       };
+
+    componentDidMount() {
+        this.fetchRequestUser(this.props.request.user_id)
+        this.fetchRepliesNumber(this.props.request.id)
+    }
 
     handleChange = name => event => {
         this.setState({
@@ -22,6 +29,44 @@ class RequestMarkerModal extends React.Component {
         e.preventDefault()
         this.submitReply();
         this.startConversation();
+    }
+
+    fetchRequestUser = (user_id) => {
+        const url = `/users/${user_id}`
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            }
+        }).then(response => {
+            //console.log(response)
+            return response.json()
+        }).then(data => {
+            this.setState({
+                requestUserName: `${data.first_name} ${data.last_name}`
+            })
+        })
+    }
+
+    fetchRepliesNumber = (request_id) => {
+        const url = `/requests/${request_id}/replies`;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            }
+        }).then(response => {
+            //console.log(response)
+            return response.json()
+        }).then(data => {
+            this.setState({
+                repliesNumber: data.length
+            })
+        })
     }
 
     submitReply = () => {
@@ -90,10 +135,10 @@ class RequestMarkerModal extends React.Component {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
-            console.log(data)
+            //console.log(data)
         })
     }
 
@@ -109,18 +154,21 @@ class RequestMarkerModal extends React.Component {
                     id="form-dialog-title"
                     style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF"} : {backgroundColor: "#f6685e"}}
                     >
-                        Request type: {this.props.request.request_category_id === 1 ? "One-time task" : "Material need"}
-    
+                        {this.state.requestUserName} 
                     </DialogTitle>
                     <DialogContent>
-                        <br></br>
+                        
+                        <Typography variant="overline" gutterBottom>
+                            Request type: {this.props.request.request_category_id === 1 ? "One-time task" : 'Material need'}
+                        </Typography>
                         <br></br>
                         <Typography variant='subtitle1'>
                             {this.props.request.description}
                         </Typography>
+                        
                         <br></br>
                         <Typography variant='subtitle2'>
-                            If you would like to fulfill this request, please send the user a message below and check fulfill.
+                            Replies so far: {this.state.repliesNumber}
                         </Typography>
                         <br></br>
                         <form id="response-form" onSubmit={this.handleSubmit}>
@@ -133,6 +181,7 @@ class RequestMarkerModal extends React.Component {
                                 multiline
                                 rows="4"
                                 onChange={this.handleChange('message')}
+                                required
                             />
                             <FormControlLabel
                                 control={
