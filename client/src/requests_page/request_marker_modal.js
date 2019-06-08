@@ -10,7 +10,8 @@ class RequestMarkerModal extends React.Component {
         checked: true,
         requestUserName: null,
         repliesNumber: null, 
-        open: false
+        open: false,
+        validateForm: false
       };
 
     componentDidMount() {
@@ -30,8 +31,12 @@ class RequestMarkerModal extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        if (this.state.message) { 
         this.submitReply();
         this.startConversation();
+        } else {
+            this.validateForm()
+        }
     }
 
     fetchRequestUser = (user_id) => {
@@ -159,12 +164,35 @@ class RequestMarkerModal extends React.Component {
         this.setState({ open: false });
       };
 
+      handleModalClose = () => {
+        this.setState({
+            validateForm: false
+        })
+        this.props.close()
+    }
+
+      validateForm = () => {
+        this.setState({
+            validateForm: true
+        })
+      }
+
+      renderErrorMessage = () => {
+        if (this.state.validateForm) {
+            return (
+                <div className='request-response-error-message' style={{fontWeight:'bold', color: '#f44336', marginTop: '5px'}}> 
+                    Can't be blank
+                </div>
+            )
+      }
+    }
+
     render() {
         return(
             <Fragment>
             <Dialog
                     open={this.props.open}
-                    onClose={this.props.close}
+                    onClose={this.handleModalClose}
                     aria-labelledby="form-dialog-title"
                     
                 >
@@ -189,7 +217,7 @@ class RequestMarkerModal extends React.Component {
                             Replies so far: {this.state.repliesNumber}
                         </Typography>
                         <br></br>
-                        <form id="response-form" onSubmit={this.handleSubmit}>
+                        <form id="response-form" onSubmit={this.handleSubmit} noValidate>
                             <TextField
                                 autoFocus
                                 margin="dense"
@@ -200,7 +228,9 @@ class RequestMarkerModal extends React.Component {
                                 rows="4"
                                 onChange={this.handleChange('message')}
                                 required
+                                error={this.state.validateForm}
                             />
+                            {this.renderErrorMessage()}
                             <FormControlLabel
                                 control={
                                     <Switch
@@ -215,7 +245,7 @@ class RequestMarkerModal extends React.Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.props.close} color="primary">
+                        <Button onClick={this.handleModalClose} color="primary">
                         Cancel
                         </Button>
                         <Button 
