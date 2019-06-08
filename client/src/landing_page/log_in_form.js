@@ -10,7 +10,9 @@ class LogInForm extends React.Component {
         email: '',
         password: '',
         showPassword: false,
-        response: {}
+        response: {},
+        error: false,
+        errorText: null
     }
 
     handleChange = prop => event => {
@@ -42,6 +44,7 @@ class LogInForm extends React.Component {
 
             console.log(response)
             Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
+            console.log(Cookies.get('Authorization'))
 
             return response.json();
         }).then(data => {
@@ -52,33 +55,41 @@ class LogInForm extends React.Component {
                 email: data.email         
             }, { expires: 1 })
             //console.log(Cookies.getJSON('currentUser'))
+            console.log(data)
+            console.log(Cookies.get('Authorization'))
             
-            this.checkResponseStatus(this.state.response);
+            this.checkResponseStatus(this.state.response, data);
         })
         .catch(error => console.error('Error:', error)) 
     }
 
-    checkResponseStatus = (response) => {
-        const { from } = this.props.location || {from: {pathname: '/'}} 
+    checkResponseStatus = (response, data) => {
+        const { from } = this.props.location || {from: {pathname: '/requests'}} 
   
         if (response.status === 200) {
             this.props.history.push(from)
+        } else if (response.status === 401) {
+            this.setState({
+                error: true,
+                errorText: data.error
+            })
         }
     }
 
     render() {
         return(
             <form onSubmit={this.handleSubmit}>
-                <TextField
-                    id="email"
-                    label="Email"
-                    value={this.state.email}
-                    onChange={this.handleChange('email')}
-                    margin="normal"
-                    required
-                    style={{width: '100%'}}
-                />
-                <FormControl style={{width: '100%'}} required>
+                    <TextField
+                        id="email"
+                        label="Email"
+                        value={this.state.email}
+                        onChange={this.handleChange('email')}
+                        margin="normal"
+                        required 
+                        error={this.state.error}
+                        style={{width: '100%'}}
+                    />
+                <FormControl style={{width: '100%'}} required error={this.state.error}>
                     <InputLabel htmlFor="adornment-password">Password</InputLabel>
                     <Input
                         id="adornment-password"
@@ -98,6 +109,7 @@ class LogInForm extends React.Component {
                         }
                     />
                 </FormControl>
+                <div className="error-message" style={this.state.errorText ? {display: 'block'} : {display: 'none'}}>{this.state.errorText}</div>
                 <Fab 
                 variant="extended" 
                 aria-label="Log in" 

@@ -13,7 +13,7 @@ class App extends React.Component {
       <Router>
         <Route path="/login" exact component={LandingPage} />
         <Route path="/signup" component={SignUpPage} />
-        <PrivateRoute exact path="/" component={RequestsPage} />
+        <PrivateRoute path="/requests" component={RequestsPage} />
         <PrivateRoute path='/inbox' component={ConversationsPage} />
         {/*<Route path="/requests" component={RequestsPage} />
         <Route path="/inbox" component={ConversationsPage} />*/}
