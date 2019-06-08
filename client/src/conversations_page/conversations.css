@@ -1,23 +1,15 @@
 #conversations-container {
     height: calc(100vh - 64px);
-    overflow-y: scroll;
-}
-
-#conversations-container > div.MuiGrid-item-100.MuiGrid-grid-sm-9-150 > div > div.MuiGrid-item-100.MuiGrid-grid-sm-2-143 {
-    border-top: 1px solid #D1C4E9;
-}
-
-#conversations-container > div.MuiGrid-item-100.MuiGrid-grid-sm-9-150 > div > div.MuiGrid-item-100.MuiGrid-grid-sm-2-143 > div > label {
-    margin-left: 10px;
-}
-
-#conversations-container > div.MuiGrid-item-100.MuiGrid-grid-sm-9-150 > div > div.MuiGrid-item-100.MuiGrid-grid-sm-2-143 > div > div {
-    padding-left: 10px;
 }
 
 #contacts {
     /*border-right: 1px solid #EAEAEA; */
     background-color: #EAEAEA;
+    
+}
+
+.messages-container {
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 599px) {

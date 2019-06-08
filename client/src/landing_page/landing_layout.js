@@ -3,8 +3,15 @@ import { Link } from "react-router-dom";
 import { Paper, Grid, Typography } from '@material-ui/core';
 import LogInForm from './log_in_form';
 import './landing_layout.css';
+import Cookies from 'js-cookie';
 
 class LandingPage extends React.Component {
+    componentDidMount() {
+        if(Cookies.get('Authorization')) {
+            this.props.history.replace('/')
+        }
+    }
+
     render() {
         return(
             <Grid container alignContent={'center'} justify={'center'} className="main-container" style={{minHeight: '100vh'}}>
@@ -28,7 +35,7 @@ class LandingPage extends React.Component {
                                 <Typography variant="overline">
                                     Log in to continue
                                 </Typography>
-                                <LogInForm history={this.props.history}/> 
+                                <LogInForm history={this.props.history} location={this.props.location.state}/> 
                                 <Typography variant="subtitle2">
                                     Not a member? <Link to='/signup'>Sign up.</Link>
                                 </Typography>

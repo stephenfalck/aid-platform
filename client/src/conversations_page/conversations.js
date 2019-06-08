@@ -119,7 +119,7 @@ class ConversationsPage extends React.Component {
                     </Grid>
                     <Grid container item xs={9} style={{height: '100%'}} direction='row' wrap='wrap'>
                         
-                            <Grid container item xs={12} direction='column' style={{maxWidth: '100%', height:'80%', padding: '10px', backgroundColor: 'white'}}>
+                            <Grid container className='messages-container' item xs={12} direction='column' style={{maxWidth: '100%', height:'80%', padding: '10px', backgroundColor: 'white'}}>
                                 {messages}
                             </Grid>
                             <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '20%'}}>

@@ -41,7 +41,7 @@ class Navbar extends React.Component {
 
     checkResponseStatus = (response) => {
         if (response.status === 204) {
-            this.props.history.push("/")
+            this.props.history.push("/login")
         }
     }
 
@@ -82,7 +82,7 @@ class Navbar extends React.Component {
                         open={open}
                         onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose}><Link to='/requests'>Requests</Link></MenuItem>
+                            <MenuItem onClick={this.handleClose}><Link to='/'>Requests</Link></MenuItem>
                             <MenuItem onClick={this.handleClose}><Link to='/inbox'>Inbox</Link></MenuItem>
                             <MenuItem onClick={this.handleLogOut}>Log out</MenuItem>
                         </Menu>

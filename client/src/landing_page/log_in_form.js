@@ -59,8 +59,10 @@ class LogInForm extends React.Component {
     }
 
     checkResponseStatus = (response) => {
+        const { from } = this.props.location || {from: {pathname: '/'}} 
+  
         if (response.status === 200) {
-            this.props.history.push("/requests")
+            this.props.history.push(from)
         }
     }
 
