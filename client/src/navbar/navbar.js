@@ -58,7 +58,7 @@ class Navbar extends React.Component {
                     <Typography variant="h6" color="inherit">
                         {this.props.title}
                     </Typography>
-                    <div>
+                    <div id='user-menu'>
                         <IconButton
                         aria-owns={open ? 'menu-appbar' : undefined}
                         aria-haspopup="true"

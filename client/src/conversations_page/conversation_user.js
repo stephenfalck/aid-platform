@@ -67,7 +67,7 @@ class ConversationUser extends React.Component {
                         className={this.props.active === this.props.conversation.id ? "active-conversation-text" : ""}
                     />
                 </ListItem>
-                <Divider variant="middle" />
+                <Divider variant="fullWidth" />
             </Fragment>
         )
     }

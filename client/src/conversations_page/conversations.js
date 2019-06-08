@@ -119,26 +119,14 @@ class ConversationsPage extends React.Component {
                     </Grid>
                     <Grid container item xs={9} style={{height: '100%'}} direction='row' wrap='wrap'>
                         
-                            <Grid container item xs={12} direction='column' style={{maxWidth: '100%', height:'80%', padding: '10px'}}>
+                            <Grid container item xs={12} direction='column' style={{maxWidth: '100%', height:'80%', padding: '10px', backgroundColor: 'white'}}>
                                 {messages}
                             </Grid>
                             <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '20%'}}>
                                 
                                     <Grid item xs={12}>
                                 <form id='message-form' onSubmit={this.handleSubmit}>
-                                    {/*
-                                    <TextField
-                                        id="message"
-                                        label="Write a message..."
-                                        multiline
-                                        rows="4"
-                                        fullWidth
-                                        margin="normal"
-                                        variant="outlined"
-                                        onChange={this.handleChange('message')}
-                                    />
-                                    */}
-                                    <Paper id="input-paper" elevation={1}>
+                                    <Paper id="input-paper" elevation={1} style={{borderRadius: '0px'}}>
                                         <InputBase 
                                             id="message-input" 
                                             placeholder="Write a message..." 
@@ -148,7 +136,7 @@ class ConversationsPage extends React.Component {
                                             style={{padding: '6px'}} 
                                             onChange={this.handleChange('message')}
                                         />
-                                        <Button variant="contained" color="secondary" type='submit' form='message-form' >
+                                        <Button variant="contained" color="secondary" type='submit' form='message-form' style={{borderRadius: '0px'}}>
                                             <Icon>send</Icon>
                                         </Button>
                                     </Paper>

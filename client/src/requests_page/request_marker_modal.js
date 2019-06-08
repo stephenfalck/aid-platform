@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
-    DialogTitle, Typography, Switch, FormControlLabel  } from '@material-ui/core';
+    DialogTitle, Typography, Switch, FormControlLabel, Snackbar, IconButton  } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 //import { withStyles } from '@material-ui/core/styles';
 
 class RequestMarkerModal extends React.Component {
     state = {
         checked: true,
         requestUserName: null,
-        repliesNumber: null
+        repliesNumber: null, 
+        open: false
       };
 
     componentDidMount() {
         this.fetchRequestUser(this.props.request.user_id)
         this.fetchRepliesNumber(this.props.request.id)
-        console.log(this.props.classes)
     }
 
     handleChange = name => event => {
@@ -137,15 +138,30 @@ class RequestMarkerModal extends React.Component {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            //console.log(response)
+            //console.log(response)   
+            if(response.status === 201) {
+                this.props.close()
+                this.setState({
+                    open: true
+                })
+            }        
             return response.json()
         }).then(data => {
             //console.log(data)
         })
     }
+    
+      handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({ open: false });
+      };
 
     render() {
         return(
+            <Fragment>
             <Dialog
                     open={this.props.open}
                     onClose={this.props.close}
@@ -153,8 +169,8 @@ class RequestMarkerModal extends React.Component {
                     
                 >
                     <DialogTitle 
-                    id="form-dialog-title"
-                    style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF", color:'#FFFFFF'} : {backgroundColor: "#f6685e"}}
+                    className="form-dialog-title"
+                    style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF"} : {backgroundColor: "#f6685e"}}
                     >
                         {this.state.requestUserName} 
                     </DialogTitle>
@@ -203,7 +219,6 @@ class RequestMarkerModal extends React.Component {
                         Cancel
                         </Button>
                         <Button 
-                        onClick={this.props.close} 
                         color="primary" 
                         type='submit' 
                         form="response-form"
@@ -213,6 +228,36 @@ class RequestMarkerModal extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Snackbar
+                    className="success-snackbar"
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={3000}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={
+                        <span id="message-id">
+                            Message sent!
+                        </span>
+                    }
+                    action={[
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        onClick={this.handleClose}
+                        >
+                        <CloseIcon />
+                        </IconButton>,
+                    ]}
+                    />
+            </Fragment>
+                
         )
     }
 }

@@ -1,21 +1,10 @@
-#root > header.MuiPaper-root-10.MuiPaper-elevation4-16.MuiAppBar-root-1.MuiAppBar-positionStatic-5.MuiAppBar-colorPrimary-8 > div > div {
+#user-menu {
     position: absolute;
     right: 24px;
 }
 
 @media screen and (max-width: 599px) {
-    #root > header.MuiPaper-root-10.MuiPaper-elevation4-16.MuiAppBar-root-1.MuiAppBar-positionStatic-5.MuiAppBar-colorPrimary-8 > div > div {
-        right: 16px;
-    }
-}
-
-#root > header.MuiPaper-root-98.MuiPaper-elevation4-104.MuiAppBar-root-253.MuiAppBar-positionStatic-257.MuiAppBar-colorPrimary-260 > div > div {
-    position: absolute;
-    right: 24px;
-}
-
-@media screen and (max-width: 599px) {
-    #root > header.MuiPaper-root-98.MuiPaper-elevation4-104.MuiAppBar-root-253.MuiAppBar-positionStatic-257.MuiAppBar-colorPrimary-260 > div > div {
-        right: 16px;
+    #user-menu {
+        right: 16px
     }
 }
