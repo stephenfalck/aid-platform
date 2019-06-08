@@ -14,7 +14,15 @@ class SignUpForm extends React.Component {
     showPassword: false,
     password_confirmation: '',
     showPasswordConfirmation: false,
-    response: {}
+    response: {},
+    errors: {
+        first_name: null,
+        last_name: null,
+        email: null,
+        password: null,
+        password_confirmation: null,
+        image: null
+    }
    }
 
     handleChange = prop => event => {
@@ -52,7 +60,7 @@ class SignUpForm extends React.Component {
              Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
              return response.json();
         }).then(data => {
-            //console.log(data)
+            console.log(data)
             Cookies.set('currentUser', {
                 user_id: data.id,
                 first_name: data.first_name,
@@ -60,21 +68,46 @@ class SignUpForm extends React.Component {
                 email: data.email         
             }, { expires: 1 })
 
-            this.checkResponseStatus(this.state.response);
+            this.checkResponseStatus(this.state.response, data);
         })
         .catch(error => console.error('Error:', error));    
     }
 
-    checkResponseStatus = (response) => {
+    checkResponseStatus = (response, data) => {
         if (response.status === 201) {
             this.props.history.push("/requests")
+        } else if (response.status === 422) {
+            this.setState({
+                errors: data.errors
+            })
+        }
+        console.log(this.state.errors)
+    }
+
+    checkError = (field) => {
+        if (this.state.errors[field]) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    renderErrorMessage = (field) => {
+        if(this.state.errors[field]) {
+            let formattedText = this.state.errors[field][0].charAt(0).toUpperCase() + this.state.errors[field][0].slice(1)
+
+            return(
+                <div className='signup-error-message' style={{fontWeight:'bold', color: '#f44336'}}> 
+                    {formattedText}
+                </div>
+            )
         }
     }
 
 
     render() {
         return(
-            <form id="sign-up-form" onSubmit={this.handleSubmit}>
+            <form id="sign-up-form" onSubmit={this.handleSubmit} noValidate>
                 <TextField
                     label="First Name"
                     name="first_name"
@@ -82,7 +115,9 @@ class SignUpForm extends React.Component {
                     margin="normal"
                     required
                     fullWidth
+                    error={this.checkError('first_name')}
                 />
+                {this.renderErrorMessage('first_name')}
                 <TextField
                     label="Last Name"
                     name="last_name"
@@ -90,7 +125,9 @@ class SignUpForm extends React.Component {
                     margin="normal"
                     required
                     fullWidth
+                    error={this.checkError('last_name')}
                 />
+                {this.renderErrorMessage('last_name')}
                 <TextField
                     label="Email"
                     name="email"
@@ -98,7 +135,9 @@ class SignUpForm extends React.Component {
                     margin="normal"
                     required
                     fullWidth
+                    error={this.checkError('email')}
                 />
+                {this.renderErrorMessage('email')}
                 <FormControl style={{width: '100%', marginBottom: '8px'}} required>
                     <InputLabel htmlFor="adornment-password">Password</InputLabel>
                     <Input
@@ -107,6 +146,7 @@ class SignUpForm extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange('password')}
                         name='password'
+                        error={this.checkError('password')}
                         endAdornment={
                         <InputAdornment position="end">
                             <IconButton
@@ -119,6 +159,7 @@ class SignUpForm extends React.Component {
                         }
                     />
                 </FormControl>
+                {this.renderErrorMessage('password')}
                 <FormControl style={{width: '100%', marginBottom: '8px'}} required>
                     <InputLabel htmlFor="adornment-password-confirmation">Password Confirmation</InputLabel>
                     <Input
@@ -127,6 +168,7 @@ class SignUpForm extends React.Component {
                         value={this.state.password_confirmation}
                         onChange={this.handleChange('password_confirmation')}
                         name="password_confirmation"
+                        error={this.checkError('password_confirmation')}
                         endAdornment={
                         <InputAdornment position="end">
                             <IconButton
@@ -139,6 +181,7 @@ class SignUpForm extends React.Component {
                         }
                     />
                 </FormControl>
+                {this.renderErrorMessage('password_confirmation')}
                 <Tooltip disableFocusListener disableTouchListener title=".jpg / .png / .pdf" placement="right">
                 <label htmlFor="upload">
                     <Button component="span" color="primary">
@@ -155,6 +198,7 @@ class SignUpForm extends React.Component {
                     required
                     style={{width: "100%"}}
                 />
+                {this.renderErrorMessage('image')}
                 <Fab 
                 variant="extended" 
                 aria-label="Sign up" 

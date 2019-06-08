@@ -14,7 +14,7 @@ class RequestsPage extends React.Component {
     }
     componentDidMount() {
         this.fetchRequests();
-        console.log(Cookies.get('Authorization'))
+        //console.log(Cookies.get('Authorization'))
     }
 
     //dispatchRequests = (requests) => {

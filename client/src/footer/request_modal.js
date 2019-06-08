@@ -58,6 +58,9 @@ class RequestModal extends React.Component {
             body: JSON.stringify(data)
           }).then(response => {
               console.log(response)
+              if(response.status === 201) {
+                this.props.close()
+            } 
               return response.json()
           }).then(data => {
               console.log(data)
@@ -147,7 +150,7 @@ class RequestModal extends React.Component {
                         <Button onClick={this.props.close} color="primary">
                           Cancel
                         </Button>
-                        <Button onClick={this.props.close} color="primary" type="submit" form="request-form">
+                        <Button color="primary" type="submit" form="request-form">
                           Submit
                         </Button>
                       </DialogActions>
