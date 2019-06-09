@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
-import { Grid, List, Button, Paper, InputBase } from '@material-ui/core';
+import { Grid, List, Button, Paper, InputBase, Typography, Avatar } from '@material-ui/core';
+import ImageIcon from '@material-ui/icons/Image';
 import Icon from '@material-ui/core/Icon';
 import Navbar from '../navbar/navbar';
 import ConversationUser from './conversation_user';
@@ -10,7 +11,8 @@ import './conversations.css';
 class ConversationsPage extends React.Component {
     state = {
         conversations: [],
-        messages: []
+        messages: [],
+        headerContent: 'Open a conversation...',
     };
 
     componentDidMount() {
@@ -97,6 +99,13 @@ class ConversationsPage extends React.Component {
 
     }
 
+    setConversationUser = (userName) => {
+        this.setState({
+            headerContent: userName
+        })
+        
+    }
+
     render() {      
         let { conversations } = this.state;
 
@@ -110,33 +119,52 @@ class ConversationsPage extends React.Component {
             <Fragment>
                 <Navbar title='Inbox' history={this.props.history}/>
                 <Grid container item id="conversations-container" xs={12}>
-                    <Grid item style={{height: '100%'}} id="contacts" xs={3}>
+                    <Grid item style={{height: '100%', padding: '10px'}} id="contacts" xs={3}>
                         <List>
                             {conversations.map(conversation => (
-                                <ConversationUser key={conversation.id} conversation={conversation}  click={this.displayMessages} active={this.state.currentConversation}/>
+                                <ConversationUser 
+                                    key={conversation.id} 
+                                    conversation={conversation} 
+                                    setConversationUser={this.setConversationUser} 
+                                    click={this.displayMessages} 
+                                    active={this.state.currentConversation}
+                                />
                             ))}  
                         </List>
                     </Grid>
-                    <Grid container item xs={9} style={{height: '100%'}} direction='row' wrap='wrap'>
-                        
-                            <Grid container className='messages-container' item xs={12} direction='column' style={{maxWidth: '100%', height:'80%', padding: '10px', backgroundColor: 'white'}}>
+                    <Grid container item xs={9} id="message-and-input-area" style={{height: '100%'}} direction='row' wrap='wrap'>
+                            <Grid container item xs={12} justify='center' style={{height:'10%'}} id='messages-area-header'>
+                                <Paper elevation={2} id='messages-container-header' style={{width: '100%', textAlign: 'center'}}>
+                                        {
+                                            this.state.headerContent !== 'Open a conversation...' ? 
+                                            <Avatar style={{marginRight:'10px'}}> 
+                                                <ImageIcon /> 
+                                            </Avatar> : null
+                                        }
+                                    <Typography variant='h5'>
+                                        {this.state.headerContent}
+                                    </Typography>
+                                </Paper>
+                            </Grid>
+                            <Grid container id='messages-container' item xs={12} direction='column' style={{maxWidth: '100%', height:'75%'}}>
                                 {messages}
                             </Grid>
-                            <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '20%'}}>
+                            <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '15%'}}>
                                 
-                                    <Grid item xs={12}>
+                                    <Grid item xs={12} id='input-container'>
                                 <form id='message-form' onSubmit={this.handleSubmit}>
-                                    <Paper id="input-paper" elevation={1} style={{borderRadius: '0px'}}>
+                                    <Paper id="input-paper" elevation={2}>
                                         <InputBase 
                                             id="message-input" 
                                             placeholder="Write a message..." 
                                             fullWidth 
                                             multiline 
-                                            rows='4' 
-                                            style={{padding: '6px'}} 
+                                            rows='4'
+                                            rowsMax='4' 
+                                            style={{padding: '6px', backgroundColor:'white', color: 'black', borderRadius:'4px'}} 
                                             onChange={this.handleChange('message')}
                                         />
-                                        <Button variant="contained" color="secondary" type='submit' form='message-form' style={{borderRadius: '0px'}}>
+                                        <Button variant="contained" id="message-submit-button" color="secondary" type='submit' form='message-form'>
                                             <Icon>send</Icon>
                                         </Button>
                                     </Paper>

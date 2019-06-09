@@ -44,7 +44,6 @@ class LogInForm extends React.Component {
 
             console.log(response)
             Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
-            console.log(Cookies.get('Authorization'))
 
             return response.json();
         }).then(data => {
@@ -55,8 +54,6 @@ class LogInForm extends React.Component {
                 email: data.email         
             }, { expires: 1 })
             //console.log(Cookies.getJSON('currentUser'))
-            console.log(data)
-            console.log(Cookies.get('Authorization'))
             
             this.checkResponseStatus(this.state.response, data);
         })

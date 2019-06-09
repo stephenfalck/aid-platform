@@ -1,21 +1,24 @@
 .my-message {
-    background-color: #8C9EFF;
+    /*background-color: #f48fb1;*/
+    background-color: #e91e63;
     border-radius: 10px 10px 0px 10px;
     align-self: flex-end;
     color: white;
-
+    margin-right: 0px;
 }
 
 .their-message {
-    background-color: #EAEAEA;
+    /*background-color: white;*/
+    /*color: black;*/
+    background-color: #8C9EFF;
+    color: white;
     border-radius: 10px 10px 10px 0px;
     align-self: flex-start;
-    color: black;
-    
+    margin-left: 0px;
 }
 
 .message {
-    width: 70%;
+    max-width: 70%;
     padding: 5px 8px;
     margin: 5px;
 }

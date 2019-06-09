@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
-import { ListItem, Avatar, ListItemText, Divider } from '@material-ui/core';
+import { ListItem, Avatar, ListItemText, Paper } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 
 class ConversationUser extends React.Component {
@@ -41,33 +41,36 @@ class ConversationUser extends React.Component {
     }
 
     handleClick = () => {
+        this.props.setConversationUser(this.state.userName)
         this.props.click(this.props.conversation.id)
+        
     }
 
 
     render() {
         return(
             <Fragment>
-                <ListItem 
-                alignItems="flex-start" 
-                key={this.props.conversation.id} 
-                onClick={this.handleClick}
-                className={this.props.active === this.props.conversation.id ? "active-conversation" : ""}
-                >
-                    <Avatar>
-                        <ImageIcon />
-                    </Avatar>
-                    <ListItemText
-                        primary={this.state.userName}
-                        secondary={
-                            <React.Fragment>
-                            {"Potential message snippet" }
-                            </React.Fragment>
-                        }
-                        className={this.props.active === this.props.conversation.id ? "active-conversation-text" : ""}
-                    />
-                </ListItem>
-                <Divider variant="fullWidth" />
+                <Paper elevation={2} id='list-item-paper' style={{marginBottom: '10px'}}>
+                    <ListItem 
+                    alignItems="flex-start" 
+                    key={this.props.conversation.id} 
+                    onClick={this.handleClick}
+                    className={this.props.active === this.props.conversation.id ? "active-conversation" : ""}
+                    >
+                        <Avatar>
+                            <ImageIcon />
+                        </Avatar>
+                        <ListItemText
+                            primary={this.state.userName}
+                            secondary={
+                                <React.Fragment>
+                                {"Potential message snippet" }
+                                </React.Fragment>
+                            }
+                            className={this.props.active === this.props.conversation.id ? "active-conversation-text" : ""}
+                        />
+                    </ListItem>
+                </Paper>
             </Fragment>
         )
     }
