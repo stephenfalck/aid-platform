@@ -7,7 +7,8 @@ import { Button, TextField, Dialog, DialogActions, DialogContent,
 class RequestModal extends React.Component {
     state = {
         category: '1',
-        location: {}
+        location: {},
+        response: {}
     };
 
       handleChange = name => event => {
@@ -22,17 +23,19 @@ class RequestModal extends React.Component {
         const joinedAddress = address.replace(/ /g, '+');
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${joinedAddress}&key=${apiKey}`;
 
-        fetch(url, {
-            method: "GET",
-            mode: 'cors'
-        }).then(response => {
-            console.log(response)
-            return response.json()
-        }).then(data => {
-            console.log(data)
-            this.saveRequest(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
-        })
-        .catch(error => console.error('Error: ', error))
+      //  fetch(url, {
+      //      method: "GET",
+      //      mode: 'cors'
+      //  }).then(response => {
+      //      console.log(response)
+      //      return response.json()
+      //  }).then(data => {
+      //      console.log(data)
+      //      this.saveRequest(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
+      //  })
+      //  .catch(error => console.error('Error: ', error))
+
+      this.saveRequest(null, null)
       }
 
       saveRequest = (lat, lng) => {
@@ -57,13 +60,19 @@ class RequestModal extends React.Component {
             },
             body: JSON.stringify(data)
           }).then(response => {
+            this.setState({
+              response: response
+            })
               console.log(response)
               if(response.status === 201) {
-                this.props.close()
-            } 
+                this.handleClose()
+              }  
               return response.json()
           }).then(data => {
               console.log(data)
+              if (this.state.response.status === 422) {
+                this.validateForm(data.message)
+              }
           })
           .catch(error => console.error('Error: ', error))
 
@@ -78,11 +87,69 @@ class RequestModal extends React.Component {
           this.getLocationData()
       }
 
+      validateForm = (message) => {
+        if(this.state.description){
+          this.setState({
+            descriptionIssue: false
+          })
+        }
+        const addressIssue = "Validation failed: Latitude can't be blank, Longitude can't be blank";
+        const descriptionIssue = "Validation failed: Description can't be blank";
+
+        if (message === addressIssue) {
+          console.log('address')
+          this.setState({
+            addressIssue: true
+          })
+        } else if (message === descriptionIssue) {
+          console.log('description')
+          this.setState({
+            descriptionIssue: true
+          })
+        } else {
+          console.log('both')
+          this.setState({
+            addressIssue: true,
+            descriptionIssue: true
+          })
+          console.log(this.state.descriptionIssue)
+        }
+        
+      }
+
+      renderAddressIssue = () => {
+        if(this.state.addressIssue) {
+          return (
+            <div className='request-error-message' style={{fontWeight:'bold', color: '#f44336'}}> 
+                Incorrent address format
+            </div>
+          )
+        }
+      }
+
+      renderDescriptionIssue = () => {
+        if(this.state.descriptionIssue) {
+          return (
+          <div className='request-error-message' style={{fontWeight:'bold', color: '#f44336'}}> 
+              Can't be blank
+          </div>
+          )
+        }
+      }
+
+      handleClose = () => {
+        this.setState({
+          addressIssue: false,
+          descriptionIssue: false
+        })
+        this.props.close()
+      }
+
     render() {
         return(
             <Dialog
                       open={this.props.open}
-                      onClose={this.props.close}
+                      onClose={this.handleClose}
                       scroll="paper"
                       aria-labelledby="form-dialog-title"
                     >
@@ -91,7 +158,7 @@ class RequestModal extends React.Component {
                         <DialogContentText>
                             Please fill out this form to add your request to the map...
                         </DialogContentText>
-                        <form id='request-form' onSubmit={this.handleSubmit}>
+                        <form id='request-form' onSubmit={this.handleSubmit} noValidate>
                             <TextField
                             autoFocus
                             margin="normal"
@@ -100,6 +167,7 @@ class RequestModal extends React.Component {
                             fullWidth
                             required
                             onChange={this.handleChange('address')}
+                            error={this.state.addressIssue}
                             />
                             <TextField
                             margin="normal"
@@ -114,6 +182,7 @@ class RequestModal extends React.Component {
                             label="Town/City"
                             required
                             onChange={this.handleChange('town')}
+                            error={this.state.addressIssue}
                             />
                             <TextField
                             margin="normal"
@@ -121,7 +190,9 @@ class RequestModal extends React.Component {
                             label="Post Code"
                             required
                             onChange={this.handleChange('postCode')}
+                            error={this.state.addressIssue}
                             />
+                            {this.renderAddressIssue()}
                         <TextField
                                 id="standard-multiline-flexible"
                                 label="Description"
@@ -131,7 +202,9 @@ class RequestModal extends React.Component {
                                 margin="normal"
                                 fullWidth
                                 required
+                                error={this.state.descriptionIssue}
                             />
+                            {this.renderDescriptionIssue()}
                             <FormControl component="fieldset" style={{marginTop: '30px'}}>
                                 <FormLabel component="legend">Category</FormLabel>
                                 <RadioGroup
@@ -147,7 +220,7 @@ class RequestModal extends React.Component {
                         </form>
                       </DialogContent>
                       <DialogActions>
-                        <Button onClick={this.props.close} color="primary">
+                        <Button onClick={this.handleClose} color="primary">
                           Cancel
                         </Button>
                         <Button color="primary" type="submit" form="request-form">
