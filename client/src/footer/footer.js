@@ -4,6 +4,13 @@ import { AppBar, Toolbar, IconButton, Fab, Typography } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import './footer.css';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    return {
+        requests: state.requests
+    }
+}
 
 class Footer extends React.Component {
     state = {
@@ -31,7 +38,7 @@ class Footer extends React.Component {
                     </Fab>
                     <RequestModal open={this.state.open} close={this.handleClose} fetchRequests={this.props.fetchRequests} />
                     <Typography variant="overline" color="inherit">
-                        Total requests: {this.props.totalRequests}
+                        Total requests: {this.props.requests.length}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -39,4 +46,4 @@ class Footer extends React.Component {
     }
 }
 
-export default Footer;
+export default connect(mapStateToProps)(Footer);

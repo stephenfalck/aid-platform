@@ -1,15 +1,16 @@
 import React from "react";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
+import { connect } from 'react-redux';
 //import { store } from "../redux/store";
 import RequestMarker from './request_marker';
 
-const RequestsMap = withScriptjs(withGoogleMap((props) =>{
+const mapStateToProps = (state) => {
+  return{
+    requests: state.requests
+  }
+}
 
-    /*const markers = store.getState().requests.map(request => 
-        <RequestMarker 
-          key={request.id} request={request} location={{lat: request.latitude, lng: request.longitude}}
-        />
-    );*/
+const RequestsMap = withScriptjs(withGoogleMap((props) =>{
 
     const markers = props.requests.map(request => 
       <RequestMarker 
@@ -28,4 +29,4 @@ const RequestsMap = withScriptjs(withGoogleMap((props) =>{
     }
 ))
 
-export default RequestsMap;
+export default connect(mapStateToProps)(RequestsMap);

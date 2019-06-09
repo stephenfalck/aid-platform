@@ -5,21 +5,19 @@ import Navbar from '../navbar/navbar';
 import Footer from '../footer/footer';
 import './requests_layout.css'
 import RequestsMapContainer from './requests_map_container'
-//import { store } from "../redux/store";
-//import { setRequests } from '../redux/actions';
+import { store } from "../redux/store";
+import { connect } from 'react-redux';
+import { setRequests } from '../redux/actions';
 
 class RequestsPage extends React.Component {
-    state = {
-        requests: []
-    }
     componentDidMount() {
         this.fetchRequests();
         //console.log(Cookies.get('Authorization'))
     }
 
-    //dispatchRequests = (requests) => {
-    //    store.dispatch(setRequests(requests))
-    //}
+    dispatchRequests = (requests) => {
+        this.props.setRequests(requests)
+    }
 
     fetchRequests() {
         const url = '/requests';
@@ -34,11 +32,10 @@ class RequestsPage extends React.Component {
             console.log(response)
             return response.json()
         }).then(data => {
-            //this.dispatchRequests(data)
-            //console.log(store.getState().requests)
-            this.setState({
-                requests: data
-            })
+            this.dispatchRequests(data)
+            //this.setState({
+            //    requests: data
+            //})
         })
         .catch(error => console.error('Error:', error)) 
     }
@@ -49,12 +46,15 @@ class RequestsPage extends React.Component {
             <Fragment>
                 <Navbar title='Requests' history={this.props.history} />
                 <Grid container id="map-container">
-                    <RequestsMapContainer requests={this.state.requests} />
+                    <RequestsMapContainer  />
                 </Grid>
-                <Footer fetchRequests={this.fetchRequests} totalRequests={this.state.requests.length}/>
+                <Footer fetchRequests={this.fetchRequests} />
             </Fragment>
         )
     }
 }
 
-export default RequestsPage;
+export default connect(
+    null, 
+    { setRequests }
+)(RequestsPage);

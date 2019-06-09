@@ -6,6 +6,7 @@ import LandingPage from'./landing_page/landing_layout';
 import SignUpPage from'./sign_up_page/sign_up_layout';
 import RequestsPage from './requests_page/requests_layout';
 import ConversationsPage from './conversations_page/conversations';
+import MyRequestsPage from './my_requests/my_requests_page';
 
 class App extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class App extends React.Component {
         <Route path="/signup" component={SignUpPage} />
         <PrivateRoute path="/requests" component={RequestsPage} />
         <PrivateRoute path='/inbox' component={ConversationsPage} />
+        <PrivateRoute path="/myrequests" component={MyRequestsPage} />
         {/*<Route path="/requests" component={RequestsPage} />
         <Route path="/inbox" component={ConversationsPage} />*/}
       </Router>
