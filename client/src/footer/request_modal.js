@@ -23,19 +23,17 @@ class RequestModal extends React.Component {
         const joinedAddress = address.replace(/ /g, '+');
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${joinedAddress}&key=${apiKey}`;
 
-      //  fetch(url, {
-      //      method: "GET",
-      //      mode: 'cors'
-      //  }).then(response => {
-      //      console.log(response)
-      //      return response.json()
-      //  }).then(data => {
-      //      console.log(data)
-      //      this.saveRequest(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
-      //  })
-      //  .catch(error => console.error('Error: ', error))
-
-      this.saveRequest(null, null)
+        fetch(url, {
+            method: "GET",
+            mode: 'cors'
+        }).then(response => {
+            console.log(response)
+            return response.json()
+        }).then(data => {
+            console.log(data)
+            this.saveRequest(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
+        })
+        .catch(error => console.error('Error: ', error))
       }
 
       saveRequest = (lat, lng) => {

@@ -11,7 +11,8 @@ class RequestMarkerModal extends React.Component {
         requestUserName: null,
         repliesNumber: null, 
         open: false,
-        validateForm: false
+        validateForm: false,
+        currentUserResponded: false
       };
 
     componentDidMount() {
@@ -71,10 +72,35 @@ class RequestMarkerModal extends React.Component {
             //console.log(response)
             return response.json()
         }).then(data => {
+            //console.log(data)
+            this.checkIfUserResponded(data)
             this.setState({
                 repliesNumber: data.length
             })
         })
+    }
+
+    checkIfUserResponded = (data) => {
+        for(let i=0; i<data.length; i++){
+            if (data[i].volunteer_id === Cookies.getJSON('currentUser').user_id){
+                this.setState({
+                    currentUserResponded: true
+                })
+                return true
+            }
+        }
+    }
+
+    renderAlreadyRespondedMessage = () => {
+        if(this.state.currentUserResponded) {
+            return (
+                <div className='already-responded-message' style={{fontWeight:'bold', color: '#43a047'}}> 
+                    You have already responded to this request!
+                    <br></br>
+                </div>
+                
+            )
+        }
     }
 
     submitReply = () => {
@@ -217,6 +243,7 @@ class RequestMarkerModal extends React.Component {
                             Replies so far: {this.state.repliesNumber}
                         </Typography>
                         <br></br>
+                        {this.renderAlreadyRespondedMessage()}
                         <form id="response-form" onSubmit={this.handleSubmit} noValidate>
                             <TextField
                                 autoFocus
@@ -229,6 +256,7 @@ class RequestMarkerModal extends React.Component {
                                 onChange={this.handleChange('message')}
                                 required
                                 error={this.state.validateForm}
+                                disabled={this.state.currentUserResponded}
                             />
                             {this.renderErrorMessage()}
                             <FormControlLabel
@@ -252,7 +280,7 @@ class RequestMarkerModal extends React.Component {
                         color="primary" 
                         type='submit' 
                         form="response-form"
-                        disabled={Cookies.getJSON('currentUser').user_id === this.props.request.user_id ? true : false}
+                        disabled={Cookies.getJSON('currentUser').user_id === this.props.request.user_id || this.state.currentUserResponded === true ? true : false}
                         >
                         Submit
                         </Button>
