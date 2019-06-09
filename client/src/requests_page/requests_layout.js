@@ -51,7 +51,7 @@ class RequestsPage extends React.Component {
                 <Grid container id="map-container">
                     <RequestsMapContainer requests={this.state.requests} />
                 </Grid>
-                <Footer totalRequests={this.state.requests.length}/>
+                <Footer fetchRequests={this.fetchRequests} totalRequests={this.state.requests.length}/>
             </Fragment>
         )
     }

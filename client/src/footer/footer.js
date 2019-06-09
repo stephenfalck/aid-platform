@@ -29,7 +29,7 @@ class Footer extends React.Component {
                     <Fab color="secondary" aria-label="Add" id="fab-add-button" onClick={this.handleClickOpen}>
                         <AddIcon/>
                     </Fab>
-                    <RequestModal open={this.state.open} close={this.handleClose} />
+                    <RequestModal open={this.state.open} close={this.handleClose} fetchRequests={this.props.fetchRequests} />
                     <Typography variant="overline" color="inherit">
                         Total requests: {this.props.totalRequests}
                     </Typography>

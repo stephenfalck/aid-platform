@@ -83,6 +83,7 @@ class RequestModal extends React.Component {
           e.preventDefault();
 
           this.getLocationData()
+          this.props.fetchRequests()
       }
 
       validateForm = (message) => {
@@ -95,22 +96,18 @@ class RequestModal extends React.Component {
         const descriptionIssue = "Validation failed: Description can't be blank";
 
         if (message === addressIssue) {
-          console.log('address')
           this.setState({
             addressIssue: true
           })
         } else if (message === descriptionIssue) {
-          console.log('description')
           this.setState({
             descriptionIssue: true
           })
         } else {
-          console.log('both')
           this.setState({
             addressIssue: true,
             descriptionIssue: true
           })
-          console.log(this.state.descriptionIssue)
         }
         
       }
@@ -146,86 +143,86 @@ class RequestModal extends React.Component {
     render() {
         return(
             <Dialog
-                      open={this.props.open}
-                      onClose={this.handleClose}
-                      scroll="paper"
-                      aria-labelledby="form-dialog-title"
-                    >
-                      <DialogTitle id="form-dialog-title">Make a request</DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                            Please fill out this form to add your request to the map...
-                        </DialogContentText>
-                        <form id='request-form' onSubmit={this.handleSubmit} noValidate>
-                            <TextField
-                            autoFocus
-                            margin="normal"
-                            id="address"
-                            label="Address"
-                            fullWidth
-                            required
-                            onChange={this.handleChange('address')}
-                            error={this.state.addressIssue}
-                            />
-                            <TextField
-                            margin="normal"
-                            id="address-2"
-                            label="Address 2"
-                            fullWidth
-                            onChange={this.handleChange('address-2')}
-                            />
-                            <TextField
-                            margin="normal"
-                            id="town-city"
-                            label="Town/City"
-                            required
-                            onChange={this.handleChange('town')}
-                            error={this.state.addressIssue}
-                            />
-                            <TextField
-                            margin="normal"
-                            id="post-code"
-                            label="Post Code"
-                            required
-                            onChange={this.handleChange('postCode')}
-                            error={this.state.addressIssue}
-                            />
-                            {this.renderAddressIssue()}
-                        <TextField
-                                id="standard-multiline-flexible"
-                                label="Description"
-                                multiline
-                                rowsMax="6"
-                                onChange={this.handleChange('description')}
-                                margin="normal"
-                                fullWidth
-                                required
-                                error={this.state.descriptionIssue}
-                            />
-                            {this.renderDescriptionIssue()}
-                            <FormControl component="fieldset" style={{marginTop: '30px'}}>
-                                <FormLabel component="legend">Category</FormLabel>
-                                <RadioGroup
-                                    aria-label="Category"
-                                    name="category"
-                                    value={this.state.category}
-                                    onChange={this.handleChange('category')}
-                                >
-                                    <FormControlLabel value='1' control={<Radio />} label="One-time task" />
-                                    <FormControlLabel value='2' control={<Radio />} label="Material Need" />
-                                </RadioGroup>
-                            </FormControl>
-                        </form>
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                          Cancel
-                        </Button>
-                        <Button color="primary" type="submit" form="request-form">
-                          Submit
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
+              open={this.props.open}
+              onClose={this.handleClose}
+              scroll="paper"
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Make a request</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                    Please fill out this form to add your request to the map...
+                </DialogContentText>
+                <form id='request-form' onSubmit={this.handleSubmit} noValidate>
+                    <TextField
+                    autoFocus
+                    margin="normal"
+                    id="address"
+                    label="Address"
+                    fullWidth
+                    required
+                    onChange={this.handleChange('address')}
+                    error={this.state.addressIssue}
+                    />
+                    <TextField
+                    margin="normal"
+                    id="address-2"
+                    label="Address 2"
+                    fullWidth
+                    onChange={this.handleChange('address-2')}
+                    />
+                    <TextField
+                    margin="normal"
+                    id="town-city"
+                    label="Town/City"
+                    required
+                    onChange={this.handleChange('town')}
+                    error={this.state.addressIssue}
+                    />
+                    <TextField
+                    margin="normal"
+                    id="post-code"
+                    label="Post Code"
+                    required
+                    onChange={this.handleChange('postCode')}
+                    error={this.state.addressIssue}
+                    />
+                    {this.renderAddressIssue()}
+                <TextField
+                        id="standard-multiline-flexible"
+                        label="Description"
+                        multiline
+                        rowsMax="6"
+                        onChange={this.handleChange('description')}
+                        margin="normal"
+                        fullWidth
+                        required
+                        error={this.state.descriptionIssue}
+                    />
+                    {this.renderDescriptionIssue()}
+                    <FormControl component="fieldset" style={{marginTop: '30px'}}>
+                        <FormLabel component="legend">Category</FormLabel>
+                        <RadioGroup
+                            aria-label="Category"
+                            name="category"
+                            value={this.state.category}
+                            onChange={this.handleChange('category')}
+                        >
+                            <FormControlLabel value='1' control={<Radio />} label="One-time task" />
+                            <FormControlLabel value='2' control={<Radio />} label="Material Need" />
+                        </RadioGroup>
+                    </FormControl>
+                </form>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button color="primary" type="submit" form="request-form">
+                  Submit
+                </Button>
+              </DialogActions>
+            </Dialog>
         )
     }
 }

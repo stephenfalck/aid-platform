@@ -151,35 +151,25 @@ class ConversationsPage extends React.Component {
                             </Grid>
                             <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '15%'}}>
                                 
-                                    <Grid item xs={12} id='input-container'>
-                                <form id='message-form' onSubmit={this.handleSubmit}>
-                                    <Paper id="input-paper" elevation={2}>
-                                        <InputBase 
-                                            id="message-input" 
-                                            placeholder="Write a message..." 
-                                            fullWidth 
-                                            multiline 
-                                            rows='4'
-                                            rowsMax='4' 
-                                            style={{padding: '6px', backgroundColor:'white', color: 'black', borderRadius:'4px'}} 
-                                            onChange={this.handleChange('message')}
-                                        />
-                                        <Button variant="contained" id="message-submit-button" color="secondary" type='submit' form='message-form'>
-                                            <Icon>send</Icon>
-                                        </Button>
-                                    </Paper>
+                                <Grid item xs={12} id='input-container'>
+                                    <form id='message-form' onSubmit={this.handleSubmit}>
+                                        <Paper id="input-paper" elevation={2}>
+                                            <InputBase 
+                                                id="message-input" 
+                                                placeholder="Write a message..." 
+                                                fullWidth 
+                                                multiline 
+                                                rows='4'
+                                                rowsMax='4' 
+                                                style={{padding: '6px', backgroundColor:'white', color: 'black', borderRadius:'4px'}} 
+                                                onChange={this.handleChange('message')}
+                                            />
+                                            <Button variant="contained" id="message-submit-button" color="secondary" type='submit' form='message-form'>
+                                                <Icon>send</Icon>
+                                            </Button>
+                                        </Paper>
                                     </form>
-                                    </Grid>
-                                    
-                                    {/*
-                                    <Grid item xs={2} >
-                                        
-                                    <Button variant="contained" color="primary" type='submit' form='message-form'>
-                                        <Icon>send</Icon>
-                                    </Button>
-                                        
                                 </Grid>
-                                */}
                             </Grid>
                         
                     </Grid>
