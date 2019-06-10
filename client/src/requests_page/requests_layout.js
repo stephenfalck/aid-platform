@@ -5,7 +5,6 @@ import Navbar from '../navbar/navbar';
 import Footer from '../footer/footer';
 import './requests_layout.css'
 import RequestsMapContainer from './requests_map_container'
-import { store } from "../redux/store";
 import { connect } from 'react-redux';
 import { setRequests } from '../redux/actions';
 
@@ -15,11 +14,11 @@ class RequestsPage extends React.Component {
         //console.log(Cookies.get('Authorization'))
     }
 
-    dispatchRequests = (requests) => {
-        this.props.setRequests(requests)
-    }
+    //dispatchRequests = (requests) => {
+    //    this.props.setRequests(requests)
+    //}
 
-    fetchRequests() {
+    fetchRequests = () => {
         const url = '/requests';
          
         fetch(url, {
@@ -32,10 +31,8 @@ class RequestsPage extends React.Component {
             console.log(response)
             return response.json()
         }).then(data => {
-            this.dispatchRequests(data)
-            //this.setState({
-            //    requests: data
-            //})
+            //this.dispatchRequests(data)
+            this.props.setRequests(data)
         })
         .catch(error => console.error('Error:', error)) 
     }

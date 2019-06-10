@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
     DialogTitle, Typography, Switch, FormControlLabel, Snackbar, IconButton  } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-//import { withStyles } from '@material-ui/core/styles';
 
 class RequestMarkerModal extends React.Component {
     state = {
