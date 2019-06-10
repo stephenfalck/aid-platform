@@ -20,6 +20,8 @@ class ConversationsPage extends React.Component {
     }
 
     displayMessages = (conversation_id) => {
+        this.clearMessage();
+        
         const url = `/conversations/${conversation_id}/messages`;
 
         fetch(url, {
@@ -90,12 +92,15 @@ class ConversationsPage extends React.Component {
             return response.json()
         }).then(data => {
             console.log(data)
-            this.displayMessages(data.conversation_id)
+            this.clearMessage();
+            this.displayMessages(data.conversation_id);
         })
         .catch(error => console.error('Error: ', error))
+    }
 
+    clearMessage = () => {
         this.setState({
-            message: null
+            message: ''
         })
     }
 
@@ -163,6 +168,7 @@ class ConversationsPage extends React.Component {
                                                 rowsMax='4' 
                                                 style={{padding: '6px', backgroundColor:'white', color: 'black', borderRadius:'4px'}} 
                                                 onChange={this.handleChange('message')}
+                                                value={this.state.message}
                                             />
                                             <Button variant="contained" id="message-submit-button" color="secondary" type='submit' form='message-form'>
                                                 <Icon>send</Icon>
