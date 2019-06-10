@@ -91,12 +91,12 @@ class ConversationsPage extends React.Component {
         }).then(data => {
             console.log(data)
             this.displayMessages(data.conversation_id)
-            this.setState({
-                message: null
-            })
         })
         .catch(error => console.error('Error: ', error))
 
+        this.setState({
+            message: null
+        })
     }
 
     setConversationUser = (userName) => {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Cookies from 'js-cookie';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';

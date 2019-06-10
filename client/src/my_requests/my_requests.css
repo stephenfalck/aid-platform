@@ -1,3 +1,7 @@
 #my-requests-container {
     padding: 10px;
 }
+
+.request-card-title span{
+    color: white;
+}

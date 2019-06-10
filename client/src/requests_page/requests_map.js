@@ -12,7 +12,9 @@ const mapStateToProps = (state) => {
 
 const RequestsMap = withScriptjs(withGoogleMap((props) =>{
 
-    const markers = props.requests.map(request => 
+  let unFulfilledRequests = props.requests.filter(request => request.fulfilled === false);
+
+    const markers = unFulfilledRequests.map(request => 
       <RequestMarker 
           key={request.id} request={request} location={{lat: request.latitude, lng: request.longitude}}
         />

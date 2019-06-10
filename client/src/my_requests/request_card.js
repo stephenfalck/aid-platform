@@ -1,11 +1,56 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import { Grid, Typography, Card, CardContent, CardActions, Button, CardHeader } from '@material-ui/core';
+import { setRequests } from '../redux/actions';
 
 class RequestCard extends React.Component {
     componentDidMount(){
-        console.log(this.props.request.created_at)
+        //console.log(this.props.request.created_at)
+    }
+
+    handleFulfilled = () => {
+        const url = `requests/${this.props.request.id}`;
+        const data = {
+            fulfilled: true
+        };
+
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response)
+            //return response.json()
+        })//.then(data => {
+            //console.log(data)
+        //})
+        .catch(error => console.error('Error:', error)) 
+    }
+
+    handleRelist = () => {
+        const url = `requests/${this.props.request.id}`;
+        const data = {
+            fulfilled: false
+        };
+
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response)
+            //return response.json()
+        })//.then(data => {
+            //console.log(data)
+        //})
+        .catch(error => console.error('Error:', error))
     }
 
 
@@ -13,31 +58,45 @@ class RequestCard extends React.Component {
         return(
             <Grid item xs={6}>
                 <Card raised>
-                    <CardHeader title="Request">
-                       
-                    </CardHeader>
-                    <CardContent>
-                        <Typography  color="textSecondary" gutterBottom>
-                        {this.props.request.id}
+                    <CardHeader 
+                    title="Request"
+                    subheader={this.props.request.created_at}
+                    className="request-card-title" 
+                    style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF"} : {backgroundColor: "#f6685e"}}
+                    />   
+                    <CardContent style={{paddingTop: '0'}}>
+                        <Typography  variant={'overline'} color="textSecondary" gutterBottom>
+                            {this.props.request.request_category_id === 1 ? "Request type: One-time task" : " Request Type: Material need"}
                         </Typography>
-                        
-                        <Typography  color="textSecondary">
-                        adjective
-                        </Typography>
+                        <br></br>
                         <Typography variant='subtitle2'>
                         {this.props.request.description}
                         </Typography>
                         <br />
-                        <Typography variant="button">
+                        <Typography  color="textSecondary">
+                        {this.props.request.id}
+                        </Typography>
+                        <br></br>
+                        <Typography variant="body1">
                         Status: {this.props.request.fulfilled ? "Fulfilled" : "Unfulfilled"}
                         <br />
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" color="primary">
+                        <Button 
+                        variant="contained" 
+                        size="small" 
+                        color="primary" 
+                        onClick={this.handleRelist}
+                        >
                         Relist
                         </Button>
-                        <Button size="small" color="secondary">
+                        <Button 
+                        variant="contained" 
+                        size="small" 
+                        color="secondary" 
+                        onClick={this.handleFulfilled}
+                        >
                         Fulfilled
                         </Button>
                     </CardActions>
@@ -47,4 +106,7 @@ class RequestCard extends React.Component {
     }
 }
 
-export default RequestCard;
+export default connect(
+    null,
+    { setRequests }
+)(RequestCard);
