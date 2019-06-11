@@ -33,7 +33,7 @@ class MyRequestsPage extends React.Component {
         return(
             <Fragment>
                 <Navbar title='My Requests' history={this.props.history}/>
-                <RequestCards />
+                <RequestCards fetchRequests={this.fetchRequests}/>
             </Fragment>
         )
     }

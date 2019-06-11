@@ -121,11 +121,55 @@ class RequestMarkerModal extends React.Component {
             body: JSON.stringify(data)
         }).then(response => {
             //console.log(response)
+            this.checkRepliesNumber()
             return response.json()
         }).then(data => {
             //console.log(data)
+            //write function that checks if the request has 5 responses and if it does change status of request to fulfilled
         })
         .catch(error => console.error('Error:', error))
+    }
+
+    checkRepliesNumber = () => {
+        const url = `/requests/${this.props.request.id}/replies`
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            }
+        }).then(response => {
+            console.log(response)
+            return response.json()
+        }).then(data => {
+            if(data.length % 5 === 0) {
+                this.markAsFulfilled();
+            } 
+        })
+    }
+
+    markAsFulfilled = () => {
+        const url = `requests/${this.props.request.id}`;
+        const data = {
+            fulfilled: true
+        };
+
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('Authorization')
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response)
+            this.props.fetchRequests();
+            //return response.json()
+        })//.then(data => {
+            //console.log(data)
+        //})
+        .catch(error => console.error('Error:', error)) 
     }
 
     startConversation = () => {

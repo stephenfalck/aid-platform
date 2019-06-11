@@ -6,12 +6,6 @@ import AddIcon from '@material-ui/icons/Add';
 import './footer.css';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state) => {
-    return {
-        requests: state.requests
-    }
-}
-
 class Footer extends React.Component {
     state = {
         open: false
@@ -43,6 +37,12 @@ class Footer extends React.Component {
                 </Toolbar>
             </AppBar>
         )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        requests: state.requests
     }
 }
 

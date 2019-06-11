@@ -24,6 +24,7 @@ class RequestCard extends React.Component {
             body: JSON.stringify(data)
         }).then(response => {
             console.log(response)
+            this.props.fetchRequests();
             //return response.json()
         })//.then(data => {
             //console.log(data)
@@ -46,6 +47,7 @@ class RequestCard extends React.Component {
             body: JSON.stringify(data)
         }).then(response => {
             console.log(response)
+            this.props.fetchRequests();
             //return response.json()
         })//.then(data => {
             //console.log(data)
@@ -89,7 +91,7 @@ class RequestCard extends React.Component {
                         color="primary" 
                         onClick={this.handleRelist}
                         >
-                        Relist
+                        Repost
                         </Button>
                         <Button 
                         variant="contained" 

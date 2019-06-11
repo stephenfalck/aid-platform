@@ -4,12 +4,6 @@ import { connect } from 'react-redux';
 //import { store } from "../redux/store";
 import RequestMarker from './request_marker';
 
-const mapStateToProps = (state) => {
-  return{
-    requests: state.requests
-  }
-}
-
 const RequestsMap = withScriptjs(withGoogleMap((props) =>{
 
   let unFulfilledRequests = props.requests.filter(request => request.fulfilled === false);
@@ -30,5 +24,11 @@ const RequestsMap = withScriptjs(withGoogleMap((props) =>{
       );
     }
 ))
+
+const mapStateToProps = (state) => {
+  return{
+    requests: state.requests
+  }
+}
 
 export default connect(mapStateToProps)(RequestsMap);

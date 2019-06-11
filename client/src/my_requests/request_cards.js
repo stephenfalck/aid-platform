@@ -4,19 +4,13 @@ import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import RequestCard from './request_card';
 
-const mapStateToProps = (state) => {
-    return {
-        requests: state.requests
-    }
-}
-
 const RequestCards = (props) => {
 
     let userRequests = props.requests.filter(request => request.user_id === Cookies.getJSON('currentUser').user_id);
 
 
     const cards = userRequests.map(request => 
-    <RequestCard request={request} key={request.id} />
+    <RequestCard request={request} key={request.id} fetchRequests={props.fetchRequests}/>
 )
 
 
@@ -27,6 +21,11 @@ const RequestCards = (props) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        requests: state.requests
+    }
+}
 
 export default connect(mapStateToProps)(RequestCards);
 

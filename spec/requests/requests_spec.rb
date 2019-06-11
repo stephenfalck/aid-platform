@@ -109,6 +109,35 @@ RSpec.describe 'Requests API', type: :request do
         end
     end
 
+    describe 'PATCH /requests/:id' do
+        let(:valid_attributes) { { fulfilled: true } }
+
+        before { patch "/requests/#{request_id}", params: valid_attributes }
+
+        context 'when request exists' do
+            it 'returns status code 204' do
+                expect(response).to have_http_status(204)
+            end
+
+            it 'updates the request' do
+                updated_request = Request.find(request_id)
+                expect(updated_request.fulfilled).to match(true)
+            end
+        end
+
+        context 'when the request does not exist' do
+            let(:request_id) { 0 }
+
+            it 'returns status code 404' do
+                expect(response).to have_http_status(404)
+            end
+
+            it 'returns a not found message' do
+                expect(response.body).to match(/Couldn't find Request with 'id'=0/)
+            end
+        end
+    end
+
 
     describe 'DELETE /requests/:id' do
         before { delete "/requests/#{request_id}" }
