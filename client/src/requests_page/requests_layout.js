@@ -43,15 +43,21 @@ class RequestsPage extends React.Component {
             <Fragment>
                 <Navbar title='Requests' history={this.props.history} />
                 <Grid container id="map-container">
-                    <RequestsMapContainer  />
+                    <RequestsMapContainer  requests={this.props.requests}/>
                 </Grid>
-                <Footer fetchRequests={this.fetchRequests} />
+                <Footer fetchRequests={this.fetchRequests} requests={this.props.requests} />
             </Fragment>
         )
     }
 }
 
+const mapStateToProps = (state) => {
+    return{
+      requests: state.requests
+    }
+  }
+
 export default connect(
-    null, 
+    mapStateToProps, 
     { setRequests }
 )(RequestsPage);

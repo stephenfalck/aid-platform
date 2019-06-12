@@ -33,13 +33,19 @@ class MyRequestsPage extends React.Component {
         return(
             <Fragment>
                 <Navbar title='My Requests' history={this.props.history}/>
-                <RequestCards fetchRequests={this.fetchRequests}/>
+                <RequestCards fetchRequests={this.fetchRequests} requests={this.props.requests}/>
             </Fragment>
         )
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        requests: state.requests
+    }
+}
+
 export default connect(
-    null, 
+    mapStateToProps, 
     { setRequests }
 )(MyRequestsPage);

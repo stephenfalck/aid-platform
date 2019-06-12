@@ -1,4 +1,8 @@
-export function reducer(state, action) {
+const initialState = { 
+    requests: []
+}
+
+export function reducer(state = initialState, action) {
     switch (action.type) {
         case "SET_REQUESTS":
             return {

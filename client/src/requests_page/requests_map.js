@@ -1,6 +1,5 @@
 import React from "react";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
-import { connect } from 'react-redux';
 //import { store } from "../redux/store";
 import RequestMarker from './request_marker';
 
@@ -25,10 +24,4 @@ const RequestsMap = withScriptjs(withGoogleMap((props) =>{
     }
 ))
 
-const mapStateToProps = (state) => {
-  return{
-    requests: state.requests
-  }
-}
-
-export default connect(mapStateToProps)(RequestsMap);
+export default RequestsMap;

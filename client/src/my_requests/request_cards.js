@@ -1,6 +1,5 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import RequestCard from './request_card';
 
@@ -21,11 +20,6 @@ const RequestCards = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        requests: state.requests
-    }
-}
 
-export default connect(mapStateToProps)(RequestCards);
+export default RequestCards;
 
