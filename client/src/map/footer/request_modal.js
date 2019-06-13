@@ -2,13 +2,14 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
     DialogContentText, DialogTitle, Radio, RadioGroup, 
-    FormControl, FormControlLabel, FormLabel  } from '@material-ui/core';
+    FormControl, FormControlLabel, FormLabel, InputAdornment  } from '@material-ui/core';
 
 class RequestModal extends React.Component {
     state = {
         category: '1',
         location: {},
-        response: {}
+        response: {},
+        description: ''
     };
 
       handleChange = name => event => {
@@ -94,20 +95,28 @@ class RequestModal extends React.Component {
           })
         }
         const addressIssue = "Validation failed: Latitude can't be blank, Longitude can't be blank";
-        const descriptionIssue = "Validation failed: Description can't be blank";
+        const descriptionEmpty = "Validation failed: Description can't be blank";
+        const descriptionLength = "Validation failed: Description is too long (maximum is 300 characters)";
 
         if (message === addressIssue) {
           this.setState({
             addressIssue: true
           })
-        } else if (message === descriptionIssue) {
+        } else if (message === descriptionEmpty) {
           this.setState({
-            descriptionIssue: true
+            descriptionIssue: true,
+            descriptionIssueText: "Description can't be blank"
+          })
+        } else if (message === descriptionLength) {
+          this.setState({
+            descriptionIssue: true,
+            descriptionIssueText:  "Description is too long (maximum is 300 characters)"
           })
         } else {
           this.setState({
             addressIssue: true,
-            descriptionIssue: true
+            descriptionIssue: true,
+            descriptionIssueText: message.slice(70)
           })
         }
         
@@ -127,7 +136,7 @@ class RequestModal extends React.Component {
         if(this.state.descriptionIssue) {
           return (
           <div className='request-error-message' style={{fontWeight:'bold', color: '#f44336'}}> 
-              Can't be blank
+              {this.state.descriptionIssueText}
           </div>
           )
         }
@@ -136,7 +145,9 @@ class RequestModal extends React.Component {
       handleClose = () => {
         this.setState({
           addressIssue: false,
-          descriptionIssue: false
+          descriptionIssue: false,
+          descriptionIssueText: '',
+          description: ''
         })
         this.props.close()
       }
@@ -191,7 +202,7 @@ class RequestModal extends React.Component {
                     {this.renderAddressIssue()}
                 <TextField
                         id="standard-multiline-flexible"
-                        label="Description"
+                        label="Description (300 characters max)"
                         multiline
                         rowsMax="6"
                         onChange={this.handleChange('description')}
@@ -199,6 +210,9 @@ class RequestModal extends React.Component {
                         fullWidth
                         required
                         error={this.state.descriptionIssue}
+                        InputProps={{
+                          endAdornment: <InputAdornment position="end">{this.state.description.length}</InputAdornment>,
+                        }}
                     />
                     {this.renderDescriptionIssue()}
                     <FormControl component="fieldset" style={{marginTop: '30px'}}>
