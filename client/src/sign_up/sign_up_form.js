@@ -60,7 +60,7 @@ class SignUpForm extends React.Component {
              Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
              return response.json();
         }).then(data => {
-            console.log(data)
+           // console.log(data)
             Cookies.set('currentUser', {
                 user_id: data.id,
                 first_name: data.first_name,
@@ -75,7 +75,7 @@ class SignUpForm extends React.Component {
 
     checkResponseStatus = (response, data) => {
         if (response.status === 201) {
-            this.props.history.push("/requests")
+            this.props.history.push("/")
         } else if (response.status === 422) {
             this.setState({
                 errors: data.errors
