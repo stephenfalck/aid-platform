@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import { Grid, Typography, Card, CardContent, CardActions, Button, CardHeader } from '@material-ui/core';
-import { setRequests } from '../redux/actions';
+//import { setRequests } from '../redux/actions';
 
 class RequestCard extends React.Component {
     componentDidMount(){
@@ -108,7 +108,7 @@ class RequestCard extends React.Component {
     }
 }
 
-export default connect(
+export default /*connect(
     null,
     { setRequests }
-)(RequestCard);
+)*/(RequestCard);

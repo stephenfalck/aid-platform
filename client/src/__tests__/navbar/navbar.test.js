@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import NavBar from '../navbar';
+import NavBar from '../../navbar/navbar';
 
 it('renders without crashing', () => {
     shallow(<NavBar />);

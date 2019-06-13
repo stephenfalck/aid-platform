@@ -64,6 +64,7 @@ class RequestModal extends React.Component {
               console.log(response)
               if(response.status === 201) {
                 this.handleClose()
+                this.props.fetchRequests()
               }  
               return response.json()
           }).then(data => {
@@ -83,7 +84,7 @@ class RequestModal extends React.Component {
           e.preventDefault();
 
           this.getLocationData()
-          this.props.fetchRequests()
+          //this.props.fetchRequests()
       }
 
       validateForm = (message) => {

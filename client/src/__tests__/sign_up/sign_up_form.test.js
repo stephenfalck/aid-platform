@@ -1,7 +1,7 @@
 import React from 'react';
-import LogInForm from '../log_in_form';
+import SignUpForm from '../../sign_up/sign_up_form';
 import { shallow } from 'enzyme';
 
 it('renders without crashing', () => {
-    shallow(<LogInForm />);
+    shallow(<SignUpForm />);
   });

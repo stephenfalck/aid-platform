@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Footer from './footer';
+import Footer from '../../../map/footer';
 
 it('renders without crashing', () => {
     shallow(<Footer />);

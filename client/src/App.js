@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import PrivateRoute from './private_route';
-import LandingPage from'./landing_page/landing_layout';
-import SignUpPage from'./sign_up_page/sign_up_layout';
-import RequestsPage from './requests_page/requests_layout';
-import ConversationsPage from './conversations_page/conversations';
+import LandingPage from'./login/landing_layout';
+import SignUpPage from'./sign_up/sign_up_layout';
+import RequestsPage from './map/requests_layout';
+import ConversationsPage from './inbox/conversations';
 import MyRequestsPage from './my_requests/my_requests_page';
 
 class App extends React.Component {
@@ -14,7 +14,7 @@ class App extends React.Component {
       <Router>
         <Route path="/login" exact component={LandingPage} />
         <Route path="/signup" component={SignUpPage} />
-        <PrivateRoute path="/requests" component={RequestsPage} />
+        <PrivateRoute exact path="/" component={RequestsPage} />
         <PrivateRoute path='/inbox' component={ConversationsPage} />
         <PrivateRoute path="/myrequests" component={MyRequestsPage} />
         {/*<Route path="/requests" component={RequestsPage} />

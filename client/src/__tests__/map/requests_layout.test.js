@@ -1,7 +1,7 @@
 import React from 'react';
-import RequestsPage from '../requests_layout';
+import RequestsPage from '../../map/requests_layout';
 import { shallow } from 'enzyme';
-import RequestsMapContainer from '../requests_map_container';
+import RequestsMapContainer from '../../map/requests_map_container';
 
 it('renders without crashing', () => {
     shallow(<RequestsPage />);

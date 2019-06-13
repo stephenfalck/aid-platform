@@ -1,6 +1,6 @@
 import React from 'react';
-import LandingPage from '../landing_layout';
-import LogInForm from '../log_in_form';
+import LandingPage from '../../login/landing_layout';
+import LogInForm from '../../login/log_in_form';
 import { shallow } from 'enzyme';
 
 it('renders without crashing', () => {

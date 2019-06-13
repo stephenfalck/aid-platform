@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Grid } from '@material-ui/core';
 import Cookies from 'js-cookie';
 import Navbar from '../navbar/navbar';
-import Footer from '../footer/footer';
+import Footer from './footer/footer';
 import './requests_layout.css'
 import RequestsMapContainer from './requests_map_container'
 import { connect } from 'react-redux';
@@ -35,6 +35,7 @@ class RequestsPage extends React.Component {
             this.props.setRequests(data)
         })
         .catch(error => console.error('Error:', error)) 
+        console.log("requests fetched")
     }
     
 

@@ -82,7 +82,7 @@ class Navbar extends React.Component {
                         open={open}
                         onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose}><Link to='/requests'>Requests</Link></MenuItem>
+                            <MenuItem onClick={this.handleClose}><Link to='/'>Map</Link></MenuItem>
                             <MenuItem onClick={this.handleClose}><Link to='/inbox'>Inbox</Link></MenuItem>
                             <MenuItem onClick={this.handleClose}><Link to='/myrequests'>My requests</Link></MenuItem>
                             <MenuItem onClick={this.handleLogOut}>Log out</MenuItem>

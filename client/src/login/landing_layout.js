@@ -7,11 +7,9 @@ import Cookies from 'js-cookie';
 
 class LandingPage extends React.Component {
     componentDidMount() {
-        //if(Cookies.get('Authorization')) {
-        //    this.props.history.push('/')
-        //} else {
-        //    return
-        //}
+        if(Cookies.get('Authorization')) {
+            this.props.history.push('/')
+        } 
     }
 
     render() {
