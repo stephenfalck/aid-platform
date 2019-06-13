@@ -5,7 +5,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import Icon from '@material-ui/core/Icon';
 import Navbar from '../navbar/navbar';
 import ConversationUser from './conversation_user';
-import Message from './messages';
+import Messages from './messages';
 import './conversations.css';
 
 class ConversationsPage extends React.Component {
@@ -114,16 +114,16 @@ class ConversationsPage extends React.Component {
     render() {      
         let { conversations } = this.state;
 
-        const messages = this.state.messages.map(message => 
-            <Message 
-              key={message.id} message={message} 
-            />
-        );
+        //const messages = this.state.messages.map(message => 
+        //    <Messages
+        //      key={message.id} message={message} 
+        //    />
+        //);
         
         return(
             <Fragment>
                 <Navbar title='Inbox' history={this.props.history}/>
-                <Grid container item id="conversations-container" xs={12}>
+                <Grid container id="conversations-container">
                     <Grid item style={{height: '100%', padding: '10px'}} id="contacts" xs={3}>
                         <List>
                             {conversations.map(conversation => (
@@ -137,7 +137,7 @@ class ConversationsPage extends React.Component {
                             ))}  
                         </List>
                     </Grid>
-                    <Grid container item xs={9} id="message-and-input-area" style={{height: '100%'}} direction='row' wrap='wrap'>
+                    <Grid container item xs={9} id="message-and-input-area" style={{height: '100%'}} >
                             <Grid container item xs={12} justify='center' style={{height:'10%'}} id='messages-area-header'>
                                 <Paper elevation={2} id='messages-container-header' style={{width: '100%', textAlign: 'center'}}>
                                         {
@@ -152,7 +152,7 @@ class ConversationsPage extends React.Component {
                                 </Paper>
                             </Grid>
                             <Grid container id='messages-container' item xs={12} direction='column' style={{maxWidth: '100%', height:'75%'}}>
-                                {messages}
+                                <Messages messages={this.state.messages}/>      
                             </Grid>
                             <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '15%'}}>
                                 
@@ -166,7 +166,7 @@ class ConversationsPage extends React.Component {
                                                 multiline 
                                                 rows='4'
                                                 rowsMax='4' 
-                                                style={{padding: '6px', backgroundColor:'white', color: 'black', borderRadius:'4px'}} 
+                                                style={{padding: '8px', backgroundColor:'white', color: 'black', borderRadius:'4px'}} 
                                                 onChange={this.handleChange('message')}
                                                 value={this.state.message}
                                             />
