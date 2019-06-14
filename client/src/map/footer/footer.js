@@ -10,6 +10,14 @@ class Footer extends React.Component {
         open: false
     };
 
+    componentDidMount(){
+        this.interval = setInterval(() => this.props.fetchRequests(), 5000)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
+
     handleClickOpen = () => {
         this.setState({ open: true });
       };

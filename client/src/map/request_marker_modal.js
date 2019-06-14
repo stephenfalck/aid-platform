@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
-    DialogTitle, Typography, Switch, FormControlLabel, Snackbar, IconButton  } from '@material-ui/core';
+    DialogTitle, Typography, Switch, FormControlLabel, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 class RequestMarkerModal extends React.Component {
@@ -32,8 +32,8 @@ class RequestMarkerModal extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         if (this.state.message) { 
-        this.submitReply();
-        this.startConversation();
+            this.submitReply();
+            this.startConversation();
         } else {
             this.validateForm()
         }
@@ -125,7 +125,6 @@ class RequestMarkerModal extends React.Component {
             return response.json()
         }).then(data => {
             //console.log(data)
-            //write function that checks if the request has 5 responses and if it does change status of request to fulfilled
         })
         .catch(error => console.error('Error:', error))
     }
@@ -357,8 +356,7 @@ class RequestMarkerModal extends React.Component {
                         </IconButton>,
                     ]}
                     />
-            </Fragment>
-                
+            </Fragment>     
         )
     }
 }

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
     DialogContentText, DialogTitle, Radio, RadioGroup, 
-    FormControl, FormControlLabel, FormLabel, InputAdornment  } from '@material-ui/core';
+    FormControl, FormControlLabel, FormLabel, InputAdornment,
+    Snackbar, IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 class RequestModal extends React.Component {
     state = {
@@ -64,8 +66,11 @@ class RequestModal extends React.Component {
             })
               console.log(response)
               if(response.status === 201) {
-                this.handleClose()
+                this.handleModalClose()
                 this.props.fetchRequests()
+                this.setState({
+                  open: true
+                })
               }  
               return response.json()
           }).then(data => {
@@ -142,7 +147,7 @@ class RequestModal extends React.Component {
         }
       }
 
-      handleClose = () => {
+      handleModalClose = () => {
         this.setState({
           addressIssue: false,
           descriptionIssue: false,
@@ -152,11 +157,20 @@ class RequestModal extends React.Component {
         this.props.close()
       }
 
+      handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({ open: false });
+      };
+
     render() {
         return(
+          <Fragment>
             <Dialog
               open={this.props.open}
-              onClose={this.handleClose}
+              onClose={this.handleModalClose}
               scroll="paper"
               aria-labelledby="form-dialog-title"
             >
@@ -230,7 +244,7 @@ class RequestModal extends React.Component {
                 </form>
               </DialogContent>
               <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
+                <Button onClick={this.handleModalClose} color="primary">
                   Cancel
                 </Button>
                 <Button color="primary" type="submit" form="request-form">
@@ -238,6 +252,35 @@ class RequestModal extends React.Component {
                 </Button>
               </DialogActions>
             </Dialog>
+            <Snackbar
+              className="success-snackbar"
+              anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+              }}
+              open={this.state.open}
+              autoHideDuration={3000}
+              onClose={this.handleClose}
+              ContentProps={{
+                  'aria-describedby': 'message-id',
+              }}
+              message={
+                  <span id="message-id">
+                      Request Sent!
+                  </span>
+              }
+              action={[
+                  <IconButton
+                  key="close"
+                  aria-label="Close"
+                  color="inherit"
+                  onClick={this.handleClose}
+                  >
+                  <CloseIcon />
+                  </IconButton>,
+              ]}
+              />
+            </Fragment>
         )
     }
 }
