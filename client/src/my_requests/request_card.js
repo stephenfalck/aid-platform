@@ -58,8 +58,8 @@ class RequestCard extends React.Component {
                     <CardHeader 
                     title="Request"
                     subheader={this.props.request.created_at}
-                    className={this.props.request.fulfilled ? "request-card-title fulfilled" : "request-card-title" }
-                    style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF"} : {backgroundColor: "#f6685e"}}
+                    className={this.props.request.request_category_id === 1 ? "request-card-title one-time-card" : "request-card-title material-need-card" }
+                    style={this.props.request.fulfilled ? {backgroundColor: "#43a047"} : null}
                     />   
                     {/*<Grid container item justify='space-between' direction='column'>*/}
                     <CardContent id="request-card-content">

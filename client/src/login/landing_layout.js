@@ -16,7 +16,7 @@ class LandingPage extends React.Component {
         return(
             <Grid container alignContent={'center'} justify={'center'} className="main-container" style={{minHeight: '100vh'}}>
                 <Grid item sm={10} xs={10}>
-                    <Paper>
+                    <Paper elevation={4}>
                         <Grid container>
                             <Grid item sm={7} id="main-header-container">                        
                                 <Typography variant="h2">
