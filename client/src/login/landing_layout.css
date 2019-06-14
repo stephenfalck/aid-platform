@@ -1,7 +1,9 @@
 .main-container {
-    background: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg') center;
+    /*background: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg') center;*/
     background-size: cover;
     background-repeat: no-repeat;
+    background-image: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg');
+    background-position: center;
 }
 
 #main-header-container {

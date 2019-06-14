@@ -5,3 +5,23 @@
 .request-card-title span{
     color: white;
 }
+
+/*.request-card {
+    height: 380px;
+}*/
+
+#request-card-content {
+    padding-top: 0px;
+    box-sizing: border-box;
+    height: 273px;  
+}
+
+@media screen and (max-width: 425px) {
+    #request-card-content {
+        overflow-y: scroll;
+    }
+}
+
+.fulfilled{
+    background-color: #43a047
+}

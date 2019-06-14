@@ -1,12 +1,9 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { Grid, Typography, Card, CardContent, CardActions, Button, CardHeader } from '@material-ui/core';
+import { Grid, Typography, Card, CardContent, 
+    CardActions, Button, CardHeader } from '@material-ui/core';
 
 class RequestCard extends React.Component {
-    componentDidMount(){
-        //console.log(this.props.request.created_at)
-    }
-
     handleFulfilled = () => {
         const url = `requests/${this.props.request.id}`;
         const data = {
@@ -57,14 +54,15 @@ class RequestCard extends React.Component {
     render() {
         return(
             <Grid item sm={6} xs={12}>
-                <Card raised>
+                <Card raised className="request-card">
                     <CardHeader 
                     title="Request"
                     subheader={this.props.request.created_at}
-                    className="request-card-title" 
+                    className={this.props.request.fulfilled ? "request-card-title fulfilled" : "request-card-title" }
                     style={this.props.request.request_category_id === 1 ? {backgroundColor: "#8C9EFF"} : {backgroundColor: "#f6685e"}}
                     />   
-                    <CardContent style={{paddingTop: '0'}}>
+                    {/*<Grid container item justify='space-between' direction='column'>*/}
+                    <CardContent id="request-card-content">
                         <Typography  variant={'overline'} color="textSecondary" gutterBottom>
                             {this.props.request.request_category_id === 1 ? "Request type: One-time task" : " Request Type: Material need"}
                         </Typography>
@@ -88,6 +86,7 @@ class RequestCard extends React.Component {
                         size="small" 
                         color="primary" 
                         onClick={this.handleRelist}
+                        disabled={this.props.request.fulfilled ? false : true}
                         >
                         Repost
                         </Button>
@@ -96,17 +95,16 @@ class RequestCard extends React.Component {
                         size="small" 
                         color="secondary" 
                         onClick={this.handleFulfilled}
+                        disabled={this.props.request.fulfilled ? true : false}
                         >
                         Fulfilled
                         </Button>
                     </CardActions>
+                    {/*</Grid>*/}
                 </Card>
             </Grid>
         )
     }
 }
 
-export default /*connect(
-    null,
-    { setRequests }
-)*/(RequestCard);
+export default RequestCard;

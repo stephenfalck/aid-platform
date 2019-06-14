@@ -62,11 +62,12 @@ class ConversationUser extends React.Component {
                         </Avatar>
                         <ListItemText
                             primary={this.state.userName}
-                            secondary={
-                                <React.Fragment>
-                                {"Potential message snippet" }
-                                </React.Fragment>
-                            }
+                            style={{overflow:'scroll'}}
+                            //secondary={
+                            //    <React.Fragment>
+                            //    {"Potential message snippet" }
+                            //    </React.Fragment>
+                            //}
                             className={this.props.active === this.props.conversation.id ? "active-conversation-text" : ""}
                         />
                     </ListItem>

@@ -266,7 +266,7 @@ class RequestModal extends React.Component {
               }}
               message={
                   <span id="message-id">
-                      Request Sent!
+                      Request posted!
                   </span>
               }
               action={[

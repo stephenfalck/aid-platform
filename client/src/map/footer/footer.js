@@ -7,15 +7,24 @@ import './footer.css';
 
 class Footer extends React.Component {
     state = {
-        open: false
+        open: false,
+        unFulfilledRequests: null
     };
 
     componentDidMount(){
-        this.interval = setInterval(() => this.props.fetchRequests(), 5000)
+        this.interval = setInterval(() => this.checkRequestsNumber(), 5000)
+        console.log(this.state)
     }
 
     componentWillUnmount(){
         clearInterval(this.interval)
+    }
+
+    checkRequestsNumber = () => {
+        let unFulfilledRequests = this.props.requests.filter(request => request.fulfilled === false).length;
+        this.setState({
+            unFulfilledRequests: unFulfilledRequests
+        })
     }
 
     handleClickOpen = () => {
@@ -41,7 +50,7 @@ class Footer extends React.Component {
                     </Fab>
                     <RequestModal open={this.state.open} close={this.handleClose} fetchRequests={this.props.fetchRequests} />
                     <Typography variant="overline" color="inherit">
-                        Total requests: {unFulfilledRequestsLength}
+                        Total requests: {this.state.unFulfilledRequests ? this.state.unFulfilledRequests : unFulfilledRequestsLength}
                     </Typography>
                 </Toolbar>
             </AppBar>

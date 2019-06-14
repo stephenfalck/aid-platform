@@ -164,8 +164,8 @@ class ConversationsPage extends React.Component {
                                                 placeholder="Write a message..." 
                                                 fullWidth 
                                                 multiline 
-                                                rows='4'
-                                                rowsMax='4' 
+                                                rows='3'
+                                                rowsMax='3' 
                                                 style={{padding: '8px', backgroundColor:'white', color: 'black', borderRadius:'4px'}} 
                                                 onChange={this.handleChange('message')}
                                                 value={this.state.message}

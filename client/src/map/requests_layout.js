@@ -43,7 +43,7 @@ class RequestsPage extends React.Component {
     fetchUserLocation = () => {
         const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk'
         const url = `https://www.googleapis.com/geolocation/v1/geolocate?key=${apiKey}`
-
+        
         fetch(url, {
             method: 'POST',
             mode: 'cors'
