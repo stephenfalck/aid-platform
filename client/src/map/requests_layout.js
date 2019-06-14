@@ -9,14 +9,17 @@ import { connect } from 'react-redux';
 import { setRequests } from '../redux/actions';
 
 class RequestsPage extends React.Component {
+    state={
+        userLocation: {
+            lat: 51.515499,
+            lng: -0.1419
+        }
+    }
     componentDidMount() {
+        this.fetchUserLocation();
         this.fetchRequests();
         //console.log(Cookies.get('Authorization'))
     }
-
-    //dispatchRequests = (requests) => {
-    //    this.props.setRequests(requests)
-    //}
 
     fetchRequests = () => {
         const url = '/requests';
@@ -36,6 +39,35 @@ class RequestsPage extends React.Component {
         })
         .catch(error => console.error('Error:', error)) 
     }
+
+    fetchUserLocation = () => {
+        const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk'
+        const url = `https://www.googleapis.com/geolocation/v1/geolocate?key=${apiKey}`
+
+        fetch(url, {
+            method: 'POST',
+            mode: 'cors'
+        }).then(response => {
+            console.log(response)
+            this.setState({
+                response: response
+            })
+            if(this.state.response.status === 200) {
+                return response.json();
+            }
+        }).then(data => {
+            if (this.state.response.status === 200) {
+                console.log(data)
+                this.setState({
+                    userLocation: {
+                        lat: data.location.lat,
+                        lng: data.location.lng
+                    }
+                })
+            } 
+        })
+        .catch(error => console.error('Error:', error)) 
+    }
     
 
     render() {
@@ -43,7 +75,7 @@ class RequestsPage extends React.Component {
             <Fragment>
                 <Navbar title='Requests' history={this.props.history} />
                 <Grid container id="map-container">
-                    <RequestsMapContainer  requests={this.props.requests}/>
+                    <RequestsMapContainer userLocation={this.state.userLocation} requests={this.props.requests}/>
                 </Grid>
                 <Footer fetchRequests={this.fetchRequests} requests={this.props.requests} />
             </Fragment>

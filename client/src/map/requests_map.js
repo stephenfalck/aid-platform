@@ -12,10 +12,15 @@ const RequestsMap = withScriptjs(withGoogleMap((props) =>{
         />
     )
 
+    let location = {
+      lat: props.userLocation.lat,
+      lng: props.userLocation.lng
+    }
+
     return (
         <GoogleMap
           defaultZoom={14}
-          center={ { lat:  51.515499, lng: -0.1419 } }
+          center={ { lat: location.lat, lng: location.lng } }
           >
             {markers}
         </GoogleMap>
