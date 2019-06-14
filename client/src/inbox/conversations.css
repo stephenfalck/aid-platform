@@ -3,13 +3,12 @@
 }
 #contacts {
     border-right: 2px solid white; 
-    /*background-color: #e3f2fd;
-    background-color: #e3f2fd;
-    border-right: 2px solid #8C9EFF;*/
     background-color: #e8eaf6;
-    
+    height: 100%; 
+    padding: 10px;
     overflow-y: scroll;   
 }
+
 
 #contacts > ul {
     padding-top: 0px;
@@ -21,14 +20,10 @@
 }
 
 #list-item-paper span { 
-    /*color: white;
-    color: black*/
     color: white;
 }
 
 #list-item-paper p {
-    /*color: white;
-    color: black*/
     color: white;
 }
 
@@ -54,7 +49,7 @@
     */
     /* dark slate grey: #192033, lighter dark slate grey: #1f2a42      deep pink: #ff458b*/
     background-color: #e8eaf6;
-    
+    height: 100%;
     padding: 10px;
 
 }
@@ -70,16 +65,14 @@
     border-radius: 0px 4px 4px 0px;
 }
 
-@media screen and (max-width: 599px) {
+/*@media screen and (max-width: 599px) {
     #conversations-container {
         height: calc(100vh - 56px);
     }
-}
+}*/
 
 .active-conversation {
     background-color: #8C9EFF;
-    /*background-color: white;
-    background-color: #e91e63;*/
     border-radius: 4px;
 }
 
@@ -89,4 +82,22 @@
 
 .active-conversation-text p {
     color: white;
+}
+
+@media screen and (max-width: 599px) {
+    #conversations-container {
+        height: 130vh;
+    }
+
+    #contacts {
+        height: 25%;
+    }
+
+    #message-and-input-area {
+        height: 75%;
+    }
+
+    #messages-container {
+        padding-bottom: 10px;
+    }
 }

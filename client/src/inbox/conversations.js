@@ -124,7 +124,7 @@ class ConversationsPage extends React.Component {
             <Fragment>
                 <Navbar title='Inbox' history={this.props.history}/>
                 <Grid container id="conversations-container">
-                    <Grid item style={{height: '100%', padding: '10px'}} id="contacts" xs={3}>
+                    <Grid item id="contacts" sm={3} xs={12}>
                         <List>
                             {conversations.map(conversation => (
                                 <ConversationUser 
@@ -137,8 +137,8 @@ class ConversationsPage extends React.Component {
                             ))}  
                         </List>
                     </Grid>
-                    <Grid container item xs={9} id="message-and-input-area" style={{height: '100%'}} >
-                            <Grid container item xs={12} justify='center' style={{height:'10%'}} id='messages-area-header'>
+                    <Grid container item sm={9} xs={12} id="message-and-input-area" >
+                            <Grid container item sm={12} justify='center' style={{height:'10%'}} id='messages-area-header'>
                                 <Paper elevation={2} id='messages-container-header' style={{width: '100%', textAlign: 'center'}}>
                                         {
                                             this.state.headerContent !== 'Open a conversation...' ? 
@@ -151,10 +151,10 @@ class ConversationsPage extends React.Component {
                                     </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid container id='messages-container' item xs={12} direction='column' style={{maxWidth: '100%', height:'75%'}}>
+                            <Grid container id='messages-container' item sm={12} direction='column' style={{maxWidth: '100%', height:'75%'}}>
                                 <Messages messages={this.state.messages}/>      
                             </Grid>
-                            <Grid container item xs={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '15%'}}>
+                            <Grid container item sm={12} direciton='row' alignItems='flex-end' style={{maxWidth: '100%', height: '15%'}}>
                                 
                                 <Grid item xs={12} id='input-container'>
                                     <form id='message-form' onSubmit={this.handleSubmit}>

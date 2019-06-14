@@ -23,8 +23,8 @@ class Footer extends React.Component {
         let unFulfilledRequestsLength = this.props.requests.filter(request => request.fulfilled === false).length;
 
         return(
-            <AppBar position="fixed" color="primary" style={{top: 'auto', bottom: 0}}>
-                <Toolbar style={{ alignItems: 'center', justifyContent: 'space-between'}}>
+            <AppBar position="fixed" color="primary" style={{top: 'auto', bottom: 0}} >
+                <Toolbar style={{ alignItems: 'center', justifyContent: 'space-between'}} id="map-footer">
                     <IconButton color="inherit" aria-label="Open drawer">
                         <MenuIcon />
                     </IconButton>

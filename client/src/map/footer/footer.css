@@ -22,3 +22,28 @@
 #request-form > div:nth-child(4) > div {
     width: 60%;
 }
+
+
+@media screen and (max-width: 599px) {
+    #map-footer {
+        height: 70px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #request-form > div:nth-child(3) {
+        width: 100%;
+    }
+    
+    #request-form > div:nth-child(3) > div {
+        width: 100%;
+    }
+    
+    #request-form > div:nth-child(4) {
+        width: 100%;
+    }
+    
+    #request-form > div:nth-child(4) > div {
+        width: 100%;
+    }
+}

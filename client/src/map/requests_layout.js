@@ -35,7 +35,6 @@ class RequestsPage extends React.Component {
             this.props.setRequests(data)
         })
         .catch(error => console.error('Error:', error)) 
-        console.log("requests fetched")
     }
     
 

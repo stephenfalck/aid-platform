@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import { Grid, Typography, Card, CardContent, CardActions, Button, CardHeader } from '@material-ui/core';
-//import { setRequests } from '../redux/actions';
 
 class RequestCard extends React.Component {
     componentDidMount(){
@@ -58,7 +56,7 @@ class RequestCard extends React.Component {
 
     render() {
         return(
-            <Grid item xs={6}>
+            <Grid item sm={6} xs={12}>
                 <Card raised>
                     <CardHeader 
                     title="Request"

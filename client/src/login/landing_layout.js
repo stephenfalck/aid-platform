@@ -15,24 +15,22 @@ class LandingPage extends React.Component {
     render() {
         return(
             <Grid container alignContent={'center'} justify={'center'} className="main-container" style={{minHeight: '100vh'}}>
-                <Grid item md={10}>
+                <Grid item sm={10} xs={10}>
                     <Paper>
                         <Grid container>
-                            <Grid item md={7} style={{padding: "15px"}}>                        
+                            <Grid item sm={7} id="main-header-container">                        
                                 <Typography variant="h2">
-                                    Aid Platform
+                                    Local Aid
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-                                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
-                                dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                                A platform facilitating acts of kindness in your community.
                                 </Typography>                    
                             </Grid>
-                            <Grid item md={5} style={{padding: "15px"}}>                        
-                                <Typography variant="h4">
+                            <Grid item sm={5} id="login-form-container">                        
+                                <Typography variant="h4" id="log-in-form-header">
                                     Welcome Back
                                 </Typography>
-                                <Typography variant="overline">
+                                <Typography variant="overline" id="log-in-form-subheader">
                                     Log in to continue
                                 </Typography>
                                 <LogInForm history={this.props.history} location={this.props.location.state}/> 

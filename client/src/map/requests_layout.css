@@ -4,7 +4,7 @@
 
 @media screen and (max-width: 599px) {
     #map-container {
-        height: calc(100vh - 112px);
+        height: calc(100vh - 102px);
     }
 }
 
