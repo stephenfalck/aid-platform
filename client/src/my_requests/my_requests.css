@@ -1,5 +1,6 @@
 #my-requests-container {
     padding: 10px;
+    min-height: calc(100vh - 64px)
 }
 
 .request-card-title span{
@@ -12,6 +13,10 @@
 
 .material-need-card{
     background-color: #f6685e;
+}
+
+.fulfilled{
+    background-color: #43a047
 }
 
 .request-card {
@@ -38,6 +43,8 @@
     }
 }
 
-.fulfilled{
-    background-color: #43a047
+@media screen and (max-width: 599px) {
+    #my-requests-container {
+        height: calc(100vh - 56px);
+    }
 }

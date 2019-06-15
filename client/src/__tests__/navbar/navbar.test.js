@@ -1,17 +1,24 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { create } from 'react-test-renderer';
 import NavBar from '../../navbar/navbar';
 
 
-it('renders without crashing', () => {
-    shallow(<NavBar />);
-});
+describe('<Navbar />', () => {
+    it('renders without crashing', () => {
+        shallow(<NavBar />);
+    });
 
+    it('renders a correct snapshot', () => {
+        let form = create(<NavBar />)
+        expect(form.toJSON()).toMatchSnapshot();
+      })
 
-it('has a title element', () => {
-    let wrapper = mount(<NavBar title="Request" />)
-    let title = 'Request'
-    expect(wrapper.find('h6').text()).toBe(title)
+    it('has a title', () => {
+        let title = 'Request'
+        let wrapper = mount(<NavBar title={title} />)
+        expect(wrapper.find('h6').text()).toBe(title)
+    });
 
-});
+})
 

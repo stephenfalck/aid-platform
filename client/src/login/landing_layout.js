@@ -19,7 +19,7 @@ class LandingPage extends React.Component {
                 <Grid item sm={10} xs={10}>
                     <Paper elevation={4}>
                         <Grid container>
-                            <Grid item sm={7} id="main-header-container">                        
+                            <Grid item sm={7} xs={12} id="main-header-container">                        
                                 <Typography variant="h2">
                                     Local Aid
                                 </Typography>
@@ -27,7 +27,7 @@ class LandingPage extends React.Component {
                                 A platform facilitating acts of kindness in your community.
                                 </Typography>                    
                             </Grid>
-                            <Grid item sm={5} id="login-form-container">                        
+                            <Grid item sm={5} xs={12} id="login-form-container">                        
                                 <Typography variant="h4" id="log-in-form-header">
                                     Welcome Back
                                 </Typography>
@@ -36,7 +36,7 @@ class LandingPage extends React.Component {
                                 </Typography>
                                 <LogInForm history={this.props.history} location={this.props.location.state}/> 
                                 <Typography variant="subtitle2">
-                                    Not a member? <Route><Link to='/signup'>Sign up.</Link></Route>
+                                    Not a member? <Link to='/signup'>Sign up.</Link>
                                 </Typography>
                             </Grid>
                         </Grid>
