@@ -1,14 +1,19 @@
 import React from 'react';
 import LandingPage from '../../login/landing_layout';
 import LogInForm from '../../login/log_in_form';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { Typography } from '@material-ui/core';
 
-it('renders without crashing', () => {
-    shallow(<LandingPage />);
-  });
+  describe('<LandingPage />', () => {
+    it('renders without crashing', () => {
+      const location = {state: '/location'}
+      shallow(<LandingPage location={location} />);
+    });
 
-  it('renders log in form', () => {
-    const wrapper = shallow(<LandingPage />);
-    const logInForm = <LogInForm />;
-    expect(wrapper.contains(logInForm)).toEqual(true);
-  });
+    /*
+    it('renders three <Foo /> components', () => {
+      const wrapper = shallow(<MyComponent />);
+      expect(wrapper.find(Foo)).to.have.lengthOf(3);
+    });
+    */
+  })

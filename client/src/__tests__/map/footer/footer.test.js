@@ -1,9 +1,11 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Footer from '../../../map/footer';
+import Footer from '../../../map/footer/footer.js';
 
 it('renders without crashing', () => {
-    shallow(<Footer />);
+    const requests = [{fulfilled:true},{fulfilled:true},{fulfilled:false}]
+
+    shallow(<Footer requests={requests}/>);
   });
 
 /*

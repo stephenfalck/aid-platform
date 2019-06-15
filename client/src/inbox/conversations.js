@@ -113,12 +113,6 @@ class ConversationsPage extends React.Component {
 
     render() {      
         let { conversations } = this.state;
-
-        //const messages = this.state.messages.map(message => 
-        //    <Messages
-        //      key={message.id} message={message} 
-        //    />
-        //);
         
         return(
             <Fragment>

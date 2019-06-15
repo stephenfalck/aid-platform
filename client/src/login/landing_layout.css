@@ -2,16 +2,16 @@
     /*background: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg') center;*/
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg');
+    /*background-image: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg');*/
+    background-image: url('../assets/img/Bright-Blue.jpg');
     background-position: center;
-    /*background-image: url('../assets/img/chicago-690364_1920.jpg');*/
     background-blend-mode: screen;
 }
 
 #main-header-container {
     padding: 15px;
-    /*background-image: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg');*/
-    background-image: url('../assets/img/Bright-Blue.jpg');
+    background-image: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg');
+    /*background-image: url('../assets/img/Bright-Blue.jpg');*/
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

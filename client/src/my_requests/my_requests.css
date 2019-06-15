@@ -14,9 +14,9 @@
     background-color: #f6685e;
 }
 
-/*.request-card {
-    height: 380px;
-}*/
+.request-card {
+    margin: 5px;
+}
 
 #request-card-content {
     padding-top: 0px;
@@ -24,9 +24,17 @@
     height: 273px;  
 }
 
+.description-body {
+    height: 150px;
+}
+
 @media screen and (max-width: 425px) {
     #request-card-content {
         overflow-y: scroll;
+    }
+
+    .description-body {
+        height: 175px;
     }
 }
 

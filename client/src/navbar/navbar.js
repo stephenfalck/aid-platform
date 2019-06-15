@@ -1,6 +1,7 @@
 import React from 'react';
 import './navbar.css';
 import { Link } from "react-router-dom";
+import { BrowserRouter as Route } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem  } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
@@ -70,6 +71,7 @@ class Navbar extends React.Component {
                         </IconButton>
                         <Menu
                         id="menu-appbar"
+                        disableAutoFocus={true}
                         anchorEl={anchorEl}
                         anchorOrigin={{
                             vertical: 'top',

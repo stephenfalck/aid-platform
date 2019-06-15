@@ -8,7 +8,7 @@ import RequestsMapContainer from './requests_map_container'
 import { connect } from 'react-redux';
 import { setRequests } from '../redux/actions';
 
-class RequestsPage extends React.Component {
+export class RequestsPage extends React.Component {
     state={
         userLocation: {
             lat: 51.515499,

@@ -56,26 +56,25 @@ class RequestCard extends React.Component {
             <Grid item sm={6} xs={12}>
                 <Card raised className="request-card">
                     <CardHeader 
-                    title="Request"
-                    subheader={this.props.request.created_at}
+                    title={this.props.request.created_at.slice(0,10).split("-").reverse().join("-")}
+                    subheader={this.props.request.request_category_id === 1 ? "One-time task" : "Material need"}
                     className={this.props.request.request_category_id === 1 ? "request-card-title one-time-card" : "request-card-title material-need-card" }
                     style={this.props.request.fulfilled ? {backgroundColor: "#43a047"} : null}
                     />   
-                    {/*<Grid container item justify='space-between' direction='column'>*/}
                     <CardContent id="request-card-content">
-                        <Typography  variant={'overline'} color="textSecondary" gutterBottom>
+                        {/*<Typography  variant={'overline'} color="textSecondary" gutterBottom>
                             {this.props.request.request_category_id === 1 ? "Request type: One-time task" : " Request Type: Material need"}
-                        </Typography>
+                        </Typography>*/}
                         <br></br>
-                        <Typography variant='subtitle2'>
+                        <Typography variant='subtitle2' className="description-body">
                         {this.props.request.description}
                         </Typography>
                         <br />
-                        <Typography  color="textSecondary">
+                        {/*<Typography  color="textSecondary">
                         {this.props.request.id}
-                        </Typography>
+                        </Typography>*/}
                         <br></br>
-                        <Typography variant="body1">
+                        <Typography color="textSecondary" variant="body1">
                         Status: {this.props.request.fulfilled ? "Fulfilled" : "Unfulfilled"}
                         <br />
                         </Typography>
@@ -100,7 +99,6 @@ class RequestCard extends React.Component {
                         Fulfilled
                         </Button>
                     </CardActions>
-                    {/*</Grid>*/}
                 </Card>
             </Grid>
         )

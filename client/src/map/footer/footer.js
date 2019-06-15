@@ -13,7 +13,7 @@ class Footer extends React.Component {
 
     componentDidMount(){
         this.interval = setInterval(() => this.checkRequestsNumber(), 5000)
-        console.log(this.state)
+        //console.log(this.state)
     }
 
     componentWillUnmount(){

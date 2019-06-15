@@ -5,7 +5,8 @@
 
 .link a{
     text-decoration: none;
-    color: #536dfe;
+    color: #536dfe; 
+    width: 100%;
 }
 
 @media screen and (max-width: 599px) {

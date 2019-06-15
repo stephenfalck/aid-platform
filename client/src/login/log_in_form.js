@@ -108,6 +108,7 @@ class LogInForm extends React.Component {
                 </FormControl>
                 <div className="login-error-message" style={this.state.errorText ? {display: 'block'} : {display: 'none'}}>{this.state.errorText}</div>
                 <Fab 
+                id="login-button"
                 variant="extended" 
                 aria-label="Log in" 
                 type="submit"

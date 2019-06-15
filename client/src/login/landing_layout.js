@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { BrowserRouter as Route } from "react-router-dom";
 import { Paper, Grid, Typography } from '@material-ui/core';
 import LogInForm from './log_in_form';
 import './landing_layout.css';
@@ -35,7 +36,7 @@ class LandingPage extends React.Component {
                                 </Typography>
                                 <LogInForm history={this.props.history} location={this.props.location.state}/> 
                                 <Typography variant="subtitle2">
-                                    Not a member? <Link to='/signup'>Sign up.</Link>
+                                    Not a member? <Route><Link to='/signup'>Sign up.</Link></Route>
                                 </Typography>
                             </Grid>
                         </Grid>

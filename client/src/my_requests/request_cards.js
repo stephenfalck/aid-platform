@@ -14,7 +14,7 @@ const RequestCards = (props) => {
 
 
     return (
-        <Grid container spacing={16} id="my-requests-container">
+        <Grid container className="main-container" id="my-requests-container">
             {cards}
         </Grid>
     )
