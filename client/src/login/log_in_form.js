@@ -41,8 +41,7 @@ class LogInForm extends React.Component {
             this.setState({
                 response: response
             })
-
-            console.log(response)
+            //console.log(response)
             Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
 
             return response.json();

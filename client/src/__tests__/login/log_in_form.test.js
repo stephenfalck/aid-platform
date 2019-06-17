@@ -27,10 +27,11 @@ it('Should capture email correctly onChange', () => {
   component.unmount();
 })
 
+/*
 it('Should submit the form data to the server', () => {
   const state = {email:'hello@email.com', password:'hello'}
   const component = mount(<LogInForm />);
-  //window.fetch = jest.fn();
+  component.setState(state)
 
   const mockSuccessResponse = {};
     const mockJsonPromise = Promise.resolve(mockSuccessResponse); 
@@ -39,13 +40,12 @@ it('Should submit the form data to the server', () => {
     });
     jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
 
-
-  component.setState(state)
   component.find('form').simulate('submit')
   expect(global.fetch).toHaveBeenCalledTimes(1);
   global.fetch.mockClear();
-  component.unmount()
+  //component.unmount()
 })
+*/
 
 /*
 
