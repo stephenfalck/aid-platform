@@ -8,13 +8,13 @@ RSpec.describe 'Conversations API' do
 
     before { sign_in user }
 
-    #describe 'GET users/:user_id/conversations' do 
-    #    before { get "users/1/conversations" }
-#
-    #    it 'returns a status code of 200' do
-    #        expect(response).to have_http_status(200)
-    #    end
-    #end
+    describe 'GET users/:user_id/conversations' do 
+        before { get "/users/#{user_id}/conversations" }
+
+        it 'returns a status code of 200' do
+            expect(response).to have_http_status(200)
+        end
+    end
 
     describe 'GET /conversations/:id' do
         before { get "/conversations/#{conversations.first.id}" }

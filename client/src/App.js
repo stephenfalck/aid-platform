@@ -12,13 +12,15 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path="/login" exact component={LandingPage} />
-        <Route path="/signup" component={SignUpPage} />
-        <PrivateRoute exact path="/" component={RequestsPage} />
-        <PrivateRoute path='/inbox' component={ConversationsPage} />
-        <PrivateRoute path="/myrequests" component={MyRequestsPage} />
-        {/*<Route path="/requests" component={RequestsPage} />
-        <Route path="/inbox" component={ConversationsPage} />*/}
+        <div>
+          <Route path="/login" exact component={LandingPage} />
+          <Route path="/signup" component={SignUpPage} />
+          <PrivateRoute exact path="/" component={RequestsPage} />
+          <PrivateRoute path='/inbox' component={ConversationsPage} />
+          <PrivateRoute path="/myrequests" component={MyRequestsPage} />
+          {/*<Route path="/requests" component={RequestsPage} />
+          <Route path="/inbox" component={ConversationsPage} />*/}
+        </div>
       </Router>
     )
   }

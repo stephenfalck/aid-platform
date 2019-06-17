@@ -2,18 +2,21 @@ import React from 'react';
 import LandingPage from '../../login/landing_layout';
 import LogInForm from '../../login/log_in_form';
 import { shallow, mount } from 'enzyme';
-import { Typography } from '@material-ui/core';
+import { create } from 'react-test-renderer';
 
   describe('<LandingPage />', () => {
     it('renders without crashing', () => {
       const location = {state: '/location'}
       shallow(<LandingPage location={location} />);
     });
+   
+    it('renders <LogInForm> component', () => {
+      const location = {state: '/location'}
+      const wrapper = shallow(<LandingPage history="/history" location={location} />);
+      const logInForm = <LogInForm history="/history" location="/location"/>
 
-    /*
-    it('renders three <Foo /> components', () => {
-      const wrapper = shallow(<MyComponent />);
-      expect(wrapper.find(Foo)).to.have.lengthOf(3);
+      //console.log(wrapper.debug())
+      expect(wrapper.contains(logInForm)).toEqual(true);
     });
-    */
+   
   })

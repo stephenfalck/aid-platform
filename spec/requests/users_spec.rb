@@ -4,18 +4,15 @@ require 'devise/jwt/test_helpers'
 RSpec.describe 'Users API', type: :request do
     let(:file) { fixture_file_upload(Rails.root.join('public', '/Users/stephenfalck/Documents/open-classrooms/Bootstrap/film-festival/website-files/assets/images/wall_e.jpg'), 'image/jpg') }
     let!(:user) {create :user, :with_image}
-    let!(:users) { create_list :user, 10, :with_image }
     let(:user_id) { user.id }
+    let!(:conversation) {create (:conversation)}
 
-    before {sign_in user }
+    let!(:users) { create_list :user, 10, :with_image }
 
     describe 'GET /users' do
-        before { get "/users" }
-
-        it 'returns users' do
-            expect(json).not_to be_empty
-            expect(json.size).to eq(11)
-        end
+        
+        before {sign_in user }
+        before { get "/conversations/#{conversation.id}/users" }
 
         it 'returns status code 200' do
             expect(response).to have_http_status(200)
@@ -23,6 +20,7 @@ RSpec.describe 'Users API', type: :request do
     end
 
     describe 'GET /users/:id' do
+        before {sign_in user }
         before { get "/users/#{user_id}" }
 
         context 'when the user exists' do
@@ -63,19 +61,8 @@ RSpec.describe 'Users API', type: :request do
               expect(json['first_name']).to eq('Frank')
             end
 
-            #it 'attaches the uploaded file' do
-            #    expect(ActiveStorage::Attachment).to include(file)
-            #end
-
             it 'returns JWT token in authorization header' do
                 expect(response.headers['Authorization']).to be_present
-            end
-
-            it 'returns valid JWT token' do
-                #post '/signup', params: valid_attributes 
-                token = JSON.parse(response.body)['token']
-
-                expect{ JWT.decode(token, key) }.to_not raise_error(JWT::DecodeError)
             end
         end
 
@@ -107,7 +94,7 @@ RSpec.describe 'Users API', type: :request do
     end
 
     describe 'DELETE /signup' do
-
+        before {sign_in user }
         it 'returns status code 204' do
 
             #user = user
@@ -133,14 +120,6 @@ RSpec.describe 'Users API', type: :request do
                 expect(response.headers['Authorization']).to be_present
             end
 
-            #it 'returns valid JWT token' do
-            #    token = JSON.parse(response.body)['token']
-            #    token = JSON.parse(response.header)
-#
-            #    #expect(token).to be_present
-#
-            #    expect{ JWT.decode(token, key) }.to_not raise_error(JWT::DecodeError)
-            #end
         end
 
         context 'when login params are incorrect' do

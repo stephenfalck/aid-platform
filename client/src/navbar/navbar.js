@@ -53,9 +53,6 @@ class Navbar extends React.Component {
         return (
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="Open drawer">
-                        <MenuIcon />
-                    </IconButton>
                     <Typography variant="h6" color="inherit">
                         {this.props.title}
                     </Typography>
@@ -84,9 +81,9 @@ class Navbar extends React.Component {
                         open={open}
                         onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose} className="link"><Route><Link to='/'>Map</Link></Route></MenuItem>
-                            <MenuItem onClick={this.handleClose} className="link"><Route><Link to='/inbox'>Inbox</Link></Route></MenuItem>
-                            <MenuItem onClick={this.handleClose} className="link"><Route><Link to='/myrequests'>My requests</Link></Route></MenuItem>
+                            <MenuItem onClick={this.handleClose} className="link"><Link to='/'>Map</Link></MenuItem>
+                            <MenuItem onClick={this.handleClose} className="link"><Link to='/inbox'>Inbox</Link></MenuItem>
+                            <MenuItem onClick={this.handleClose} className="link"><Link to='/myrequests'>My requests</Link></MenuItem>
                             <MenuItem onClick={this.handleLogOut} style={{color: '#ff5252'}}>Log out</MenuItem>
                         </Menu>
                     </div>  

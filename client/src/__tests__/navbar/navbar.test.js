@@ -10,8 +10,8 @@ describe('<Navbar />', () => {
     });
 
     it('renders a correct snapshot', () => {
-        let form = create(<NavBar />)
-        expect(form.toJSON()).toMatchSnapshot();
+        let wrapper = create(<NavBar />)
+        expect(wrapper.toJSON()).toMatchSnapshot();
       })
 
     it('has a title', () => {

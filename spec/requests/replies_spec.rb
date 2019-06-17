@@ -2,17 +2,28 @@ require 'rails_helper'
 
 RSpec.describe 'replies API', type: :request do
     let!(:user) { create :user, :with_image }
+    let!(:user2) { create :user, :with_image }
     let!(:replies) { create_list :reply, 5 }
+    let!(:request_category) { create(:request_category) }
+    let!(:request) { create :request, user_id: user.id, request_category_id: request_category.id }
     let!(:reply) { replies.first }
 
     before { sign_in user }
 
     describe 'GET replies' do
-        before { get "/replies"}
+        before { get "/requests/#{request.id}/replies" }
 
         it "returns replies" do
+            array = []
+            
+            for reply in replies do 
+                if reply.request_id == 1
+                    array << reply
+                end
+            end
+
             expect(json).not_to be_empty
-            expect(json.size).to eq(5)
+            expect(json.size).to eq(array.length)
         end
 
         it 'returns a status request of 200' do
@@ -50,7 +61,7 @@ RSpec.describe 'replies API', type: :request do
     end
 
     describe "POST /replies" do
-        let(:valid_attributes) {{reply: {request_id: 6, active: true , message_sent: true}}}
+        let(:valid_attributes) {{reply: {request_id: 6, active: true , message_sent: true, volunteer_id: user2.id}}}
 
         context 'when the reponse is valid' do 
             before { post '/replies', params: valid_attributes }

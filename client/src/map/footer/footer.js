@@ -42,9 +42,6 @@ class Footer extends React.Component {
         return(
             <AppBar position="fixed" color="primary" style={{top: 'auto', bottom: 0}} >
                 <Toolbar style={{ alignItems: 'center', justifyContent: 'space-between'}} id="map-footer">
-                    <IconButton color="inherit" aria-label="Open drawer">
-                        <MenuIcon />
-                    </IconButton>
                     <Fab color="secondary" aria-label="Add" id="fab-add-button" onClick={this.handleClickOpen}>
                         <AddIcon/>
                     </Fab>

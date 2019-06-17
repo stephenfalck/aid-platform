@@ -40,6 +40,7 @@ class SignUpForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const form = document.getElementById("sign-up-form")
+        console.log(form)
 
         const formData = new FormData(form)
         const url = '/signup'
@@ -81,7 +82,7 @@ class SignUpForm extends React.Component {
                 errors: data.errors
             })
         }
-        console.log(this.state.errors)
+        //console.log(this.state.errors)
     }
 
     checkError = (field) => {
