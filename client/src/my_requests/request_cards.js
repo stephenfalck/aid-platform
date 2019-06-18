@@ -2,6 +2,7 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { Grid } from '@material-ui/core';
 import RequestCard from './request_card';
+import NoRequests from './no_requests_component'
 
 const RequestCards = (props) => {
 
@@ -12,10 +13,12 @@ const RequestCards = (props) => {
     <RequestCard request={request} key={request.id} fetchRequests={props.fetchRequests}/>
 )
 
+    const noRequests = <NoRequests />
+
 
     return (
         <Grid container className="main-container" id="my-requests-container">
-            {cards}
+            {userRequests >= 1 ? cards : noRequests}
         </Grid>
     )
 }

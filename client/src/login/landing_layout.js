@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { BrowserRouter as Route } from "react-router-dom";
 import { Paper, Grid, Typography } from '@material-ui/core';
 import LogInForm from './log_in_form';
 import './landing_layout.css';

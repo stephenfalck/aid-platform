@@ -33,6 +33,10 @@
     height: 150px;
 }
 
+#no-requests-paper {
+    text-align: center;
+}
+
 @media screen and (max-width: 425px) {
     #request-card-content {
         overflow-y: scroll;

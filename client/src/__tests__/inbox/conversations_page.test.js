@@ -1,6 +1,7 @@
 import React from 'react';
 import ConversationsPage from '../../inbox/conversations';
 import Messages from '../../inbox/messages';
+import Navbar from '../../navbar/navbar';
 import { shallow, mount } from 'enzyme';
 import Cookies from 'js-cookie';
 import { create } from 'react-test-renderer';
@@ -11,6 +12,16 @@ describe('<ConversationsPage />', () => {
         .mockImplementation(() => '1');
       
       shallow(<ConversationsPage history="/history" />);
+    });
+
+    it('renders <Navbar> component', () => {  
+      Cookies.getJSON = jest.fn()
+        .mockImplementation(() => '1');
+
+      const wrapper = shallow(<ConversationsPage/>);
+      const navbar = <Navbar title="Inbox"/>
+
+      expect(wrapper.contains(navbar)).toEqual(true);
     });
 
     it('renders <Messages> component', () => {  

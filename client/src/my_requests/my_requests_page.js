@@ -6,7 +6,7 @@ import RequestCards from './request_cards';
 import { setRequests } from '../redux/actions';
 import './my_requests.css'
 
-class MyRequestsPage extends React.Component {
+export class MyRequestsPage extends React.Component {
     componentDidMount() {
         this.fetchRequests();
     }
