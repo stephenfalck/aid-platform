@@ -10,10 +10,10 @@ describe('<SignUpPage>', () => {
       shallow(<SignUpPage />);
     });
 
-    it('renders a correct snapshot', () => {
-      let wrapper = create(<SignUpPage />)
-      expect(wrapper.toJSON()).toMatchSnapshot();
-    })
+    //it('renders a correct snapshot', () => {
+    //  let wrapper = create(<SignUpPage />)
+    //  expect(wrapper.toJSON()).toMatchSnapshot();
+    //})
 
     it('renders sign up form', () => {
       const history = '/history'

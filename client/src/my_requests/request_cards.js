@@ -4,25 +4,38 @@ import { Grid } from '@material-ui/core';
 import RequestCard from './request_card';
 import NoRequests from './no_requests_component'
 
-const RequestCards = (props) => {
 
-    let userRequests = props.requests.filter(request => request.user_id === Cookies.getJSON('currentUser').user_id);
+class RequestCards extends React.Component {
+    
+    state={
+        userRequests: []
+    }
+    componentDidMount(){
+        this.userCards(this.props.requests)
+    }
 
+    userCards = (requests) => {
+        let userRequests = requests.filter(request => request.user_id === Cookies.getJSON('currentUser').user_id);
 
-    const cards = userRequests.map(request => 
-    <RequestCard request={request} key={request.id} fetchRequests={props.fetchRequests}/>
-)
+        this.setState({
+            userRequests: userRequests
+        })
+    }
 
-    const noRequests = <NoRequests />
+    render() {
+        const cards = this.state.userRequests.map(request => 
+            <RequestCard request={request} key={request.id} fetchRequests={this.props.fetchRequests}/>
+            )
+        const noRequests = <NoRequests />
 
-
-    return (
-        <Grid container className="main-container" id="my-requests-container">
-            {userRequests >= 1 ? cards : noRequests}
-        </Grid>
-    )
+        
+        return(
+            <Grid container id="my-requests-container" style={this.state.userRequests.length === 0 ? null : {padding: '10px', background: 'white'}}>
+                { this.state.userRequests.length === 0 ? noRequests : cards }
+            </Grid>
+        )
+    }
 }
-
 
 export default RequestCards;
 

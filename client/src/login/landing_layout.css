@@ -5,7 +5,13 @@
     background-image: url('../assets/img/bracelets-collaboration-colleagues-398532.jpg');
     /*background-image: url('../assets/img/Bright-Blue.jpg');*/
     background-position: center;
-    background-blend-mode: screen;
+}
+
+.overlay {
+    /*background-color: rgba(128,128,128, 0.5)
+    background: -webkit-linear-gradient(225deg, rgba(140, 158, 255,0.8), rgba(236,154,151,0.7) 100%);*/
+    background-color: rgba(0,0,0,0.5);
+
 }
 
 #main-header-container {

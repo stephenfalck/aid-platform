@@ -5,7 +5,8 @@ import './sign_up_layout.css';
 
 const SignUpPage = (props) => {
     return(
-        <Grid container alignContent={'center'} justify={'center'} className="main-container" id="sign-up-container" style={{minHeight: '100vh'}}>  
+        <Grid container alignContent={'center'} justify={'center'} className="main-container" id="sign-up-container" style={{minHeight: '100vh'}}> 
+            <Grid container alignContent={'center'} justify={'center'} className="overlay" id="sign-up-container" style={{minHeight: '100vh', paddingBottom: '10px', paddingTop: '10px'}}>  
                 <Grid item sm={8} xs={10}>
                     <Paper id='sign-up-form-paper'>
                     <Typography variant="h5" gutterBottom align="center">
@@ -15,6 +16,7 @@ const SignUpPage = (props) => {
                     </Paper>
                 </Grid>
             </Grid>
+        </Grid>
     )
 }
 

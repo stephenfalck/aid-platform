@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 const NoRequests = (props) => {
     return (
-        <Grid item container alignContent={'center'} justify={'center'} xs={12}>
-            <Grid item sm={8} xs={10}>
-                <Card id="no-requests-paper">
+        <Grid item container alignContent={'center'} justify={'center'} xs={12} className="main-container">
+            <Grid item sm={8} xs={10} >
+                <Card id="no-requests-paper" >
                     <CardHeader 
                         title="No Requests"
                         style={{textAlign: 'center'}}
