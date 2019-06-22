@@ -34,7 +34,6 @@ export class RequestsPage extends React.Component {
             console.log(response)
             return response.json()
         }).then(data => {
-            //this.dispatchRequests(data)
             this.props.setRequests(data)
         })
         .catch(error => console.error('Error:', error)) 
@@ -75,7 +74,7 @@ export class RequestsPage extends React.Component {
             <Fragment>
                 <Navbar title='Requests' history={this.props.history} />
                 <Grid container id="map-container">
-                    <RequestsMapContainer userLocation={this.state.userLocation} requests={this.props.requests}/>
+                    <RequestsMapContainer userLocation={this.state.userLocation} requests={this.props.requests} fetchRequests={this.fetchRequests}/>
                 </Grid>
                 <Footer fetchRequests={this.fetchRequests} requests={this.props.requests} />
             </Fragment>

@@ -16,6 +16,7 @@ class RequestsMapContainer extends React.Component {
                 mapElement={<div style={{ height: `100%` }} />}
                 requests={this.props.requests}
                 userLocation={this.props.userLocation}
+                fetchRequests={this.props.fetchRequests}
             />
         );
     }

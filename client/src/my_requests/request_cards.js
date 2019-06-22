@@ -6,15 +6,8 @@ import NoRequests from './no_requests_component'
 
 
 class RequestCards extends React.Component {
-    
-    state={
-        userRequests: []
-    }
-    componentDidMount(){
-        this.userCards(this.props.requests)
-    }
-
     userCards = (requests) => {
+        console.log('hello')
         let userRequests = requests.filter(request => request.user_id === Cookies.getJSON('currentUser').user_id);
 
         this.setState({
@@ -23,15 +16,22 @@ class RequestCards extends React.Component {
     }
 
     render() {
-        const cards = this.state.userRequests.map(request => 
-            <RequestCard request={request} key={request.id} fetchRequests={this.props.fetchRequests}/>
-            )
+        console.log(this.props.requests)
+        
+        let userRequests = this.props.requests.filter(request => request.user_id === Cookies.getJSON('currentUser').user_id)
+        console.log(userRequests)
+        //const cards = this.state.userRequests.map(request => 
+        //    <RequestCard request={request} key={request.id} fetchRequests={this.props.fetchRequests}/>
+        //    )
+            const cards = userRequests.map(request => 
+                <RequestCard request={request} key={request.id} fetchRequests={this.props.fetchRequests}/>
+                )
         const noRequests = <NoRequests />
 
         
         return(
-            <Grid container id="my-requests-container" style={this.state.userRequests.length === 0 ? null : {padding: '10px', background: 'white'}}>
-                { this.state.userRequests.length === 0 ? noRequests : cards }
+            <Grid container id="my-requests-container" style={userRequests.length === 0 ? null : {padding: '10px', background: 'white'}}>
+                { userRequests.length === 0 ? noRequests : cards }
             </Grid>
         )
     }

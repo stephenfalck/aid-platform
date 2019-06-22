@@ -8,7 +8,7 @@ class RequestMarkerModal extends React.Component {
     state = {
         checked: true,
         requestUserName: null,
-        repliesNumber: null, 
+        repliesNumber: 0, 
         open: false,
         validateForm: false,
         currentUserResponded: false
@@ -121,7 +121,8 @@ class RequestMarkerModal extends React.Component {
             body: JSON.stringify(data)
         }).then(response => {
             //console.log(response)
-            this.checkRepliesNumber()
+            this.checkRepliesNumber(this.props.request.id)
+            this.fetchRepliesNumber(this.props.request.id)
             return response.json()
         }).then(data => {
             //console.log(data)
@@ -129,8 +130,8 @@ class RequestMarkerModal extends React.Component {
         .catch(error => console.error('Error:', error))
     }
 
-    checkRepliesNumber = () => {
-        const url = `/requests/${this.props.request.id}/replies`
+    checkRepliesNumber = (request_id) => {
+        const url = `/requests/${request_id}/replies`
 
         fetch(url, {
             method: 'GET',
@@ -301,7 +302,7 @@ class RequestMarkerModal extends React.Component {
                                 disabled={this.state.currentUserResponded}
                             />
                             {this.renderErrorMessage()}
-                            <FormControlLabel
+                            {/*<FormControlLabel
                                 control={
                                     <Switch
                                     checked={this.state.checked}
@@ -311,7 +312,7 @@ class RequestMarkerModal extends React.Component {
                                     />
                                 }
                                 label="Fulfill"
-                                />
+                            />*/}
                         </form>
                     </DialogContent>
                     <DialogActions>
@@ -324,7 +325,7 @@ class RequestMarkerModal extends React.Component {
                         form="response-form"
                         disabled={Cookies.getJSON('currentUser').user_id === this.props.request.user_id || this.state.currentUserResponded === true ? true : false}
                         >
-                        Submit
+                        Fulfil
                         </Button>
                     </DialogActions>
                 </Dialog>

@@ -8,7 +8,7 @@ const RequestsMap = withScriptjs(withGoogleMap((props) =>{
 
     const markers = unFulfilledRequests.map(request => 
       <RequestMarker 
-          key={request.id} request={request} location={{lat: request.latitude, lng: request.longitude}}
+          key={request.id} request={request} fetchRequests={props.fetchRequests} location={{lat: request.latitude, lng: request.longitude}}
         />
     )
 

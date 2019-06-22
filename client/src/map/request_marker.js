@@ -24,7 +24,7 @@ class RequestMarker extends React.Component {
                 onClick={this.handleClickOpen}
                 icon={this.props.request.request_category_id === 1 ? 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'}
             >
-                <RequestMarkerModal open={this.state.open} close={this.handleClose} request={this.props.request}  />
+                <RequestMarkerModal open={this.state.open} close={this.handleClose} request={this.props.request} fetchRequests={this.props.fetchRequests} />
             </Marker>
         )
     }
