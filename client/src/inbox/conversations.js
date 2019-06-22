@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
-import { Grid, List, Button, Paper, InputBase, Typography, Avatar } from '@material-ui/core';
+import { Grid, List, Button, Paper, InputBase, Typography, Avatar, Drawer } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import Icon from '@material-ui/core/Icon';
 import Navbar from '../navbar/navbar';
@@ -12,7 +12,8 @@ class ConversationsPage extends React.Component {
     state = {
         conversations: [],
         messages: [],
-        headerContent: 'Open a conversation...',
+        headerContent: 'Open a conversation',
+        drawer: false
     };
 
     componentDidMount() {
@@ -111,36 +112,66 @@ class ConversationsPage extends React.Component {
         
     }
 
+    toggleDrawer = (open) => () => {
+        this.setState({
+          drawer: open,
+        });
+      };
+
     render() {      
         let { conversations } = this.state;
+        let list = conversations.map(conversation => (
+            <ConversationUser 
+                key={conversation.id} 
+                conversation={conversation} 
+                setConversationUser={this.setConversationUser} 
+                click={this.displayMessages} 
+                active={this.state.currentConversation}
+            />
+        ))
+
+        let drawer = <List style={{padding: '10px'}}>{list}</List>
         
         return(
             <Fragment>
                 <Navbar title='Inbox' history={this.props.history}/>
+                <Drawer anchor="left" open={this.state.drawer} onClose={this.toggleDrawer(false)}>
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        onClick={this.toggleDrawer(false)}
+                        onKeyDown={this.toggleDrawer(false)}
+                    >
+                        {drawer}
+                    </div>
+                </Drawer>
                 <Grid container id="conversations-container">
                     <Grid item id="contacts" sm={3} xs={12}>
-                        <List>
-                            {conversations.map(conversation => (
-                                <ConversationUser 
-                                    key={conversation.id} 
-                                    conversation={conversation} 
-                                    setConversationUser={this.setConversationUser} 
-                                    click={this.displayMessages} 
-                                    active={this.state.currentConversation}
-                                />
-                            ))}  
+                        <List> 
+                            {list}
                         </List>
                     </Grid>
                     <Grid container item sm={9} xs={12} id="message-and-input-area" >
                             <Grid container item sm={12} justify='center' style={{height:'10%'}} id='messages-area-header'>
-                                <Paper elevation={2} id='messages-container-header' style={{width: '100%', textAlign: 'center'}}>
+                                <Paper elevation={2} id='messages-container-header' style={{width: '100%', textAlign: 'center'}} >
                                         {
-                                            this.state.headerContent !== 'Open a conversation...' ? 
+                                            this.state.headerContent !== 'Open a conversation' ? 
                                             <Avatar style={{marginRight:'10px'}}> 
                                                 <ImageIcon /> 
                                             </Avatar> : null
                                         }
                                     <Typography variant='h5'>
+                                        {this.state.headerContent}
+                                    </Typography>
+                                </Paper>
+                                <Paper elevation={2} id='mobile-messages-container-header' style={{width: '100%', textAlign: 'center'}} onClick={this.toggleDrawer(true)}>
+                                        {
+                                            this.state.headerContent !== 'Open a conversation' ? 
+                                            <Avatar style={{marginRight:'10px'}}> 
+                                                <ImageIcon /> 
+                                            </Avatar> : null
+                                        }
+                                    <Typography variant='h5' style={{overflow:'scroll', whiteSpace:'nowrap', maxWidth:'80%'}}>
                                         {this.state.headerContent}
                                     </Typography>
                                 </Paper>

@@ -6,7 +6,7 @@ it('renders without crashing', () => {
     const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
 
     const footer = shallow(<Footer requests={requests}/>);
-    console.log(footer.debug())
+    //console.log(footer.debug())
   });
 
 /*it('displays total requests as 2 when passed 2 unfulfilled requests', ()=> {

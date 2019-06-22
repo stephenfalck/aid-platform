@@ -19,6 +19,10 @@
     background-color: #868CAA;
 }
 
+#list-item-paper:hover {
+    cursor: pointer;
+}
+
 #list-item-paper span { 
     color: white;
 }
@@ -31,11 +35,22 @@
     background-color: #8C9EFF;
     padding-left: 15px;
     display: flex;
-    align-items: center;
-    
+    align-items: center;  
 }
 
 #messages-container-header h5 {
+    color: white;
+}
+
+#mobile-messages-container-header {
+    background-color: #8C9EFF;
+    padding-left: 10px;
+    display: flex;
+    align-items: center; 
+    display: none;
+}
+
+#mobile-messages-container-header h5 {
     color: white;
 }
 
@@ -84,20 +99,39 @@
     color: white;
 }
 
+
 @media screen and (max-width: 599px) {
     #conversations-container {
-        height: 130vh;
+        height: calc(100vh - 56px);
     }
 
     #contacts {
-        height: 25%;
+        display: none;
+    }
+
+    #message-header-area {
+        height: 15%;
+    }
+
+    #messages-container-header {
+        display: none;
+    }
+
+    #mobile-messages-container-header {
+        display: flex;
+    }
+
+    #mobile-messages-container-header:hover{
+        background-color: #7E8DE5;
+        cursor: pointer;
     }
 
     #message-and-input-area {
-        height: 75%;
+        height: 100%;
     }
 
     #messages-container {
         padding-bottom: 10px;
+        height: 70%;
     }
 }
