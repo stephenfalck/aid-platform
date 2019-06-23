@@ -130,7 +130,7 @@ class ConversationsPage extends React.Component {
             />
         ))
 
-        let drawer = <List style={{padding: '10px'}}>{list}</List>
+        let drawer = <List style={{padding: '10px', backgroundColor:'#e8eaf6'}}>{list}</List>
         
         return(
             <Fragment>

@@ -50,7 +50,7 @@ class RequestModal extends React.Component {
               request_category_id: parseInt(this.state.category)
           }
 
-          console.log(data)
+          //console.log(data)
 
           
           fetch(url, {
@@ -90,7 +90,6 @@ class RequestModal extends React.Component {
           e.preventDefault();
 
           this.getLocationData()
-          //this.props.fetchRequests()
       }
 
       validateForm = (message) => {

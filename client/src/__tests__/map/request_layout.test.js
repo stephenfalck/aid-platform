@@ -4,7 +4,6 @@ import { RequestsPage } from '../../map/requests_layout';
 import RequestsMapContainer from '../../map/requests_map_container';
 import Footer from '../../map/footer/footer';
 import Navbar from '../../navbar/navbar';
-import { jssPreset } from '@material-ui/core';
 
 describe('<RequestsPage>', () => {
     it('renders without crashing', () => {
@@ -19,29 +18,45 @@ describe('<RequestsPage>', () => {
     });
 
     it('renders <RequestsMapContainer> component', () => {  
-        const wrapper = shallow(<RequestsPage />);
+        const requests = [
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+        const wrapper = shallow(<RequestsPage requests={requests}/>);
         const state = {userLocation: {lat: 0, lng: 0}}
         wrapper.setState(state)
+        
 
-        const component = <RequestsMapContainer userLocation={state.userLocation}/>
+        const fetchRequests = jest.fn()
 
-        expect(wrapper.contains(component)).toEqual(true);
+        //console.log(wrapper.debug())
+
+        const component = <RequestsMapContainer requests={requests} userLocation={state.userLocation} fetchRequests={fetchRequests}/>
+        //console.log(component)
+
+        expect(wrapper.find('RequestsMapContainer')).toHaveLength(1)
     });
 
-    /*it('renders <Footer> component', () => {  
-        const wrapper = shallow(<RequestsPage requests={[{fulfilled:true},{fulfilled:true},{fulfilled:false}]}/>)
+    it('renders <Footer> component', () => {  
+        const wrapper = shallow(<RequestsPage />)
         const props = {
-            requests: [
-                {fulfilled:true},{fulfilled:true},{fulfilled:false}
-                ],
             fetchRequests: () => {
               "function"
-            }
-          }
-        console.log(wrapper.debug())
-        //const fetchRequests = () => jest.fn()
-        const component = <Footer {...props}/>
+            },
+            requests: [
+                {fulfilled:true},{fulfilled:true},{fulfilled:false}
+                ]
+        }
 
-        expect(wrapper.contains(component)).toEqual(true);
-    });*/
+        //console.log(wrapper.debug())
+        const fetchRequests = jest.fn()
+        fetchRequests
+        .mockReturnValue({requests: [{id:1},{id:2},{id:3}]});
+        const component = <Footer {...props} />
+        //console.log(component)
+
+        //expect(wrapper.contains(component)).toEqual(true);
+        expect(wrapper.find('Footer')).toHaveLength(1)
+    });
 })

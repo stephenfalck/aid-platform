@@ -48,21 +48,17 @@ describe('<ConversationsPage />', () => {
         .mockImplementation(() => '1');
 
         let conversations = [
-          {id: 1},
-          {id: 2},
-          {id: 3}
+          {id: 1, active: false},
+          {id: 2, active: false},
+          {id: 3, active: false},
+          {id: 4, active: false}
         ]
       
-        const wrapper = mount(<ConversationsPage history="/history" />);
+        const wrapper = shallow(<ConversationsPage history="/history" />);
         wrapper.setState({conversations: conversations})
-        console.log(wrapper.debug())
-
-        function component() {
-          return <ConversationUser />
-        }
-        //const component = <Navbar title="Inbox"/>
-        expect(wrapper.find(component)).to.have.lengthOf(3)
-        //expect(wrapper.contains(component)).toEqual(true);
+        
+        const users = wrapper.find('ConversationUser')
+        expect(users).toHaveLength(8)
       })
 
 });

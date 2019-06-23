@@ -16,6 +16,7 @@ describe('<RequestCard />', () => {
     })
 
     it('disables the fulfill button if request is classed as fulfilled', () => {
+        /* fix */
         const request = {
             id: 1,
             created_at: '2019-08-11',
@@ -26,6 +27,6 @@ describe('<RequestCard />', () => {
 
         const card = mount(<RequestCard key={request.id} request={request} fetchRequests={fetchRequests} />)
         const button = card.filter('button').at(1)
-        console.log(button)
+        //console.log(button)
     })
 })
