@@ -3,10 +3,8 @@
     right: 24px;
 }
 
-.link a{
-    text-decoration: none;
+a .link{
     color: #536dfe; 
-    width: 100%;
 }
 
 @media screen and (max-width: 599px) {

@@ -57,7 +57,10 @@ describe('<RequestMarker>', () => {
 
         console.log(wrapper.debug())
         console.log(modal)
-        expect(wrapper.contains(modal)).toEqual(true)
+        //expect(wrapper.find(modal)).toHaveLength(1)
+        //expect(wrapper).toContain(modal)
+        expect(wrapper.containsMatchingElement(modal)).toEqual(true)
     })
     */
+    
 })

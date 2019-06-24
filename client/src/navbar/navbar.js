@@ -66,7 +66,7 @@ class Navbar extends React.Component {
                         </IconButton>
                         <Menu
                         id="menu-appbar"
-                        disableAutoFocus={true}
+                        disableAutoFocusItem={true}
                         anchorEl={anchorEl}
                         anchorOrigin={{
                             vertical: 'top',
@@ -79,9 +79,9 @@ class Navbar extends React.Component {
                         open={open}
                         onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose} className="link"><Link to='/'>Map</Link></MenuItem>
-                            <MenuItem onClick={this.handleClose} className="link"><Link to='/inbox'>Inbox</Link></MenuItem>
-                            <MenuItem onClick={this.handleClose} className="link"><Link to='/myrequests'>My requests</Link></MenuItem>
+                            <Link to='/' style={{textDecoration: 'none'}}><MenuItem onClick={this.handleClose} className="link">Map</MenuItem></Link>
+                            <Link to='/inbox' style={{textDecoration: 'none'}}><MenuItem onClick={this.handleClose} className="link">Inbox</MenuItem></Link>
+                            <Link to='/myrequests' style={{textDecoration: 'none'}}><MenuItem onClick={this.handleClose} className="link">My requests</MenuItem></Link>
                             <MenuItem onClick={this.handleLogOut} style={{color: '#ff5252'}}>Log out</MenuItem>
                         </Menu>
                     </div>  
