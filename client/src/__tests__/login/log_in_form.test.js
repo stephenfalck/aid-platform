@@ -1,9 +1,8 @@
 import React from 'react';
 import LogInForm from '../../login/log_in_form';
 import { shallow, mount } from 'enzyme';
-import renderer, { create } from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 import Cookies from 'js-cookie';
-import { TextField } from '@material-ui/core';
 
 describe('<LogInForm>', () => {
   it('renders without crashing', () => {
@@ -47,6 +46,5 @@ describe('<LogInForm>', () => {
     component.find('form').simulate('submit')
     expect(global.fetch).toHaveBeenCalledTimes(1);
     global.fetch.mockClear();
-  
   })
 })

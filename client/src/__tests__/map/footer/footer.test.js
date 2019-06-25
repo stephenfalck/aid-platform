@@ -2,32 +2,31 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Footer from '../../../map/footer/footer';
 
-it('renders without crashing', () => {
-    const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
-
-    const footer = shallow(<Footer requests={requests}/>);
-    //console.log(footer.debug())
-  });
-
-/*it('displays total requests as 2 when passed 2 unfulfilled requests', ()=> {
-    const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
-
-    const footer = shallow(<Footer requests={requests}/>);
-    const total = footer.find('WithStyles(Typography)').at(0)
-    console.log(total.debug())
-    expect(total.contains('2')).to.be.true
-})
-
-
 describe('add request button', () => {
-    let add;
+    it('renders without crashing', () => {
+        const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
 
-    beforeEach(() => wrapper = mount(<Footer />))
-    beforeEach(() => add = wrapper.find('fab-add-button'))
+        const footer = shallow(<Footer requests={requests}/>);
+        //console.log(footer.debug())
+    });
 
-    it('renders a form modal when clicked', () => {
-        add.simulate('click')
+    it('displays total requests as 2 when passed 2 unfulfilled requests', ()=> {
+        const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
+
+        const footer = mount(<Footer requests={requests}/>);
+        const total = footer.find('span').at(2).text()
+        
+        expect(total).toEqual('Total requests: 2')
     })
 
+    it('renders a modal when clicking the add request button', () => {
+        const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
+        const wrapper = mount(<Footer requests={requests}/>);
+        const add = wrapper.find('#fab-add-button').at(0)
+            
+        add.simulate('click')
+        const dialog = wrapper.find('WithStyles(Dialog)')
+        
+        expect(dialog.props().open).toEqual(true)
+    })
 })
-*/
