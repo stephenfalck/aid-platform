@@ -10,33 +10,11 @@ describe('<SignUpForm>', () => {
     });
 
     it('Should capture first name correctly onChange', () => {
-      const component = mount(<SignUpForm />);
-      const input = component.find('input').at(0);
+      const wrapper = mount(<SignUpForm />);
+      const input = wrapper.find('input').at(0);
       input.instance().value = 'John';
       input.simulate('change');
-      expect(component.state().first_name).toEqual('John');
-      component.unmount();
+      expect(wrapper.state().first_name).toEqual('John');
+      wrapper.unmount();
     })
-    
-    /*
-    it('Should submit the form data to the server', () => {
-      const component = mount(<SignUpForm />);
-      console.log(component.debug())
-      const state = {first_name:'John', last_name:'Doe'}
-    
-      const mockSuccessResponse = {};
-        const mockJsonPromise = Promise.resolve(mockSuccessResponse); 
-        const mockFetchPromise = Promise.resolve({ 
-          json: () => mockJsonPromise,
-        });
-        jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
-    
-    
-      component.setState(state)
-      component.find('form').simulate('submit')
-      expect(global.fetch).toHaveBeenCalledTimes(1);
-      global.fetch.mockClear();
-      component.unmount()
-    })
-    */
 })
