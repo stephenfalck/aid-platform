@@ -7,7 +7,6 @@ import NoRequests from './no_requests_component'
 
 class RequestCards extends React.Component {
     userCards = (requests) => {
-        console.log('hello')
         let userRequests = requests.filter(request => request.user_id === Cookies.getJSON('currentUser').user_id);
 
         this.setState({
