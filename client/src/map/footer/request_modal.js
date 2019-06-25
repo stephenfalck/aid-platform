@@ -30,10 +30,10 @@ class RequestModal extends React.Component {
             method: "GET",
             mode: 'cors'
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
-            console.log(data)
+            //console.log(data)
             this.saveRequest(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
         })
         .catch(error => console.error('Error: ', error))
@@ -64,7 +64,7 @@ class RequestModal extends React.Component {
             this.setState({
               response: response
             })
-              console.log(response)
+              //console.log(response)
               if(response.status === 201) {
                 this.handleModalClose()
                 this.props.fetchRequests()
@@ -74,7 +74,7 @@ class RequestModal extends React.Component {
               }  
               return response.json()
           }).then(data => {
-              console.log(data)
+              //console.log(data)
               if (this.state.response.status === 422) {
                 this.validateForm(data.message)
               }

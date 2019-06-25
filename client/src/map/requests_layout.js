@@ -31,7 +31,7 @@ export class RequestsPage extends React.Component {
                 'Authorization': Cookies.get('Authorization')
             }
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
             this.props.setRequests(data)
@@ -47,7 +47,7 @@ export class RequestsPage extends React.Component {
             method: 'POST',
             mode: 'cors'
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             this.setState({
                 response: response
             })
@@ -56,7 +56,7 @@ export class RequestsPage extends React.Component {
             }
         }).then(data => {
             if (this.state.response.status === 200) {
-                console.log(data)
+                //console.log(data)
                 this.setState({
                     userLocation: {
                         lat: data.location.lat,

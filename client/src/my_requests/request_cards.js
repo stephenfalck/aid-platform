@@ -15,13 +15,7 @@ class RequestCards extends React.Component {
     }
 
     render() {
-        console.log(this.props.requests)
-        
         let userRequests = this.props.requests.filter(request => request.user_id === Cookies.getJSON('currentUser').user_id)
-        console.log(userRequests)
-        //const cards = this.state.userRequests.map(request => 
-        //    <RequestCard request={request} key={request.id} fetchRequests={this.props.fetchRequests}/>
-        //    )
             const cards = userRequests.map(request => 
                 <RequestCard request={request} key={request.id} fetchRequests={this.props.fetchRequests}/>
                 )

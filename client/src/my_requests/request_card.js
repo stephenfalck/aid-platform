@@ -18,12 +18,9 @@ class RequestCard extends React.Component {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             this.props.fetchRequests();
-            //return response.json()
-        })//.then(data => {
-            //console.log(data)
-        //})
+        })
         .catch(error => console.error('Error:', error)) 
     }
 
@@ -41,12 +38,9 @@ class RequestCard extends React.Component {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             this.props.fetchRequests();
-            //return response.json()
-        })//.then(data => {
-            //console.log(data)
-        //})
+        })
         .catch(error => console.error('Error:', error))
     }
 

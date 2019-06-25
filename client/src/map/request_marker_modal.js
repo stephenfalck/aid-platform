@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Cookies from 'js-cookie';
 import { Button, TextField, Dialog, DialogActions, DialogContent, 
-    DialogTitle, Typography, Switch, FormControlLabel, Snackbar, IconButton } from '@material-ui/core';
+    DialogTitle, Typography, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 class RequestMarkerModal extends React.Component {

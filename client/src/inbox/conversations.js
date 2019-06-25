@@ -32,7 +32,7 @@ class ConversationsPage extends React.Component {
                 'Authorization': Cookies.get('Authorization')
             }
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
             //console.log(data)
@@ -57,7 +57,7 @@ class ConversationsPage extends React.Component {
                 'Authorization': Cookies.get('Authorization')
             }
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
             this.setState({
@@ -89,10 +89,10 @@ class ConversationsPage extends React.Component {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
-            console.log(data)
+            //console.log(data)
             this.clearMessage();
             this.displayMessages(data.conversation_id);
         })

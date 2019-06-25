@@ -29,7 +29,7 @@ class Navbar extends React.Component {
                 'Authorization': Cookies.get('Authorization')
             }
         }).then(response => {
-            console.log(response);
+            //console.log(response);
             //return response.json();
             Cookies.remove('Authorization', { path: '/' })
             Cookies.remove('currentUser', { path: '/' })
