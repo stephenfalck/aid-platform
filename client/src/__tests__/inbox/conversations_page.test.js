@@ -1,11 +1,9 @@
 import React from 'react';
 import ConversationsPage from '../../inbox/conversations';
-import ConversationUser from '../../inbox/conversation_user';
 import Messages from '../../inbox/messages';
 import Navbar from '../../navbar/navbar';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Cookies from 'js-cookie';
-import { create } from 'react-test-renderer';
 
 describe('<ConversationsPage />', () => {
     it('renders without crashing', () => {
@@ -40,9 +38,7 @@ describe('<ConversationsPage />', () => {
         expect(wrapper.contains(messages)).toEqual(true);
       });
 
-      it('renders a list of conversation users', () => {
-        
-        /* FIX THIS TEST */
+      it('renders two lists of ConversationUser components, one for mobile one for desktop', () => {
 
         Cookies.getJSON = jest.fn()
         .mockImplementation(() => '1');
@@ -60,5 +56,4 @@ describe('<ConversationsPage />', () => {
         const users = wrapper.find('ConversationUser')
         expect(users).toHaveLength(8)
       })
-
 });

@@ -42,8 +42,7 @@ class ConversationUser extends React.Component {
 
     handleClick = () => {
         this.props.setConversationUser(this.state.userName)
-        this.props.click(this.props.conversation.id)
-        
+        this.props.click(this.props.conversation.id)    
     }
 
 
