@@ -32,7 +32,7 @@ describe('<RequestMarkerModal>', () => {
             }
         }
         const type = "One-time task"
-        const desc = 'description'
+        //const desc = 'description'
 
         const wrapper = shallow(<RequestMarkerModal {...props}/>);
         //console.log(wrapper.debug())
@@ -40,7 +40,7 @@ describe('<RequestMarkerModal>', () => {
         const description = wrapper.find('WithStyles(Typography)').at(1)
         //console.log(requestType.debug())
         expect(requestType.debug()).toContain(type)
-        expect(description.debug()).toContain(desc)
+        expect(description.debug()).toContain(props.request.description)
     })
 
     it('displays the requeser name and replies number', () => {
