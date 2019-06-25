@@ -37,8 +37,28 @@ describe('<RequestMarker>', () => {
         shallow(<RequestMarker {...props} />)
     })
 
-    /*
+    
     it('renders <RequestMarkerModal>', () => {
+        const props = {
+            handleClickOpen: () => {
+              "function"
+            },
+            position: {
+                lat: 0,
+                lng: 0
+            },
+            request: {
+                request_category_id: 1
+            }
+        }
+        const fetchRequests = jest.fn()
+        
+        const wrapper = shallow(<RequestMarker {...props} />)
+        const modal = <RequestMarkerModal open={false} close={jest.fn()} request={props.request} fetchRequests={fetchRequests}/>
+        expect(wrapper.find('RequestMarkerModal')).toHaveLength(1)
+    })
+
+    it('renders a modal when clicking on a requestMarker', () => {
         const props = {
             handleClickOpen: () => {
               "function"
@@ -53,14 +73,12 @@ describe('<RequestMarker>', () => {
         }
         
         const wrapper = shallow(<RequestMarker {...props} />)
-        const modal = <RequestMarkerModal open={false} close={jest.fn()} request={props.request} />
+        const dialog = wrapper.find('RequestMarkerModal')
+        expect(dialog.props().open).toEqual(false)
+            
+        wrapper.simulate('click')
 
-        console.log(wrapper.debug())
-        console.log(modal)
-        //expect(wrapper.find(modal)).toHaveLength(1)
-        //expect(wrapper).toContain(modal)
-        expect(wrapper.containsMatchingElement(modal)).toEqual(true)
-    })
-    */
-    
+        const dialog2 = wrapper.find('RequestMarkerModal')
+        expect(dialog2.props().open).toEqual(true)
+    }) 
 })

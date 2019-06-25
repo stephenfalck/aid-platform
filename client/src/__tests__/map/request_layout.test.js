@@ -24,22 +24,13 @@ describe('<RequestsPage>', () => {
             {id: 3}
         ]
         const wrapper = shallow(<RequestsPage requests={requests}/>);
-        const state = {userLocation: {lat: 0, lng: 0}}
+        const state = {userLocation: {lat: 51.515499, lng: -0.1419}}
         wrapper.setState(state)
-        
-
-        const fetchRequests = jest.fn()
-
-        //console.log(wrapper.debug())
-
-        const component = <RequestsMapContainer requests={requests} userLocation={state.userLocation} fetchRequests={fetchRequests}/>
-        //console.log(component)
 
         expect(wrapper.find('RequestsMapContainer')).toHaveLength(1)
     });
 
     it('renders <Footer> component', () => {  
-        const wrapper = shallow(<RequestsPage />)
         const props = {
             fetchRequests: () => {
               "function"
@@ -49,14 +40,9 @@ describe('<RequestsPage>', () => {
                 ]
         }
 
-        //console.log(wrapper.debug())
-        const fetchRequests = jest.fn()
-        fetchRequests
-        .mockReturnValue({requests: [{id:1},{id:2},{id:3}]});
-        const component = <Footer {...props} />
-        //console.log(component)
+        const wrapper = shallow(<RequestsPage requests={props.requests} />)
+        //const component = <Footer {...props} />
 
-        //expect(wrapper.contains(component)).toEqual(true);
         expect(wrapper.find('Footer')).toHaveLength(1)
     });
 })
