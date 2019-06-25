@@ -214,7 +214,7 @@ class RequestModal extends React.Component {
                     />
                     {this.renderAddressIssue()}
                 <TextField
-                        id="standard-multiline-flexible"
+                        id="description"
                         label="Description (300)"
                         multiline
                         rowsMax="6"

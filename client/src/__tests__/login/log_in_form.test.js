@@ -19,12 +19,12 @@ describe('<LogInForm>', () => {
 
 
   it('Should capture email correctly onChange', () => {
-    const component = mount(<LogInForm />);
-    const input = component.find('input').at(0);
+    const wrapper = mount(<LogInForm />);
+    const input = wrapper.find('input').at(0);
     input.instance().value = 'hello@email.com';
     input.simulate('change');
-    expect(component.state().email).toEqual('hello@email.com');
-    component.unmount();
+    expect(wrapper.state().email).toEqual('hello@email.com');
+    wrapper.unmount();
   })
 
 
@@ -33,8 +33,8 @@ describe('<LogInForm>', () => {
     .mockImplementation(() => 'jwt');
 
     const state = {email:'hello@email.com', password:'hello'}
-    const component = mount(<LogInForm />);
-    component.setState(state)
+    const wrapper = mount(<LogInForm />);
+    wrapper.setState(state)
 
     const mockSuccessResponse = {};
       const mockJsonPromise = Promise.resolve(mockSuccessResponse); 
@@ -43,7 +43,7 @@ describe('<LogInForm>', () => {
       });
       jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
 
-    component.find('form').simulate('submit')
+    wrapper.find('form').simulate('submit')
     expect(global.fetch).toHaveBeenCalledTimes(1);
     global.fetch.mockClear();
   })

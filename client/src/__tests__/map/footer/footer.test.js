@@ -2,12 +2,11 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Footer from '../../../map/footer/footer';
 
-describe('add request button', () => {
+describe('<Footer>', () => {
     it('renders without crashing', () => {
         const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
 
-        const footer = shallow(<Footer requests={requests}/>);
-        //console.log(footer.debug())
+        shallow(<Footer requests={requests}/>);
     });
 
     it('displays total requests as 2 when passed 2 unfulfilled requests', ()=> {
@@ -21,6 +20,7 @@ describe('add request button', () => {
 
     it('renders a modal when clicking the add request button', () => {
         const requests = [{fulfilled:true},{fulfilled:false},{fulfilled:false}]
+
         const wrapper = mount(<Footer requests={requests}/>);
         const add = wrapper.find('#fab-add-button').at(0)
             
