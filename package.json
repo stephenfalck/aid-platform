@@ -1,5 +1,6 @@
 {
     "name": "local-aid",
+    "license": "MIT",
     "engines": {
       "node": "10.15.0",
       "yarn": "1.13.0"
