@@ -22,7 +22,6 @@ RSpec.describe 'replies API', type: :request do
                 end
             end
 
-            expect(json).not_to be_empty
             expect(json.size).to eq(array.length)
         end
 
