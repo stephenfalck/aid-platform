@@ -40,7 +40,7 @@ class SignUpForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const form = document.getElementById("sign-up-form")
-        console.log(form)
+        //console.log(form)
 
         const formData = new FormData(form)
         const url = '/signup'
@@ -49,6 +49,7 @@ class SignUpForm extends React.Component {
             method: 'POST',
             body: formData
         }).then(response => {
+            console.log(response)
             this.setState({
                 response: response
             })
