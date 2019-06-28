@@ -3,6 +3,6 @@ class ApplicationController < ActionController::API
     include ExceptionHandler
 
     def fallback_index_html
-        render :file => 'public/index.html', layout: false
+        render :file => 'public/index.html'
       end
 end

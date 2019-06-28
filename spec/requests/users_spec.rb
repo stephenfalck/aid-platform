@@ -108,9 +108,9 @@ RSpec.describe 'Users API', type: :request do
         end
     end
 
-    describe 'POST /login' do 
+    describe 'POST /signin' do 
         context 'when params are correct' do
-            before { post '/login', params: {user: { email: user.email, password: user.password} } }
+            before { post '/signin', params: {user: { email: user.email, password: user.password} } }
 
             it 'returns a status code of 200' do
                 expect(response).to have_http_status(200)
@@ -123,7 +123,7 @@ RSpec.describe 'Users API', type: :request do
         end
 
         context 'when login params are incorrect' do
-            before { post '/login', params:{} }
+            before { post '/signin', params:{} }
 
             it 'returns unathorized status' do
                 expect(response.status).to eq 401
