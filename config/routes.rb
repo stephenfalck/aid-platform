@@ -21,6 +21,6 @@ Rails.application.routes.draw do
   #  !request.xhr? && request.format.html?
   #end
 
-  get '/*path' to: "application#fallback_index_html"
+  get '/*path', to: "application#fallback_index_html"
 
 end
