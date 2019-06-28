@@ -130,12 +130,12 @@ class ConversationsPage extends React.Component {
             />
         ))
 
-        let drawer = <List>{list}</List>
+        let drawer = <List style={{padding: '10px', backgroundColor:'#e8eaf6', height:'100%'}}>{list}</List>
         
         return(
             <Fragment>
                 <Navbar title='Inbox' history={this.props.history}/>
-                <Drawer anchor="left" open={this.state.drawer} onClose={this.toggleDrawer(false)} style={{padding: '10px', backgroundColor:'#e8eaf6'}}>
+                <Drawer anchor="left" open={this.state.drawer} onClose={this.toggleDrawer(false)} >
                     <div
                         tabIndex={0}
                         role="button"
