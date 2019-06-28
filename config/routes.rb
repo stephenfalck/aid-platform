@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   #end
 
   #get '/*path', to: "application#fallback_index_html"
-  match '*path', to: 'application#fallback_index_html', via: [:get]
+  #match '*path', to: 'application#fallback_index_html', via: [:get]
+  match '/login', to: 'application#fallback_index_html', via: [:get]
 
 end
