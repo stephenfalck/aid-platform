@@ -59,18 +59,26 @@ class SignUpForm extends React.Component {
                 return;
             }
             */
+           if (response.status === 201) {
              Cookies.set('Authorization', response.headers.get('Authorization'), { expires: 1 });
              return response.json();
+           } else {
+               return response.json()
+           }
         }).then(data => {
            // console.log(data)
-            Cookies.set('currentUser', {
-                user_id: data.id,
-                first_name: data.first_name,
-                last_name: data.last_name,
-                email: data.email         
-            }, { expires: 1 })
+           if(this.state.response.status === 201) {
+                Cookies.set('currentUser', {
+                    user_id: data.id,
+                    first_name: data.first_name,
+                    last_name: data.last_name,
+                    email: data.email         
+                }, { expires: 1 })
 
-            this.checkResponseStatus(this.state.response, data);
+                this.checkResponseStatus(this.state.response, data);
+            } else {
+                this.checkResponseStatus(this.state.response, data);
+            }
         })
         .catch(error => console.error('Error:', error));    
     }

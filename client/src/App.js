@@ -7,6 +7,7 @@ import SignUpPage from'./sign_up/sign_up_layout';
 import RequestsPage from './map/requests_layout';
 import ConversationsPage from './inbox/conversations';
 import MyRequestsPage from './my_requests/my_requests_page';
+import NotFound from './404_not_found';
 
 class App extends React.Component {
   render() {
@@ -18,8 +19,7 @@ class App extends React.Component {
           <PrivateRoute exact path="/" component={RequestsPage} />
           <PrivateRoute path='/inbox' component={ConversationsPage} />
           <PrivateRoute path="/myrequests" component={MyRequestsPage} />
-          {/*<Route path="/requests" component={RequestsPage} />
-          <Route path="/inbox" component={ConversationsPage} />*/}
+          <Route component={NotFound} />
         </div>
       </Router>
     )

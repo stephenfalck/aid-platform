@@ -3,8 +3,6 @@ Rails.application.routes.draw do
               controllers: { sessions: "sessions", registrations: "registrations" }, defaults: { format: :json }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  #potentially needed for devise to work     root to: "home#index"
-
   resources :users, only: [:index, :show]
 
   resources :conversations do 
@@ -17,10 +15,10 @@ Rails.application.routes.draw do
   
   resources :requests
 
-  #resources :conversations do 
-  #  resources :messages, only: [:index, :create]
-  #end
-
   resources :replies
+
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 
 end
