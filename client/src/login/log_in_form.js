@@ -25,7 +25,7 @@ class LogInForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        let url = '/login'
+        let url = '/signin'
         let data = {
             email: this.state.email,
             password: this.state.password

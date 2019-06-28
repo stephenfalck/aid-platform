@@ -140,7 +140,7 @@ class RequestMarkerModal extends React.Component {
                 'Authorization': Cookies.get('Authorization')
             }
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
             if(data.length % 5 === 0) {
@@ -163,7 +163,7 @@ class RequestMarkerModal extends React.Component {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             this.props.fetchRequests();
             //return response.json()
         })//.then(data => {
@@ -187,10 +187,10 @@ class RequestMarkerModal extends React.Component {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json()
         }).then(data => {
-            console.log(data)
+            //console.log(data)
             this.submitMessage(data.id)
         })
         .catch(error => console.error('Error:', error))
