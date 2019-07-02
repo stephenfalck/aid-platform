@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import PrivateRoute from './private_route';
 import LandingPage from'./login/landing_layout';
@@ -14,12 +14,14 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Route path="/login" exact component={LandingPage} />
-          <Route path="/signup" component={SignUpPage} />
-          <PrivateRoute exact path="/" component={RequestsPage} />
-          <PrivateRoute path='/inbox' component={ConversationsPage} />
-          <PrivateRoute path="/myrequests" component={MyRequestsPage} />
-          <Route component={NotFound} />
+          <Switch>
+            <Route path="/login" exact component={LandingPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <PrivateRoute exact path="/" component={RequestsPage} />
+            <PrivateRoute path='/inbox' component={ConversationsPage} />
+            <PrivateRoute path="/myrequests" component={MyRequestsPage} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     )
