@@ -14,8 +14,8 @@ class LandingPage extends React.Component {
 
     render() {
         return(
-            <Grid container alignContent={'center'} justify={'center'} className="main-container" style={{minHeight: '100vh'}}>
-                <Grid container alignContent={'center'} justify={'center'} className="overlay" style={{minHeight: '100vh'}}>
+            <Grid container alignItems={'center'} justify={'center'} className="main-container" style={{minHeight: '100vh'}}>
+                <Grid container alignItems={'center'} justify={'center'} className="overlay" style={{minHeight: '100vh'}}>
                 <Grid item sm={10} xs={10}>
                     <Paper elevation={4}>
                         <Grid container>
