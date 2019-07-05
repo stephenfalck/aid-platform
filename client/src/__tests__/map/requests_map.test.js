@@ -33,7 +33,6 @@ describe('<RequestMarker>', () => {
                 request_category_id: 1
             }
         }
-        
         shallow(<RequestMarker {...props} />)
     })
 
