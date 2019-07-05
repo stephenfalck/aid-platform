@@ -4,7 +4,7 @@ import RequestsMap from './requests_map';
 class RequestsMapContainer extends React.Component {
     
     render() {
-        const apiKey = 'YOUR API KEY';
+        const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
         
         return(
             
