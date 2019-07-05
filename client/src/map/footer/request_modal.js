@@ -21,7 +21,7 @@ class RequestModal extends React.Component {
       };
       
       getLocationData = () => {
-        const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk';
+        const apiKey = ENV['GOOGLE_MAPS_API_KEY'];
         const address = `${this.state.address}+${this.state.town}+${this.state.postCode}`;
         const joinedAddress = address.replace(/ /g, '+');
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${joinedAddress}&key=${apiKey}`;

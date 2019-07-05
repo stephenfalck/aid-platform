@@ -40,7 +40,7 @@ export class RequestsPage extends React.Component {
     }
 
     fetchUserLocation = () => {
-        const apiKey = 'AIzaSyCrNPz4UTHYuMbYlXUxM7UT21hf9742Dfk'
+        const apiKey = ENV['GOOGLE_MAPS_API_KEY'];
         const url = `https://www.googleapis.com/geolocation/v1/geolocate?key=${apiKey}`
         
         fetch(url, {
